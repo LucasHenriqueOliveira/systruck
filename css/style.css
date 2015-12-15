@@ -45,7 +45,7 @@ a,a:hover,a:focus {
     transition: all .3s ease-in-out;
 }
 /*login page*/
-.login-body {
+.body {
     background:#32323A;
     background-size:cover;
     width:100%;
@@ -94,7 +94,7 @@ a,a:hover,a:focus {
 .form-signin .form-control:focus {
     z-index:2;
 }
-.form-signin input[type="text"],.form-signin input[type="password"] {
+.form-signin input[type="text"],.form-signin input[type="email"],.form-signin input[type="password"] {
     margin-bottom:15px;
     border-radius:5px;
     -webkit-border-radius:5px;
@@ -3094,8 +3094,9 @@ ul.amounts li {
     font-weight:400;
 }
 input:focus:invalid:focus,textarea:focus:invalid:focus,select:focus:invalid:focus,.cmxform .form-group input.error,.cmxform .form-group textarea.error {
-    border-color:#B94A48 !important;
+    /*border-color:#B94A48 !important;*/
 }
+
 #signupForm label.error {
     display:inline;
     margin:5px 0px;

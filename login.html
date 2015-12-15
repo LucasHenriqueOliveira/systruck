@@ -1,19 +1,27 @@
-<form class="form-signin" action="index.html">
+<form class="form-signin" name="form" ng-submit="vm.login()" role="form">
     <h2 class="form-signin-heading logo-login"><img src="images/carlive.svg" width="140px"></h2>
     <div class="login-wrap">
         <div class="user-login-info">
-            <input type="text" class="form-control" placeholder="Email" autofocus>
-            <input type="password" class="form-control" placeholder="Senha">
+            <div class="form-group" ng-class="{ 'has-error': (form.username.$dirty && form.username.$error.required) || (form.username.$touched && form.username.$invalid && !form.username.$error.required) }">
+                <input type="email" name="username" id="username" class="form-control" placeholder="Email" ng-model="vm.email" required autofocus>
+                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Informe o email.</span>
+                <span ng-if="form.username.$touched && form.username.$invalid && !form.username.$error.required" class="help-block">Informe um email válido.</span>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                <input type="password" name="password" id="password" class="form-control" placeholder="Senha" ng-model="vm.password" required>
+                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Informe a senha.</span>
+            </div>
         </div>
         <label class="checkbox">
             <input type="checkbox" value="remember-me"> Lembrar-me
             <span class="pull-right">
                 <a data-toggle="modal" href="#myModal"> Esqueceu a senha?</a>
-
             </span>
         </label>
-        <button class="btn btn-lg btn-login btn-block" type="submit">Entrar</button>
-
+        <div class="text-center">
+            <button class="btn btn-lg btn-login btn-block" ng-disabled="form.$invalid || vm.dataLoading" type="submit">Entrar</button>
+            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
     </div>
 
     <!-- Modal -->
