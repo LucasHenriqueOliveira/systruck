@@ -1,0 +1,355 @@
+<section id="container">
+    <ng-include src="'header.html'"></ng-include>
+
+    <ng-include src="'sidebar.html'"></ng-include>
+
+    <!--main content start-->
+    <div id="main-content">
+        <div class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-md-12">
+                    <!--breadcrumbs start -->
+                    <ul class="breadcrumb">
+                        <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                        <li class="active">Usuários</li>
+                    </ul>
+                    <!--breadcrumbs end -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Usuários
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table editable-table ">
+                                <div class="clearfix">
+                                    <div class="btn-group">
+                                        <a href="#/user#myModal" data-toggle="modal" id="editable-sample_new" class="btn btn-primary">
+                                            Novo <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                    <div class="btn-group pull-right">
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
+                                            <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
+                                            <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="space15"></div>
+                                <table class="display table table-hover table-bordered table-striped table-condensed" id="hidden-table-info">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Cart. Habilitação</th>
+                                        <th>Função</th>
+                                        <th class="text-center">Ação</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Sérgio de Oliveira</td>
+                                        <td>sergio@gmail.com</td>
+                                        <td> - </td>
+                                        <td>Gerente</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Priscila Ramos de Melo</td>
+                                        <td>priscilaramos@gmail.com</td>
+                                        <td> - </td>
+                                        <td>Administrativo</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Lucas Henrique de Oliveira</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Arthur Felipe R. Costa</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Gilberto Oliveira</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Guilherme Azevedo Reis</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>José Lucas Ferreira e Silva</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Paulo Holanda Ribeiro Netto</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Matheus André da Silva</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Ruy Arruda Cassiano</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Usuários Desativados
+                                <span class="tools pull-right">
+                                    <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                    <a href="javascript:;" class="fa fa-times"></a>
+                                </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table editable-table ">
+                                <div class="clearfix">
+                                    <div class="btn-group pull-right">
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
+                                            <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
+                                            <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="space15"></div>
+                                <table class="display table table-hover table-bordered table-striped table-condensed" id="hidden-table-info">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Cart. Habilitação</th>
+                                        <th>Função</th>
+                                        <th class="text-center">Ação</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Lucas Henrique de Oliveira</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-sign-in"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Arthur Felipe R. Costa</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-sign-in"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center"><img src="images/details_open.png"></td>
+                                        <td>Gilberto Oliveira</td>
+                                        <td> - </td>
+                                        <td>31314342423</td>
+                                        <td>Motorista</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-sign-in"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!-- page end-->
+    </div>
+    <!--main content end-->
+</section>
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Inclusão de novo usuário</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group">
+                        <label for="inputNome">Nome</label>
+                        <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCNH">Carteira de Habilitação</label>
+                        <input type="text" class="form-control" id="inputCNH" placeholder="Carteira de Habilitação">
+                    </div>
+                    <div class="form-group">
+                        <label for="selectFuncao">Função</label>
+                        <select class="form-control" style="width: 100%" id="selectFuncao">
+                            <option></option>
+                            <option value="CA">Gerente</option>
+                            <option value="CS">Administrativo</option>
+                            <option value="NV">Motorista</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTelefone1">Telefone</label>
+                        <input type="text" class="form-control" id="inputTelefone1" placeholder="(xx) xxxxx-xxxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTelefone2">Telefone</label>
+                        <input type="text" class="form-control" id="inputTelefone2" placeholder="(xx) xxxxx-xxxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTelefone3">Telefone</label>
+                        <input type="text" class="form-control" id="inputTelefone3" placeholder="(xx) xxxxx-xxxx">
+                    </div>
+                    <button type="submit" class="btn btn-default">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
