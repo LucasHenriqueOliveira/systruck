@@ -1,0 +1,323 @@
+<section id="container">
+    <ng-include src="'header.html'"></ng-include>
+
+    <ng-include src="'sidebar.html'"></ng-include>
+
+    <!--main content start-->
+    <div id="main-content">
+        <div class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-md-12">
+                    <!--breadcrumbs start -->
+                    <ul class="breadcrumb">
+                        <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                        <li class="active">Caminhões</li>
+                    </ul>
+                    <!--breadcrumbs end -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Caminhões
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table editable-table ">
+                                <div class="clearfix">
+                                    <div class="btn-group">
+                                        <a href="#/truck#myModal" data-toggle="modal" id="editable-sample_new" class="btn btn-primary">
+                                            Novo <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                    <div class="btn-group pull-right">
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
+                                            <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
+                                            <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="space15"></div>
+                                <table class="display table table-hover table-bordered table-striped table-condensed" id="hidden-table-info">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">Frota</th>
+                                        <th class="text-center">Caminhão</th>
+                                        <th class="text-center">Placa</th>
+                                        <th class="text-center">Km</th>
+                                        <th class="text-center">Ação</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="center">20.279</td>
+                                        <td>Scania P310</td>
+                                        <td class="center">HGL-1909</td>
+                                        <td class="center">110.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">20.280</td>
+                                        <td>Scania P340</td>
+                                        <td class="center">HTT-0109</td>
+                                        <td class="center">160.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">20.314</td>
+                                        <td>Scania P310</td>
+                                        <td class="center">HHL-2123</td>
+                                        <td class="center">400.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">20.654</td>
+                                        <td>Scania P340</td>
+                                        <td class="center">HOL-2338</td>
+                                        <td class="center">300.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">20.323</td>
+                                        <td>Iveco Stralis 420</td>
+                                        <td class="center">HGL-2432</td>
+                                        <td class="center">220.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">20.279</td>
+                                        <td>Scania P310</td>
+                                        <td class="center">HGL-1909</td>
+                                        <td class="center">110.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">23.423</td>
+                                        <td>Iveco Stralis 420</td>
+                                        <td class="center">HQR-4234</td>
+                                        <td class="center">230.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">20.675</td>
+                                        <td>Scania P310</td>
+                                        <td class="center">HGL-6423</td>
+                                        <td class="center">110.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">20.876</td>
+                                        <td>Scania P340</td>
+                                        <td class="center">HGL-6474</td>
+                                        <td class="center">330.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">20.856</td>
+                                        <td>Scania P340</td>
+                                        <td class="center">HFB-5758</td>
+                                        <td class="center">400.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="delete" href="javascript:;">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Caminhões desativados
+                                <span class="tools pull-right">
+                                    <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                    <a href="javascript:;" class="fa fa-times"></a>
+                                </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table editable-table ">
+                                <div class="clearfix">
+                                    <div class="btn-group pull-right">
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
+                                            <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
+                                            <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="space15"></div>
+                                <table class="display table table-hover table-bordered table-striped table-condensed" id="hidden-table-info">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">Frota</th>
+                                        <th class="text-center">Caminhão</th>
+                                        <th class="text-center">Placa</th>
+                                        <th class="text-center">Km</th>
+                                        <th class="text-center">Ação</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="center">18.675</td>
+                                        <td>Scania P310</td>
+                                        <td class="center">HDS-2525</td>
+                                        <td class="center">700.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-sign-in"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">19.423</td>
+                                        <td>Scania P310</td>
+                                        <td class="center">HEW-6544</td>
+                                        <td class="center">800.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-sign-in"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">19.534</td>
+                                        <td>Scania P310</td>
+                                        <td class="center">HTE-5423</td>
+                                        <td class="center">750.000</td>
+                                        <td class="center">
+                                            <a class="edit" href="javascript:;">
+                                                <i class="fa fa-sign-in"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!-- page end-->
+    </div>
+    <!--main content end-->
+</section>
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Inclusão de novo caminhão</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group">
+                        <label for="inputFrota">Frota</label>
+                        <input type="text" class="form-control" id="inputFrota" placeholder="Frota">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCaminhao">Caminhão</label>
+                        <input type="text" class="form-control" id="inputCaminhao" placeholder="Caminhão">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPlaca">Placa</label>
+                        <input type="text" class="form-control" id="inputPlaca" placeholder="Placa">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputKm">Quilometragem</label>
+                        <input type="text" class="form-control" id="inputKm" placeholder="Quilometragem (Km)">
+                    </div>
+                    <button type="submit" class="btn btn-default">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
