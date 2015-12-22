@@ -27,9 +27,21 @@
                 controllerAs: 'vm'
             })
 
-            .when('/teste', {
-                controller: 'DashboardController',
-                templateUrl: 'teste.html',
+            .when('/user', {
+                controller: 'UserController',
+                templateUrl: 'user.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/truck', {
+                controller: 'TruckController',
+                templateUrl: 'truck.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/parts', {
+                controller: 'PartsController',
+                templateUrl: 'parts.html',
                 controllerAs: 'vm'
             })
 

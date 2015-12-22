@@ -417,7 +417,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
 }
 .noti-info {
     padding-left:10px;
-    padding-top:6px;
+    padding-top:0px;
     color:#414147;
 }
 .dropdown-menu.extended .alert {
@@ -5484,7 +5484,7 @@ div.tagsinput span.tag {
     padding-bottom:0px !important;
 }
 .task-info .desc h5 {
-    padding-top:8px;
+    padding-top:0px;
 }
 .evnt-input:-moz-placeholder {
     color:#fff !important;
@@ -5750,4 +5750,16 @@ right: -1px;
 
 .sortable{
     min-height: 400px;;
+}
+
+.space15{
+    padding-bottom: 15px;
+}
+
+.task-title{
+    display: inline;
+}
+
+.alert_review{
+    display: inline-flex !important;
 }
