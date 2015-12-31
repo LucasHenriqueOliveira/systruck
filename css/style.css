@@ -4842,8 +4842,8 @@ div.tagsinput span.tag {
     color:#fff;
 }
 .notification-info {
-    margin-left:56px;
-    margin-top:-40px;
+    margin-left:50px;
+    margin-top:-50px;
 }
 .notification-meta {
     margin-bottom:3px;
@@ -4854,6 +4854,11 @@ div.tagsinput span.tag {
     margin:0px;
     color:#999;
     font-size:12px;
+}
+.notification-info-span{
+    margin: 0px;
+    color: #999;
+    font-size: 12px;
 }
 .alert-info .alert-icon {
     background-color:#99cce3;
@@ -4873,6 +4878,7 @@ div.tagsinput span.tag {
 .notification-time {
     font-style:italic;
     color:#999;
+    border-bottom-style: dotted;
 }
 .alert-info .notification-info a {
     color:#45a2c9;
@@ -5104,12 +5110,11 @@ div.tagsinput span.tag {
     font-size:8px;
 }
 .mini-stat {
-    background:#fff;
+    background:#fafafa;
     padding:20px;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
-    margin-bottom:20px;
 }
 .mini-stat-icon {
     width:60px;
@@ -5263,19 +5268,20 @@ div.tagsinput span.tag {
     -moz-border-radius:3px;
     border-radius:3px;
     position:relative;
-    padding:13px;
+    padding:7px;
     margin-bottom:5px;
+    padding-bottom: 3px;
     cursor:move;
     list-style: none;
 }
 .to-do-list li p {
     margin-bottom:0px;
 }
-.todo-actionlist {
-    position:absolute;
-    right:15px;
-    top:13px;
-}
+/*.todo-actionlist {*/
+    /*position:absolute;*/
+    /*right:15px;*/
+    /*top:13px;*/
+/*}*/
 .todo-actionlist a {
     height:24px;
     width:24px;
@@ -5292,6 +5298,18 @@ div.tagsinput span.tag {
 }
 .todo-actionlist a:hover i {
     color:#666;
+}
+.list-center{
+    position: absolute;
+    right: 5.5%;
+}
+.list-center-desactive{
+    position: absolute;
+    right: 6.5%;
+}
+.list-center-user{
+    position: absolute;
+    right: 4.1%;
 }
 .todo-done i {
     font-size:14px;
@@ -5762,4 +5780,16 @@ right: -1px;
 
 .alert_review{
     display: inline-flex !important;
+}
+
+.text-white{
+    color: #fff;
+}
+
+.icon-title{
+    padding-left: 5px;
+}
+
+.ranking-color{
+    color: #81CFE0;
 }
