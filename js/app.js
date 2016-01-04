@@ -45,6 +45,24 @@
                 controllerAs: 'vm'
             })
 
+            .when('/company', {
+                controller: 'CompanyController',
+                templateUrl: 'company.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/add-trip', {
+                controller: 'AddTripController',
+                templateUrl: 'add-trip.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/search-trip', {
+                controller: 'SearchTripController',
+                templateUrl: 'search-trip.html',
+                controllerAs: 'vm'
+            })
+
             .otherwise({ redirectTo: '/login' });
     }
 

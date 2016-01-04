@@ -5793,3 +5793,26 @@ right: -1px;
 .ranking-color{
     color: #81CFE0;
 }
+
+.title-company{
+    padding-bottom: 20px;
+    text-align: center;
+    color: #1fb5ad;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.finish-session{
+    border-bottom: 1px solid #eff2f7;
+    padding-bottom: 30px;
+    margin-bottom: 0px;
+}
+
+.color-th thead > tr > th {
+    background-color: #fafafa;
+}
+
+.truck-field{
+    margin-top: -12px;
+}
