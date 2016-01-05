@@ -21,7 +21,7 @@ ul, .list-unstyled {
     padding-left: 30px;
 }
 ul li {
-    /*list-style:none;*/
+    list-style:none;
 }
 
 a,a:hover,a:focus {
@@ -46,7 +46,7 @@ a,a:hover,a:focus {
 }
 /*login page*/
 .body {
-    background:#32323A;
+    background: #f1f2f7;
     background-size:cover;
     width:100%;
     height:100%;
@@ -462,6 +462,10 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
 }
 .dropdown-menu.extended li a:hover {
     color:#32323a;
+}
+.last-maintenance a:hover {
+    color:#32323a;
+    background-color: #ffffff !important;
 }
 .dropdown-menu.tasks-bar .task-info .desc {
     font-size:13px;
@@ -5815,4 +5819,17 @@ right: -1px;
 
 .truck-field{
     margin-top: -12px;
+}
+
+.icon-center{
+    float: none !important;
+}
+
+.all-maintenance{
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    float: left;
+    width: 100%;
 }

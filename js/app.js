@@ -63,6 +63,30 @@
                 controllerAs: 'vm'
             })
 
+            .when('/last-trip', {
+                controller: 'LastTripController',
+                templateUrl: 'last-trip.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/add-maintenance', {
+                controller: 'AddMaintenanceController',
+                templateUrl: 'add-maintenance.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/search-maintenance', {
+                controller: 'SearchMaintenanceController',
+                templateUrl: 'search-maintenance.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/last-maintenance', {
+                controller: 'LastMaintenanceController',
+                templateUrl: 'last-maintenance.html',
+                controllerAs: 'vm'
+            })
+
             .otherwise({ redirectTo: '/login' });
     }
 
