@@ -87,6 +87,12 @@
                 controllerAs: 'vm'
             })
 
+            .when('/realized-maintenance', {
+                controller: 'RealizedMaintenanceController',
+                templateUrl: 'realized-maintenance.html',
+                controllerAs: 'vm'
+            })
+
             .otherwise({ redirectTo: '/login' });
     }
 
