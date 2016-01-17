@@ -1,0 +1,84 @@
+<section id="container">
+    <ng-include src="'header.html'"></ng-include>
+
+    <ng-include src="'sidebar.html'"></ng-include>
+
+    <!--main content start-->
+    <div id="main-content">
+        <div class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-md-12">
+                    <!--breadcrumbs start -->
+                    <ul class="breadcrumb">
+                        <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                        <li class="active">Confirmação de cadastro de viagem</li>
+                    </ul>
+                    <!--breadcrumbs end -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Confirmação de cadastro de viagem
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="alert alert-warning fade in">
+                                <button data-dismiss="alert" class="close close-sm" type="button">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <strong>Atenção!</strong> Verfique se os dados estão corretos e confirme a inclusão.
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="prf-contacts">
+                                        <h2> <span><i class="fa fa-map-marker"></i></span> Localização</h2>
+                                        <div class="location-info">
+                                            <p>Postal Address<br>
+                                                PO Box 16122 Collins Street West<br>
+                                                Victoria 8007 Australia</p>
+                                            <p>Headquarters<br>
+                                                121 King Street, Melbourne<br>
+                                                Victoria 3000 Australia</p>
+                                        </div>
+                                        <h2> <span><i class="fa fa-calendar"></i></span> Datas</h2>
+                                        <div class="location-info">
+                                            <p><strong>Data Saída:</strong> {{vm.trip.dateOutput}} <br>
+                                                <strong>Data Chegada:</strong> {{vm.trip.dateArrival}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="prf-contacts">
+                                        <h2> <span><i class="fa fa-map-marker"></i></span> Localização</h2>
+                                        <div class="location-info">
+                                            <p>Postal Address<br>
+                                                PO Box 16122 Collins Street West<br>
+                                                Victoria 8007 Australia</p>
+                                            <p>Headquarters<br>
+                                                121 King Street, Melbourne<br>
+                                                Victoria 3000 Australia</p>
+                                        </div>
+                                        <h2> <span><i class="fa fa-calendar"></i></span> Datas</h2>
+                                        <div class="location-info">
+                                            <p><strong>Data Saída:</strong> {{vm.trip.dateOutput}} <br>
+                                                <strong>Data Chegada:</strong> {{vm.trip.dateArrival}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!-- page end-->
+    </div>
+    <!--main content end-->
+</section>
