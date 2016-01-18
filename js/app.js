@@ -57,6 +57,12 @@
                 controllerAs: 'vm'
             })
 
+            .when('/add-trip-confirm', {
+                controller: 'AddTripConfirmController',
+                templateUrl: 'add-trip-confirm.html',
+                controllerAs: 'vm'
+            })
+
             .when('/search-trip', {
                 controller: 'SearchTripController',
                 templateUrl: 'search-trip.html',

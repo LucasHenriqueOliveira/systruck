@@ -29,48 +29,125 @@
                             </span>
                         </header>
                         <div class="panel-body">
-                            <div class="alert alert-warning fade in">
+                            <div class="alert alert-success fade in">
                                 <button data-dismiss="alert" class="close close-sm" type="button">
                                     <i class="fa fa-times"></i>
                                 </button>
-                                <strong>Atenção!</strong> Verfique se os dados estão corretos e confirme a inclusão.
+                                <strong>Pronto!</strong> O cadastro da viagem foi realizado com sucesso.
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="prf-contacts">
-                                        <h2> <span><i class="fa fa-map-marker"></i></span> Localização</h2>
+                                        <h2> <span><i class="fa fa-map-marker"></i></span> Viagem</h2>
                                         <div class="location-info">
-                                            <p>Postal Address<br>
-                                                PO Box 16122 Collins Street West<br>
-                                                Victoria 8007 Australia</p>
-                                            <p>Headquarters<br>
-                                                121 King Street, Melbourne<br>
-                                                Victoria 3000 Australia</p>
+                                            <p><strong>Caminhão:</strong> {{vm.truck}} <br>
+                                                <strong>Placa:</strong> HGL-1876 <br>
+                                                <strong>Placa semi-reboque:</strong> HGL-1875 <br>
+                                                <strong>Motorista:</strong> {{vm.trip.driverSelect.name}}</p>
+                                            <p><strong>Cidade Origem:</strong> {{vm.trip.cityHome}}<br>
+                                                <strong>Cidade Destino:</strong> {{vm.trip.cityDestination}}
+                                            </p>
                                         </div>
-                                        <h2> <span><i class="fa fa-calendar"></i></span> Datas</h2>
+                                        <h2> <span><i class="fa fa-money"></i></span> Recebimentos</h2>
                                         <div class="location-info">
-                                            <p><strong>Data Saída:</strong> {{vm.trip.dateOutput}} <br>
-                                                <strong>Data Chegada:</strong> {{vm.trip.dateArrival}}</p>
+                                            <p><strong>Frete Total:</strong> R$ {{vm.trip.totalMoney}} <br>
+                                                <strong>Ad. Empresa:</strong> R$ {{vm.trip.moneyCompany}} <br>
+                                                <strong>Complemento:</strong> R$ {{vm.trip.moneyComplement}}<br>
+                                                <strong>Adiantamento:</strong> R$ {{vm.trip.advance}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="prf-contacts">
-                                        <h2> <span><i class="fa fa-map-marker"></i></span> Localização</h2>
+                                        <h2> <span><i class="fa fa-road"></i></span> Quilometragem (Km)</h2>
                                         <div class="location-info">
-                                            <p>Postal Address<br>
-                                                PO Box 16122 Collins Street West<br>
-                                                Victoria 8007 Australia</p>
-                                            <p>Headquarters<br>
-                                                121 King Street, Melbourne<br>
-                                                Victoria 3000 Australia</p>
+                                            <p><strong>Saída:</strong> {{vm.trip.kmOutput}} <br>
+                                                <strong>Chegada:</strong> {{vm.trip.kmArrival}}<br>
+                                                <strong>Paga:</strong> {{vm.trip.kmPaid}}</p>
+                                            <p>
+                                                <strong>Rodados:</strong> {{vm.trip.traveled}} <br>
+                                                <strong>Diferença Km rodados:</strong> {{vm.trip.diffTraveled}} <br>
+                                                <strong>Consumo médio: </strong> {{vm.trip.average}} km/l
+                                            </p>
                                         </div>
                                         <h2> <span><i class="fa fa-calendar"></i></span> Datas</h2>
                                         <div class="location-info">
-                                            <p><strong>Data Saída:</strong> {{vm.trip.dateOutput}} <br>
-                                                <strong>Data Chegada:</strong> {{vm.trip.dateArrival}}</p>
+                                            <p><strong>Saída:</strong> {{vm.trip.dateOutput}} <br>
+                                                <strong>Chegada:</strong> {{vm.trip.dateArrival}}</p>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <div class="prf-contacts">
+                                        <h2> <span><i class="fa fa-battery-half"></i></span> Despesas Abastecimento</h2>
+                                        <div class="location-info">
+                                            <table class="table table-bordered table-striped table-condensed">
+                                                <thead>
+                                                <tr>
+                                                    <th>Local</th>
+                                                    <th class="text-center">Litros</th>
+                                                    <th class="text-center">Valor</th>
+                                                    <th class="text-center">Data</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="fuel in vm.trip.fuels track by $index">
+                                                    <td>{{fuel.name}}</td>
+                                                    <td class="text-center">{{fuel.qtd}} litros</td>
+                                                    <td class="text-center">R$ {{fuel.price}}</td>
+                                                    <td class="text-center">{{fuel.date}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Total</strong></td>
+                                                    <td class="text-center"><strong>{{vm.trip.sumLts}} litros</strong></td>
+                                                    <td class="text-center"><strong>R$ {{vm.trip.sumPriceFuel}}</strong></td>
+                                                    <td class="text-center"> - </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br >
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <div class="prf-contacts">
+                                        <h2> <span><i class="fa fa-credit-card"></i></span> Despesas gerais</h2>
+                                        <div class="location-info">
+                                            <table class="table table-bordered table-striped table-condensed">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th class="text-center">Valor</th>
+                                                    <th class="text-center">Data</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="expense in vm.trip.expenses track by $index">
+                                                    <td>{{expense.type}}</td>
+                                                    <td class="text-center">R$ {{expense.value}}</td>
+                                                    <td class="text-center">{{expense.date}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Total</strong></td>
+                                                    <td class="text-center"><strong>R$ {{vm.trip.sumPriceExpenses}}</strong></td>
+                                                    <td class="text-center"> - </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-11 text-center">
+                                    <button type="button" class="btn btn-default "><i class="fa fa-pencil"></i> Editar</button>
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</button>
                                 </div>
                             </div>
                         </div>

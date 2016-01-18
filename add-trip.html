@@ -29,7 +29,7 @@
                             </span>
                         </header>
                         <div class="panel-body">
-                            <form role="form" class="form-horizontal">
+                            <form role="form" class="form-horizontal" name="formAddTrip" ng-submit="vm.submitAddTrip(vm)">
                                 <div class="form-group">
                                     <div class="space15"></div>
                                     <label class="col-lg-11 col-sm-11 title-company">Dados da viagem</label>
@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">Motorista</label>
                                     <div class="col-lg-7 col-sm-7">
-                                        <select class="form-control" id="driverSelect" name="driverSelect" ng-model="vm.driverSelect">
+                                        <select class="form-control" ng-model="vm.driverSelect">
                                             <option ng-repeat="driver in vm.drivers" value="{{driver.id}}" ng-selected="vm.driverSelect">{{driver.name}}</option>
                                         </select>
                                     </div>
@@ -56,13 +56,13 @@
                                     <div class="col-lg-7 col-sm-7">
                                         <select class="form-control" ng-model="vm.cityHome">
                                             <option></option>
-                                            <option value="BE">Betim</option>
-                                            <option value="AK">Contagem</option>
-                                            <option value="HI">Rio de Janeiro</option>
-                                            <option value="CA">Recife</option>
-                                            <option value="NV">São Paulo</option>
-                                            <option value="OR">Natal</option>
-                                            <option value="WA">Fortaleza</option>
+                                            <option value="Betim">Betim</option>
+                                            <option value="Contagem">Contagem</option>
+                                            <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                            <option value="Recife">Recife</option>
+                                            <option value="São Paulo">São Paulo</option>
+                                            <option value="Natal">Natal</option>
+                                            <option value="Fortaleza">Fortaleza</option>
                                         </select>
                                     </div>
                                 </div>
@@ -71,34 +71,14 @@
                                     <div class="col-lg-7 col-sm-7">
                                         <select class="form-control" ng-model="vm.cityDestination">
                                             <option></option>
-                                            <option value="BE">Betim</option>
-                                            <option value="AK">Contagem</option>
-                                            <option value="HI">Rio de Janeiro</option>
-                                            <option value="CA">Recife</option>
-                                            <option value="NV">São Paulo</option>
-                                            <option value="OR">Natal</option>
-                                            <option value="WA">Fortaleza</option>
+                                            <option value="Betim">Betim</option>
+                                            <option value="Contagem">Contagem</option>
+                                            <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                            <option value="Recife">Recife</option>
+                                            <option value="São Paulo">São Paulo</option>
+                                            <option value="Natal">Natal</option>
+                                            <option value="Fortaleza">Fortaleza</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Km Saída</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.kmOutput">
-                                    </div>
-                                    <label class="col-lg-3 col-sm-3 control-label">Km Chegada</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.kmArrival">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Km Paga</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.kmPaid">
-                                    </div>
-                                    <label class="col-lg-3 col-sm-3 control-label">Km Rodada</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.kmTrip">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -112,23 +92,33 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Frete Total</label>
+                                    <label class="col-lg-3 col-sm-3 control-label">Saída (km)</label>
+                                    <div class="col-lg-2 col-sm-2">
+                                        <input type="text" class="form-control" ng-model="vm.kmOutput">
+                                    </div>
+                                    <label class="col-lg-3 col-sm-3 control-label">Chegada (km)</label>
+                                    <div class="col-lg-2 col-sm-2">
+                                        <input type="text" class="form-control" ng-model="vm.kmArrival">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 col-sm-3 control-label">Paga (km)</label>
+                                    <div class="col-lg-2 col-sm-2">
+                                        <input type="text" class="form-control" ng-model="vm.kmPaid">
+                                    </div>
+                                    <label class="col-lg-3 col-sm-3 control-label">Frete Total (R$)</label>
                                     <div class="col-lg-2 col-sm-2">
                                         <input type="text" class="form-control" ng-model="vm.totalMoney">
                                     </div>
-                                    <label class="col-lg-3 col-sm-3 control-label">Ad. Empresa</label>
+                                </div>
+                                <div class="form-group finish-session">
+                                    <label class="col-lg-3 col-sm-3 control-label">Ad. Empresa (R$)</label>
                                     <div class="col-lg-2 col-sm-2">
                                         <input type="text" class="form-control" ng-model="vm.moneyCompany">
                                     </div>
-                                </div>
-                                <div class="form-group finish-session">
-                                    <label class="col-lg-3 col-sm-3 control-label">Complemento</label>
+                                    <label class="col-lg-3 col-sm-3 control-label">Complemento (R$)</label>
                                     <div class="col-lg-2 col-sm-2">
                                         <input type="text" class="form-control" ng-model="vm.moneyComplement">
-                                    </div>
-                                    <label class="col-lg-3 col-sm-3 control-label">Adiantamento</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.moneyPartial">
                                     </div>
                                 </div>
                                 <div class="space15"></div>
@@ -281,7 +271,7 @@
                 <form name="formExpense" ng-submit="vm.submitExpense(vm.expense)">
                     <div class="form-group">
                         <label for="inputTipo">Tipo</label>
-                        <select class="form-control" id="inputTipo" ng-model="vm.expense.type">
+                        <select class="form-control" id="inputTipo" ng-model="vm.expense.type" ng-change="vm.checkExpense()">
                             <option></option>
                             <option value="Borracharia">Borracharia</option>
                             <option value="Lavagem/Limpeza">Lavagem/Limpeza</option>

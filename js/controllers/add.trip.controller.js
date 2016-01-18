@@ -5,13 +5,16 @@
         .module('app')
         .controller('AddTripController', AddTripController);
 
-    AddTripController.$inject = ['$scope', 'DataService', '$localstorage'];
+    AddTripController.$inject = ['$scope', 'DataService', '$localstorage', '$location'];
 
-    function AddTripController($scope, DataService, $localstorage) {
+    function AddTripController($scope, DataService, $localstorage, $location) {
         var vm = this;
 
         vm.truckSelect = '';
         vm.driverSelect = '';
+        vm.kmOutput = '';
+        vm.dateArrival = '';
+        vm.totalMoney = '';
         vm.fuels = DataService.getFuel();
         vm.expenses = DataService.getExpense();
         vm.trucks = [
@@ -94,6 +97,7 @@
             ];
 
             vm.driverSelect = vm.drivers[1];
+            vm.kmOutput = '788592';
         };
 
         vm.submitFuel = function(fuel){
@@ -146,6 +150,19 @@
             jQuery(document).ready(function(){
                 jQuery("#myExpense").modal("hide");
             });
+        };
+
+        vm.submitAddTrip = function(form){
+            $localstorage.remove('trip');
+            $localstorage.setObject('trip', form);
+            $location.path('/add-trip-confirm');
+        };
+
+        vm.checkExpense = function(){
+            if(vm.expense.type == 'Despesa adicional sem comprovação de nota (chapa, caixinha de conferente e outros) - 4%') {
+                vm.expense.value = parseFloat((4 / 100) * parseFloat(vm.totalMoney)).toFixed(2);
+                vm.expense.date = vm.dateArrival;
+            }
         };
     }
 
