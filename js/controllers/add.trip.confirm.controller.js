@@ -18,13 +18,13 @@
         var sumLts = 0;
         var sumPriceFuel = 0;
         vm.trip.fuels.forEach(function(fuel) {
-            sumLts = sumLts + parseInt(fuel.qtd);
-            sumPriceFuel = sumPriceFuel + parseInt(fuel.price);
+            sumLts = sumLts + parseFloat(fuel.qtd);
+            sumPriceFuel = sumPriceFuel + parseFloat(fuel.price);
         });
 
         var sumPriceExpenses = 0;
         vm.trip.expenses.forEach(function(expense) {
-            sumPriceExpenses = sumPriceExpenses + parseInt(expense.value);
+            sumPriceExpenses = sumPriceExpenses + parseFloat(expense.value);
         });
 
         vm.trip.sumLts = sumLts;
