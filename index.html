@@ -35,7 +35,13 @@
 </head>
 <body class="body">
 
-<div ng-view autoscroll="true"></div>
+<section id="container">
+    <ng-include src="'header.html'"></ng-include>
+    <ng-include src="'sidebar.html'"></ng-include>
+
+    <div ng-view autoscroll="true">
+    </div>
+</section>
 
 <!--Core js-->
 <script src="js/jquery.min.js"></script>
