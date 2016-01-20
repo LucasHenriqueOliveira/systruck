@@ -1,7 +1,6 @@
-jQuery.noConflict();
 (function ($) {
     "use strict";
-    jQuery(document).ready(function () {
+    $(document).ready(function () {
         /*==Left Navigation Accordion ==*/
         if ($.fn.dcAccordion) {
             $('#nav-accordion').dcAccordion({
@@ -16,25 +15,8 @@ jQuery.noConflict();
             });
         }
 
-        /*==Slim Scroll ==*/
-        if ($.fn.slimScroll) {
-            $('.event-list').slimscroll({
-                height: '305px',
-                wheelStep: 20
-            });
-            $('.conversation-list').slimscroll({
-                height: '360px',
-                wheelStep: 35
-            });
-            $('.to-do-list').slimscroll({
-                height: '300px',
-                wheelStep: 35
-            });
-        }
-
         /*==Nice Scroll ==*/
         if ($.fn.niceScroll) {
-
             $(".leftside-navigation").niceScroll({
                 cursorcolor: "#1FB5AD",
                 cursorborder: "0px solid #fff",
@@ -69,7 +51,6 @@ jQuery.noConflict();
         });
 
         $('.sidebar-toggle-box .fa-bars').click(function (e) {
-
             $(".leftside-navigation").niceScroll({
                 cursorcolor: "#1FB5AD",
                 cursorborder: "0px solid #fff",
@@ -87,9 +68,6 @@ jQuery.noConflict();
             if ($('#container').hasClass('open-right-panel')) {
                 $('#container').removeClass('open-right-panel')
             }
-            if ($('.right-sidebar').hasClass('open-right-bar')) {
-                $('.right-sidebar').removeClass('open-right-bar')
-            }
 
             if ($('.header').hasClass('merge-header')) {
                 $('.header').removeClass('merge-header')
@@ -100,9 +78,6 @@ jQuery.noConflict();
         $('.header,#main-content,#sidebar').click(function () {
             if ($('#container').hasClass('open-right-panel')) {
                 $('#container').removeClass('open-right-panel')
-            }
-            if ($('.right-sidebar').hasClass('open-right-bar')) {
-                $('.right-sidebar').removeClass('open-right-bar')
             }
 
             if ($('.header').hasClass('merge-header')) {
@@ -125,14 +100,6 @@ jQuery.noConflict();
         $('.panel .tools .fa-times').click(function () {
             $(this).parents(".panel").parent().remove();
         });
-
-        // tool tips
-
-        $('.tooltips').tooltip();
-
-        // popovers
-
-        $('.popovers').popover();
 
 
     });
