@@ -1,225 +1,219 @@
-<section id="container">
-    <ng-include src="'header.html'"></ng-include>
-
-    <ng-include src="'sidebar.html'"></ng-include>
-
-    <!--main content start-->
-    <div id="main-content">
-        <div class="wrapper">
-            <!-- page start-->
-            <div class="row">
-                <div class="col-md-12">
-                    <!--breadcrumbs start -->
-                    <ul class="breadcrumb">
-                        <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
-                        <li class="active">Cadastro de viagem</li>
-                    </ul>
-                    <!--breadcrumbs end -->
-                </div>
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li class="active">Cadastro de viagem</li>
+                </ul>
+                <!--breadcrumbs end -->
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            Cadastro de viagem
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Cadastro de viagem
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                                 <a href="javascript:;" class="fa fa-times"></a>
                             </span>
-                        </header>
-                        <div class="panel-body">
-                            <form role="form" class="form-horizontal" name="formAddTrip" ng-submit="vm.submitAddTrip(vm)">
-                                <div class="form-group">
-                                    <div class="space15"></div>
-                                    <label class="col-lg-11 col-sm-11 title-company">Dados da viagem</label>
-                                </div>
-                                <div class="form-group truck-field">
-                                    <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
-                                    <div class="col-lg-7 col-sm-7">
-                                        <select class="form-control" ng-model="vm.truckSelect" ng-change="vm.selectDriver()">
-                                            <option></option>
-                                            <option ng-repeat="truck in vm.trucks" value="{{truck.id}}">{{truck.name}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Motorista</label>
-                                    <div class="col-lg-7 col-sm-7">
-                                        <select class="form-control" ng-model="vm.driverSelect">
-                                            <option ng-repeat="driver in vm.drivers" value="{{driver.id}}" ng-selected="vm.driverSelect">{{driver.name}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Cidade Origem</label>
-                                    <div class="col-lg-7 col-sm-7">
-                                        <select class="form-control" ng-model="vm.cityHome">
-                                            <option></option>
-                                            <option value="Betim">Betim</option>
-                                            <option value="Contagem">Contagem</option>
-                                            <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                            <option value="Recife">Recife</option>
-                                            <option value="São Paulo">São Paulo</option>
-                                            <option value="Natal">Natal</option>
-                                            <option value="Fortaleza">Fortaleza</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Cidade Destino</label>
-                                    <div class="col-lg-7 col-sm-7">
-                                        <select class="form-control" ng-model="vm.cityDestination">
-                                            <option></option>
-                                            <option value="Betim">Betim</option>
-                                            <option value="Contagem">Contagem</option>
-                                            <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                            <option value="Recife">Recife</option>
-                                            <option value="São Paulo">São Paulo</option>
-                                            <option value="Natal">Natal</option>
-                                            <option value="Fortaleza">Fortaleza</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Data Saída</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.dateOutput">
-                                    </div>
-                                    <label class="col-lg-3 col-sm-3 control-label">Data Chegada</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.dateArrival">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Saída (km)</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.kmOutput">
-                                    </div>
-                                    <label class="col-lg-3 col-sm-3 control-label">Chegada (km)</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.kmArrival">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Paga (km)</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.kmPaid">
-                                    </div>
-                                    <label class="col-lg-3 col-sm-3 control-label">Frete Total (R$)</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.totalMoney">
-                                    </div>
-                                </div>
-                                <div class="form-group finish-session">
-                                    <label class="col-lg-3 col-sm-3 control-label">Ad. Empresa (R$)</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.moneyCompany">
-                                    </div>
-                                    <label class="col-lg-3 col-sm-3 control-label">Complemento (R$)</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.moneyComplement">
-                                    </div>
-                                </div>
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" class="form-horizontal" name="formAddTrip" ng-submit="vm.submitAddTrip(vm)">
+                            <div class="form-group">
                                 <div class="space15"></div>
-                                <div class="form-group">
-                                    <div class="space15"></div>
-                                    <label class="col-lg-10 col-sm-10 title-company">Despesas abastecimento</label>
-                                    <div class="col-lg-1 col-sm-1">
-                                        <div class="btn-group pull-right">
-                                            <a href data-target="#myFuel" data-toggle="modal" class="btn btn-primary">
-                                                Add <i class="fa fa-plus"></i>
-                                            </a>
-                                        </div>
-                                    </div>
+                                <label class="col-lg-11 col-sm-11 title-company">Dados da viagem</label>
+                            </div>
+                            <div class="form-group truck-field">
+                                <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
+                                <div class="col-lg-7 col-sm-7">
+                                    <select class="form-control" ng-model="vm.truckSelect" ng-change="vm.selectDriver()">
+                                        <option></option>
+                                        <option ng-repeat="truck in vm.trucks" value="{{truck.id}}">{{truck.name}}</option>
+                                    </select>
                                 </div>
-                                <div class="form-group finish-session">
-                                    <div class="col-lg-1 col-sm-1"></div>
-                                    <div class="col-lg-10 col-sm-10">
-                                        <table class="table table-bordered table-striped table-condensed">
-                                            <thead>
-                                                <tr>
-                                                    <th>Local</th>
-                                                    <th class="text-center">Litros</th>
-                                                    <th class="text-center">Valor</th>
-                                                    <th class="text-center" style="width:13%">Ação</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-repeat="fuel in vm.fuels track by $index">
-                                                    <td>{{fuel.name}}</td>
-                                                    <td class="text-center">{{fuel.qtd}} litros</td>
-                                                    <td class="text-center">R$ {{fuel.price}}</td>
-                                                    <td>
-                                                        <div class="todo-actionlist pull-right list-center">
-                                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="col-lg-1 col-sm-1"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Motorista</label>
+                                <div class="col-lg-7 col-sm-7">
+                                    <select class="form-control" ng-model="vm.driverSelect">
+                                        <option ng-repeat="driver in vm.drivers" value="{{driver.id}}" ng-selected="vm.driverSelect">{{driver.name}}</option>
+                                    </select>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Cidade Origem</label>
+                                <div class="col-lg-7 col-sm-7">
+                                    <select class="form-control" ng-model="vm.cityHome">
+                                        <option></option>
+                                        <option value="Betim">Betim</option>
+                                        <option value="Contagem">Contagem</option>
+                                        <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                        <option value="Recife">Recife</option>
+                                        <option value="São Paulo">São Paulo</option>
+                                        <option value="Natal">Natal</option>
+                                        <option value="Fortaleza">Fortaleza</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Cidade Destino</label>
+                                <div class="col-lg-7 col-sm-7">
+                                    <select class="form-control" ng-model="vm.cityDestination">
+                                        <option></option>
+                                        <option value="Betim">Betim</option>
+                                        <option value="Contagem">Contagem</option>
+                                        <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                        <option value="Recife">Recife</option>
+                                        <option value="São Paulo">São Paulo</option>
+                                        <option value="Natal">Natal</option>
+                                        <option value="Fortaleza">Fortaleza</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Data Saída</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <input type="text" class="form-control" ng-model="vm.dateOutput">
+                                </div>
+                                <label class="col-lg-3 col-sm-3 control-label">Data Chegada</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <input type="text" class="form-control" ng-model="vm.dateArrival">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Saída (km)</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <input type="text" class="form-control" ng-model="vm.kmOutput">
+                                </div>
+                                <label class="col-lg-3 col-sm-3 control-label">Chegada (km)</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <input type="text" class="form-control" ng-model="vm.kmArrival">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Paga (km)</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <input type="text" class="form-control" ng-model="vm.kmPaid">
+                                </div>
+                                <label class="col-lg-3 col-sm-3 control-label">Frete Total (R$)</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <input type="text" class="form-control" ng-model="vm.totalMoney">
+                                </div>
+                            </div>
+                            <div class="form-group finish-session">
+                                <label class="col-lg-3 col-sm-3 control-label">Ad. Empresa (R$)</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <input type="text" class="form-control" ng-model="vm.moneyCompany">
+                                </div>
+                                <label class="col-lg-3 col-sm-3 control-label">Complemento (R$)</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <input type="text" class="form-control" ng-model="vm.moneyComplement">
+                                </div>
+                            </div>
+                            <div class="space15"></div>
+                            <div class="form-group">
                                 <div class="space15"></div>
-                                <div class="form-group">
-                                    <div class="space15"></div>
-                                    <label class="col-lg-10 col-sm-10 title-company">Despesas gerais</label>
-                                    <div class="col-lg-1 col-sm-1">
-                                        <div class="btn-group pull-right">
-                                            <a href data-target="#myExpense" data-toggle="modal" class="btn btn-primary">
-                                                Add <i class="fa fa-plus"></i>
-                                            </a>
-                                        </div>
+                                <label class="col-lg-10 col-sm-10 title-company">Despesas abastecimento</label>
+                                <div class="col-lg-1 col-sm-1">
+                                    <div class="btn-group pull-right">
+                                        <a href data-target="#myFuel" data-toggle="modal" class="btn btn-primary">
+                                            Add <i class="fa fa-plus"></i>
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="form-group finish-session">
-                                    <div class="col-lg-1 col-sm-1"></div>
-                                    <div class="col-lg-10 col-sm-10">
-                                        <table class="table table-bordered table-striped table-condensed">
-                                            <thead>
-                                            <tr>
-                                                <th>Descrição</th>
-                                                <th class="text-center">Valor</th>
-                                                <th class="text-center">Data</th>
-                                                <th class="text-center" style="width:13%">Ação</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr ng-repeat="expense in vm.expenses track by $index">
-                                                <td>{{expense.type}}</td>
-                                                <td class="text-center">R$ {{expense.value}}</td>
-                                                <td class="text-center">{{expense.date}}</td>
-                                                <td>
-                                                    <div class="todo-actionlist pull-right list-center">
-                                                        <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                        <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="col-lg-1 col-sm-1"></div>
+                            </div>
+                            <div class="form-group finish-session">
+                                <div class="col-lg-1 col-sm-1"></div>
+                                <div class="col-lg-10 col-sm-10">
+                                    <table class="table table-bordered table-striped table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Local</th>
+                                            <th class="text-center">Litros</th>
+                                            <th class="text-center">Valor</th>
+                                            <th class="text-center" style="width:13%">Ação</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="fuel in vm.fuels track by $index">
+                                            <td>{{fuel.name}}</td>
+                                            <td class="text-center">{{fuel.qtd}} litros</td>
+                                            <td class="text-center">R$ {{fuel.price}}</td>
+                                            <td>
+                                                <div class="todo-actionlist pull-right list-center">
+                                                    <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                                    <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <div class="col-lg-1 col-sm-1"></div>
+                            </div>
+                            <div class="space15"></div>
+                            <div class="form-group">
                                 <div class="space15"></div>
-                                <div class="form-group">
-                                    <div class="col-lg-11 text-center">
-                                        <button class="btn btn-default" type="reset">Limpar</button>
-                                        <button class="btn btn-primary" type="submit">Salvar</button>
+                                <label class="col-lg-10 col-sm-10 title-company">Despesas gerais</label>
+                                <div class="col-lg-1 col-sm-1">
+                                    <div class="btn-group pull-right">
+                                        <a href data-target="#myExpense" data-toggle="modal" class="btn btn-primary">
+                                            Add <i class="fa fa-plus"></i>
+                                        </a>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </section>
-                </div>
+                            </div>
+                            <div class="form-group finish-session">
+                                <div class="col-lg-1 col-sm-1"></div>
+                                <div class="col-lg-10 col-sm-10">
+                                    <table class="table table-bordered table-striped table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Descrição</th>
+                                            <th class="text-center">Valor</th>
+                                            <th class="text-center">Data</th>
+                                            <th class="text-center" style="width:13%">Ação</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="expense in vm.expenses track by $index">
+                                            <td>{{expense.type}}</td>
+                                            <td class="text-center">R$ {{expense.value}}</td>
+                                            <td class="text-center">{{expense.date}}</td>
+                                            <td>
+                                                <div class="todo-actionlist pull-right list-center">
+                                                    <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                                    <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-1 col-sm-1"></div>
+                            </div>
+                            <div class="space15"></div>
+                            <div class="form-group">
+                                <div class="col-lg-11 text-center">
+                                    <button class="btn btn-default" type="reset">Limpar</button>
+                                    <button class="btn btn-primary" type="submit">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
             </div>
         </div>
-        <!-- page end-->
     </div>
-    <!--main content end-->
-</section>
+    <!-- page end-->
+</div>
+<!--main content end-->
 
 <!-- Modal -->
 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myFuel" class="modal fade">

@@ -1,258 +1,252 @@
-<section id="container">
-    <ng-include src="'header.html'"></ng-include>
-
-    <ng-include src="'sidebar.html'"></ng-include>
-
-    <!--main content start-->
-    <div id="main-content">
-        <div class="wrapper">
-            <!-- page start-->
-            <div class="row">
-                <div class="col-md-12">
-                    <!--breadcrumbs start -->
-                    <ul class="breadcrumb">
-                        <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
-                        <li class="active">Peças/Itens</li>
-                    </ul>
-                    <!--breadcrumbs end -->
-                </div>
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li class="active">Peças/Itens</li>
+                </ul>
+                <!--breadcrumbs end -->
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            Peças/Itens
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Peças/Itens
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                                 <a href="javascript:;" class="fa fa-times"></a>
                             </span>
-                        </header>
-                        <div class="panel-body">
-                            <div class="adv-table editable-table ">
-                                <div class="clearfix">
-                                    <div class="btn-group">
-                                        <a href="#/parts#myModal" data-toggle="modal" id="editable-sample_new" class="btn btn-primary">
-                                            Novo <i class="fa fa-plus"></i>
-                                        </a>
-                                    </div>
-                                    <div class="btn-group pull-right">
-                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
-                                            <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
-                                            <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
-                                        </ul>
-                                    </div>
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table editable-table ">
+                            <div class="clearfix">
+                                <div class="btn-group">
+                                    <a href="#/parts#myModal" data-toggle="modal" id="editable-sample_new" class="btn btn-primary">
+                                        Novo <i class="fa fa-plus"></i>
+                                    </a>
                                 </div>
-                                <div class="space15"></div>
-                                <table class="display table table-hover table-bordered table-striped table-condensed">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-center">Peças/Itens</th>
-                                        <th class="text-center">Valor Unitário</th>
-                                        <th class="text-center">Manutenção (Km)</th>
-                                        <th class="text-center">Estoque (unid.)</th>
-                                        <th class="text-center">Ação</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Óleo</td>
-                                        <td class="text-center">R$ 150,00</td>
-                                        <td class="text-center">20.000</td>
-                                        <td class="text-center">15</td>
-                                        <td>
-                                            <div class="todo-actionlist pull-right list-center">
-                                                <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Revisão de alternador</td>
-                                        <td class="text-center">R$ 500,00</td>
-                                        <td class="text-center"> 100.000 </td>
-                                        <td class="text-center">0</td>
-                                        <td>
-                                            <div class="todo-actionlist pull-right list-center">
-                                                <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Pneu</td>
-                                        <td class="text-center">R$ 1.000,00</td>
-                                        <td class="text-center"> - </td>
-                                        <td class="text-center">8</td>
-                                        <td>
-                                            <div class="todo-actionlist pull-right list-center">
-                                                <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Suspensão</td>
-                                        <td class="text-center">R$ 3.000,00</td>
-                                        <td class="text-center"> - </td>
-                                        <td class="text-center">0</td>
-                                        <td>
-                                            <div class="todo-actionlist pull-right list-center">
-                                                <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Feixe de molas</td>
-                                        <td class="text-center">R$ 2.500,00</td>
-                                        <td class="text-center"> - </td>
-                                        <td class="text-center">0</td>
-                                        <td>
-                                            <div class="todo-actionlist pull-right list-center">
-                                                <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Amortecedores</td>
-                                        <td class="text-center">R$ 6.000,00</td>
-                                        <td class="text-center"> - </td>
-                                        <td class="text-center">2</td>
-                                        <td>
-                                            <div class="todo-actionlist pull-right list-center">
-                                                <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Freio</td>
-                                        <td class="text-center">R$ 1.500,00</td>
-                                        <td class="text-center"> 150.000 </td>
-                                        <td class="text-center">3</td>
-                                        <td>
-                                            <div class="todo-actionlist pull-right list-center">
-                                                <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Molas Pneumáticas</td>
-                                        <td class="text-center">R$ 4.500,00</td>
-                                        <td class="text-center"> - </td>
-                                        <td class="text-center">0</td>
-                                        <td>
-                                            <div class="todo-actionlist pull-right list-center">
-                                                <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rolamento de roda</td>
-                                        <td class="text-center">R$ 1.500,00</td>
-                                        <td class="text-center"> - </td>
-                                        <td class="text-center">2</td>
-                                        <td>
-                                            <div class="todo-actionlist pull-right list-center">
-                                                <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Barra de direção</td>
-                                        <td class="text-center">R$ 9.500,00</td>
-                                        <td class="text-center"> - </td>
-                                        <td class="text-center">0</td>
-                                        <td>
-                                            <div class="todo-actionlist pull-right list-center">
-                                                <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
-                                                <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="btn-group pull-right">
+                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
+                                        <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
+                                        <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
+                                    </ul>
+                                </div>
                             </div>
+                            <div class="space15"></div>
+                            <table class="display table table-hover table-bordered table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Peças/Itens</th>
+                                    <th class="text-center">Valor Unitário</th>
+                                    <th class="text-center">Manutenção (Km)</th>
+                                    <th class="text-center">Estoque (unid.)</th>
+                                    <th class="text-center">Ação</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Óleo</td>
+                                    <td class="text-center">R$ 150,00</td>
+                                    <td class="text-center">20.000</td>
+                                    <td class="text-center">15</td>
+                                    <td>
+                                        <div class="todo-actionlist pull-right list-center">
+                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Revisão de alternador</td>
+                                    <td class="text-center">R$ 500,00</td>
+                                    <td class="text-center"> 100.000 </td>
+                                    <td class="text-center">0</td>
+                                    <td>
+                                        <div class="todo-actionlist pull-right list-center">
+                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pneu</td>
+                                    <td class="text-center">R$ 1.000,00</td>
+                                    <td class="text-center"> - </td>
+                                    <td class="text-center">8</td>
+                                    <td>
+                                        <div class="todo-actionlist pull-right list-center">
+                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Suspensão</td>
+                                    <td class="text-center">R$ 3.000,00</td>
+                                    <td class="text-center"> - </td>
+                                    <td class="text-center">0</td>
+                                    <td>
+                                        <div class="todo-actionlist pull-right list-center">
+                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Feixe de molas</td>
+                                    <td class="text-center">R$ 2.500,00</td>
+                                    <td class="text-center"> - </td>
+                                    <td class="text-center">0</td>
+                                    <td>
+                                        <div class="todo-actionlist pull-right list-center">
+                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Amortecedores</td>
+                                    <td class="text-center">R$ 6.000,00</td>
+                                    <td class="text-center"> - </td>
+                                    <td class="text-center">2</td>
+                                    <td>
+                                        <div class="todo-actionlist pull-right list-center">
+                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Freio</td>
+                                    <td class="text-center">R$ 1.500,00</td>
+                                    <td class="text-center"> 150.000 </td>
+                                    <td class="text-center">3</td>
+                                    <td>
+                                        <div class="todo-actionlist pull-right list-center">
+                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Molas Pneumáticas</td>
+                                    <td class="text-center">R$ 4.500,00</td>
+                                    <td class="text-center"> - </td>
+                                    <td class="text-center">0</td>
+                                    <td>
+                                        <div class="todo-actionlist pull-right list-center">
+                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Rolamento de roda</td>
+                                    <td class="text-center">R$ 1.500,00</td>
+                                    <td class="text-center"> - </td>
+                                    <td class="text-center">2</td>
+                                    <td>
+                                        <div class="todo-actionlist pull-right list-center">
+                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Barra de direção</td>
+                                    <td class="text-center">R$ 9.500,00</td>
+                                    <td class="text-center"> - </td>
+                                    <td class="text-center">0</td>
+                                    <td>
+                                        <div class="todo-actionlist pull-right list-center">
+                                            <a href="#" class="todo-edit" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#" class="todo-remove" title="Remover"><i class="ico-close"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            Peças/Itens desativados
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Peças/Itens desativados
                                 <span class="tools pull-right">
                                     <a href="javascript:;" class="fa fa-chevron-down"></a>
                                     <a href="javascript:;" class="fa fa-times"></a>
                                 </span>
-                        </header>
-                        <div class="panel-body">
-                            <div class="adv-table editable-table ">
-                                <div class="clearfix">
-                                    <div class="btn-group pull-right">
-                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
-                                            <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
-                                            <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
-                                        </ul>
-                                    </div>
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table editable-table ">
+                            <div class="clearfix">
+                                <div class="btn-group pull-right">
+                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
+                                        <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
+                                        <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
+                                    </ul>
                                 </div>
-                                <div class="space15"></div>
-                                <table class="display table table-hover table-bordered table-striped table-condensed">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-center">Peça/Item</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            Balança
-                                            <div class="todo-actionlist pull-right">
-                                                <a href="#" class="todo-done" title="Reativar"><i class="fa fa-check"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Mancais
-                                            <div class="todo-actionlist pull-right">
-                                                <a href="#" class="todo-done" title="Reativar"><i class="fa fa-check"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Terminais de direção
-                                            <div class="todo-actionlist pull-right">
-                                                <a href="#" class="todo-done" title="Reativar"><i class="fa fa-check"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
                             </div>
+                            <div class="space15"></div>
+                            <table class="display table table-hover table-bordered table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Peça/Item</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        Balança
+                                        <div class="todo-actionlist pull-right">
+                                            <a href="#" class="todo-done" title="Reativar"><i class="fa fa-check"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Mancais
+                                        <div class="todo-actionlist pull-right">
+                                            <a href="#" class="todo-done" title="Reativar"><i class="fa fa-check"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Terminais de direção
+                                        <div class="todo-actionlist pull-right">
+                                            <a href="#" class="todo-done" title="Reativar"><i class="fa fa-check"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </div>
         </div>
-        <!-- page end-->
     </div>
-    <!--main content end-->
-</section>
+    <!-- page end-->
+</div>
+<!--main content end-->
 
 <!-- Modal -->
 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">

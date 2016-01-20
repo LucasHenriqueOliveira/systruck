@@ -1,95 +1,89 @@
-<section id="container">
-    <ng-include src="'header.html'"></ng-include>
-
-    <ng-include src="'sidebar.html'"></ng-include>
-
-    <!--main content start-->
-    <div id="main-content">
-        <div class="wrapper">
-            <!-- page start-->
-            <div class="row">
-                <div class="col-md-12">
-                    <!--breadcrumbs start -->
-                    <ul class="breadcrumb">
-                        <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
-                        <li class="active">Cadastro de manutenção</li>
-                    </ul>
-                    <!--breadcrumbs end -->
-                </div>
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li class="active">Cadastro de manutenção</li>
+                </ul>
+                <!--breadcrumbs end -->
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            Cadastro de manutenção
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Cadastro de manutenção
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                                 <a href="javascript:;" class="fa fa-times"></a>
                             </span>
-                        </header>
-                        <div class="panel-body">
-                            <form role="form" class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
-                                    <div class="col-lg-6 col-sm-6">
-                                        <select class="form-control">
-                                            <option></option>
-                                            <option value="BE">20.279 - Scania P310</option>
-                                            <option value="AK">20.280 - Scania P340</option>
-                                            <option value="HI">20.314 - Scania P310</option>
-                                            <option value="CA">20.654 - Scania P340</option>
-                                            <option value="OH">20.323 - Iveco Stralis 420</option>
-                                            <option value="PA">20.279 - Scania P310</option>
-                                            <option value="RI">23.423 - Iveco Stralis 420</option>
-                                            <option value="SC">20.675 - Scania P310</option>
-                                            <option value="VT">20.876 - Scania P340</option>
-                                            <option value="VA">20.856 - Scania P340</option>
-                                        </select>
-                                    </div>
+                    </header>
+                    <div class="panel-body">
+                        <form role="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
+                                <div class="col-lg-6 col-sm-6">
+                                    <select class="form-control">
+                                        <option></option>
+                                        <option value="BE">20.279 - Scania P310</option>
+                                        <option value="AK">20.280 - Scania P340</option>
+                                        <option value="HI">20.314 - Scania P310</option>
+                                        <option value="CA">20.654 - Scania P340</option>
+                                        <option value="OH">20.323 - Iveco Stralis 420</option>
+                                        <option value="PA">20.279 - Scania P310</option>
+                                        <option value="RI">23.423 - Iveco Stralis 420</option>
+                                        <option value="SC">20.675 - Scania P310</option>
+                                        <option value="VT">20.876 - Scania P340</option>
+                                        <option value="VA">20.856 - Scania P340</option>
+                                    </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Peça/Item</label>
-                                    <div class="col-lg-6 col-sm-6">
-                                        <select class="form-control">
-                                            <option></option>
-                                            <option value="BE">Óleo</option>
-                                            <option value="AK">Suspensão</option>
-                                            <option value="HI">Feixe de molas</option>
-                                            <option value="CA">Amortecedores</option>
-                                            <option value="OH">Sistema de Freio</option>
-                                            <option value="PA">Molas Pneumáticas</option>
-                                            <option value="RI">Rolamento de roda</option>
-                                            <option value="SC">Barra de direção</option>
-                                            <option value="SE">Braços tensores</option>
-                                        </select>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Peça/Item</label>
+                                <div class="col-lg-6 col-sm-6">
+                                    <select class="form-control">
+                                        <option></option>
+                                        <option value="BE">Óleo</option>
+                                        <option value="AK">Suspensão</option>
+                                        <option value="HI">Feixe de molas</option>
+                                        <option value="CA">Amortecedores</option>
+                                        <option value="OH">Sistema de Freio</option>
+                                        <option value="PA">Molas Pneumáticas</option>
+                                        <option value="RI">Rolamento de roda</option>
+                                        <option value="SC">Barra de direção</option>
+                                        <option value="SE">Braços tensores</option>
+                                    </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Km Manutenção</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control">
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Km Manutenção</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Preço</label>
-                                    <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control">
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Preço</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <input type="text" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-lg-11 text-center">
-                                        <button class="btn btn-default" type="reset">Limpar</button>
-                                        <button class="btn btn-primary" type="submit">Salvar</button>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-11 text-center">
+                                    <button class="btn btn-default" type="reset">Limpar</button>
+                                    <button class="btn btn-primary" type="submit">Salvar</button>
                                 </div>
-                            </form>
-                        </div>
-                    </section>
-                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
             </div>
         </div>
-        <!-- page end-->
     </div>
-    <!--main content end-->
-</section>
+    <!-- page end-->
+</div>
+<!--main content end-->
