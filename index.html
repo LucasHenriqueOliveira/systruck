@@ -39,7 +39,7 @@
     <ng-include src="'header.html'"></ng-include>
     <ng-include src="'sidebar.html'"></ng-include>
 
-    <div ng-view autoscroll="true">
+    <div ng-view autoscroll="true" class="transition">
     </div>
 </section>
 
@@ -54,6 +54,7 @@
 <script src="js/angular.min.js"></script>
 <script src="js/angular-route.min.js"></script>
 <script src="js/angular-cookies.min.js"></script>
+<script src="js/angular-animate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.2.5/angular-locale_pt-br.js"></script>
 
 <script src="js/app.js"></script>
@@ -72,9 +73,11 @@
 <script src="js/controllers/truck.controller.js"></script>
 <script src="js/controllers/parts.controller.js"></script>
 <script src="js/controllers/company.controller.js"></script>
+<script src="js/controllers/trip.controller.js"></script>
 <script src="js/controllers/add.trip.controller.js"></script>
 <script src="js/controllers/add.trip.confirm.controller.js"></script>
 <script src="js/controllers/search.trip.controller.js"></script>
+<script src="js/controllers/research.trip.controller.js"></script>
 <script src="js/controllers/last.trip.controller.js"></script>
 <script src="js/controllers/add.maintenance.controller.js"></script>
 <script src="js/controllers/search.maintenance.controller.js"></script>
@@ -83,6 +86,7 @@
 <!--<script src="register/register.controller.js"></script> -->
 
 <script src="js/masks.js"></script>
+<script src="js/mask.min.js"></script>
 
 </body>
 </html>

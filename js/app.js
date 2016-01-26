@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies', 'ui.utils.masks'])
+        .module('app', ['ngRoute', 'ngCookies', 'ui.utils.masks', 'ui.mask', 'ngAnimate'])
         .config(config)
         .run(run);
 
@@ -51,6 +51,12 @@
                 controllerAs: 'vm'
             })
 
+            .when('/trip/:id', {
+                controller: 'TripController',
+                templateUrl: 'trip.html',
+                controllerAs: 'vm'
+            })
+
             .when('/add-trip', {
                 controller: 'AddTripController',
                 templateUrl: 'add-trip.html',
@@ -66,6 +72,12 @@
             .when('/search-trip', {
                 controller: 'SearchTripController',
                 templateUrl: 'search-trip.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/research-trip', {
+                controller: 'ResearchTripController',
+                templateUrl: 'research-trip.html',
                 controllerAs: 'vm'
             })
 
