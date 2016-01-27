@@ -36,8 +36,8 @@
 <body class="body">
 
 <section id="container">
-    <ng-include src="'header.html'"></ng-include>
-    <ng-include src="'sidebar.html'"></ng-include>
+    <ng-include ng-hide="login" src="'header.html'"></ng-include>
+    <ng-include ng-hide="login" src="'sidebar.html'"></ng-include>
 
     <div ng-view autoscroll="true" class="transition">
     </div>
@@ -73,6 +73,7 @@
 <script src="js/controllers/truck.controller.js"></script>
 <script src="js/controllers/parts.controller.js"></script>
 <script src="js/controllers/company.controller.js"></script>
+<script src="js/controllers/edit.company.controller.js"></script>
 <script src="js/controllers/trip.controller.js"></script>
 <script src="js/controllers/add.trip.controller.js"></script>
 <script src="js/controllers/add.trip.confirm.controller.js"></script>
@@ -87,6 +88,8 @@
 
 <script src="js/masks.js"></script>
 <script src="js/mask.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&AMP;sensor=false"></script>
 
 </body>
 </html>
