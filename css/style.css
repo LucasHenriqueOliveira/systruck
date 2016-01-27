@@ -16,6 +16,7 @@ body {
     margin:0px !important;
     font-size:13px;
     text-rendering:optimizeLegibility;
+    position: relative;
 }
 ul, .list-unstyled {
     padding-left: 30px;
@@ -5303,18 +5304,6 @@ div.tagsinput span.tag {
 .todo-actionlist a:hover i {
     color:#666;
 }
-.list-center{
-    position: absolute;
-    right: 5.5%;
-}
-.list-center-desactive{
-    position: absolute;
-    right: 6.5%;
-}
-.list-center-user{
-    position: absolute;
-    right: 4.1%;
-}
 .todo-done i {
     font-size:14px;
 }
@@ -5526,7 +5515,8 @@ div.tagsinput span.tag {
 }
 
 #map-canvas{
-    margin-top: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     width:400px;
     height:400px;
     webkit-border-radius:100%; -moz-border-radius:100%; border-radius:100%;
@@ -5837,4 +5827,58 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
     -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+/* transitions ngView*/
+.transition {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    opacity: 1;
+}
+.transition.ng-enter,
+.transition.ng-leave {
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.transition.ng-enter {
+    opacity: 0;
+}
+.transition.ng-enter-active {
+    opacity: 1;
+}
+.transition.ng-leave {
+    opacity: 1;
+}
+.transition.ng-leave-active {
+    opacity: 0;
+}
+
+/* loading */
+.element-animation{
+    overflow: hidden;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    border-radius: 100%;
+    top: -110px;
+    left: 40px;
+    opacity: 0.5;
+    box-shadow: #1fb5ad -2px -3px 2px -2px;
+    -webkit-animation: 2.0s;
+    -webkit-animation-name: animationFramesWebKit;
+    -webkit-animation-iteration-count: infinite;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+@-webkit-keyframes animationFramesWebKit {
+    0% {
+        -webkit-transform:  rotate(0deg);
+    }
+    100% {
+        -webkit-transform:  rotate(360deg);
+    }
 }
