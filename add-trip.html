@@ -79,41 +79,41 @@
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Data Saída</label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <input type="text" class="form-control" ng-model="vm.dateOutput">
+                                    <input type="text" class="form-control" ng-model="vm.dateOutput" ui-mask="99/99/9999" model-view-value="true">
                                 </div>
                                 <label class="col-lg-3 col-sm-3 control-label">Data Chegada</label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <input type="text" class="form-control" ng-model="vm.dateArrival">
+                                    <input type="text" class="form-control" ng-model="vm.dateArrival" ui-mask="99/99/9999" model-view-value="true">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Saída (km)</label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <input type="text" class="form-control" ng-model="vm.kmOutput">
+                                    <input type="text" class="form-control" ng-model="vm.kmOutput" ui-number-mask="0">
                                 </div>
                                 <label class="col-lg-3 col-sm-3 control-label">Chegada (km)</label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <input type="text" class="form-control" ng-model="vm.kmArrival">
+                                    <input type="text" class="form-control" ng-model="vm.kmArrival" ui-number-mask="0">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Paga (km)</label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <input type="text" class="form-control" ng-model="vm.kmPaid">
+                                    <input type="text" class="form-control" ng-model="vm.kmPaid" ui-number-mask="0">
                                 </div>
                                 <label class="col-lg-3 col-sm-3 control-label">Frete Total (R$)</label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <input type="text" class="form-control" ng-model="vm.totalMoney">
+                                    <input type="text" class="form-control" ng-model="vm.totalMoney" ui-money-mask="2">
                                 </div>
                             </div>
                             <div class="form-group finish-session">
                                 <label class="col-lg-3 col-sm-3 control-label">Ad. Empresa (R$)</label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <input type="text" class="form-control" ng-model="vm.moneyCompany">
+                                    <input type="text" class="form-control" ng-model="vm.moneyCompany" ui-money-mask="2">
                                 </div>
                                 <label class="col-lg-3 col-sm-3 control-label">Complemento (R$)</label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <input type="text" class="form-control" ng-model="vm.moneyComplement">
+                                    <input type="text" class="form-control" ng-model="vm.moneyComplement" ui-money-mask="2">
                                 </div>
                             </div>
                             <div class="space15"></div>
@@ -236,11 +236,11 @@
                     </div>
                     <div class="form-group">
                         <label for="inputValor">Valor</label>
-                        <input type="text" class="form-control" id="inputValor" ng-model="vm.fuel.price" placeholder="Valor (R$)">
+                        <input type="text" class="form-control" id="inputValor" ng-model="vm.fuel.price" placeholder="Valor (R$)" ui-money-mask="2">
                     </div>
                     <div class="form-group">
                         <label for="inputData">Data</label>
-                        <input type="text" class="form-control" id="inputData" ng-model="vm.fuel.date" placeholder="Data do Abastecimento">
+                        <input type="text" class="form-control" id="inputData" ng-model="vm.fuel.date" ui-mask="99/99/9999" model-view-value="true">
                     </div>
                     <button data-dismiss="modal" class="btn btn-default" type="button">Fechar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>
@@ -281,11 +281,11 @@
                     </div>
                     <div class="form-group">
                         <label for="inputValorDespesa">Valor</label>
-                        <input type="text" class="form-control" id="inputValorDespesa" ng-model="vm.expense.value" placeholder="Valor (R$)">
+                        <input type="text" class="form-control" id="inputValorDespesa" ng-model="vm.expense.value" placeholder="Valor (R$)" ui-money-mask="2">
                     </div>
                     <div class="form-group">
                         <label for="inputDataDespesa">Data</label>
-                        <input type="text" class="form-control" id="inputDataDespesa" ng-model="vm.expense.date" placeholder="Data da Despesa">
+                        <input type="text" class="form-control" id="inputDataDespesa" ng-model="vm.expense.date" ui-mask="99/99/9999" model-view-value="true">
                     </div>
                     <button data-dismiss="modal" class="btn btn-default" type="button">Fechar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>
