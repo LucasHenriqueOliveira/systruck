@@ -24,52 +24,85 @@
                             </span>
                     </header>
                     <div class="panel-body">
-                        <form role="form" class="form-horizontal">
+                        <form role="form" class="form-horizontal" ng-submit="vm.submitAddMaintenance(vm)">
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control">
+                                    <select class="form-control" ng-model="vm.truck_select" ng-change="vm.getKm()">
                                         <option></option>
-                                        <option value="BE">20.279 - Scania P310</option>
-                                        <option value="AK">20.280 - Scania P340</option>
-                                        <option value="HI">20.314 - Scania P310</option>
-                                        <option value="CA">20.654 - Scania P340</option>
-                                        <option value="OH">20.323 - Iveco Stralis 420</option>
-                                        <option value="PA">20.279 - Scania P310</option>
-                                        <option value="RI">23.423 - Iveco Stralis 420</option>
-                                        <option value="SC">20.675 - Scania P310</option>
-                                        <option value="VT">20.876 - Scania P340</option>
-                                        <option value="VA">20.856 - Scania P340</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 col-sm-3 control-label">Peça/Item</label>
-                                <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control">
-                                        <option></option>
-                                        <option value="BE">Óleo</option>
-                                        <option value="AK">Suspensão</option>
-                                        <option value="HI">Feixe de molas</option>
-                                        <option value="CA">Amortecedores</option>
-                                        <option value="OH">Sistema de Freio</option>
-                                        <option value="PA">Molas Pneumáticas</option>
-                                        <option value="RI">Rolamento de roda</option>
-                                        <option value="SC">Barra de direção</option>
-                                        <option value="SE">Braços tensores</option>
+                                        <option value="1">20.279 - Scania P310</option>
+                                        <option value="2">20.280 - Scania P340</option>
+                                        <option value="3">20.314 - Scania P310</option>
+                                        <option value="4">20.654 - Scania P340</option>
+                                        <option value="5">20.323 - Iveco Stralis 420</option>
+                                        <option value="6">20.279 - Scania P310</option>
+                                        <option value="7">23.423 - Iveco Stralis 420</option>
+                                        <option value="8">20.675 - Scania P310</option>
+                                        <option value="9">20.876 - Scania P340</option>
+                                        <option value="10">20.856 - Scania P340</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Km Manutenção</label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" ng-model="vm.km" ui-number-mask="0">
+                                </div>
+                                <div class="col-lg-3 col-sm-3 message-padding" ng-show="vm.qtd_km">
+                                    <label class="message-km">
+                                        {{vm.message}} <strong>{{vm.qtd_km | number}} {{vm.unit}}</strong>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Peça/Item</label>
+                                <div class="col-lg-6 col-sm-6">
+                                    <select class="form-control" ng-model="vm.part_select" ng-change="vm.getPrice()">
+                                        <option></option>
+                                        <option value="1">Óleo</option>
+                                        <option value="2">Pneu</option>
+                                        <option value="3">Suspensão</option>
+                                        <option value="4">Feixe de molas</option>
+                                        <option value="5">Amortecedores</option>
+                                        <option value="6">Sistema de Freio</option>
+                                        <option value="7">Molas Pneumáticas</option>
+                                        <option value="8">Rolamento de roda</option>
+                                        <option value="9">Barra de direção</option>
+                                        <option value="10">Braços tensores</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Qtd.</label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <select class="form-control" ng-model="vm.qtd" ng-change="vm.updatePrice()">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-sm-3 message-padding" ng-show="vm.part_price">
+                                    <label class="message-km">
+                                        {{vm.message_price}} <strong>{{vm.part_price | currency}}</strong>
+                                    </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Preço</label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" ng-model="vm.price" ui-money-mask="2">
                                 </div>
                             </div>
                             <div class="form-group">
