@@ -99,6 +99,12 @@
                 controllerAs: 'vm'
             })
 
+            .when('/add-maintenance-confirm', {
+                controller: 'AddMaintenanceConfirmController',
+                templateUrl: 'add-maintenance-confirm.html',
+                controllerAs: 'vm'
+            })
+
             .when('/search-maintenance', {
                 controller: 'SearchMaintenanceController',
                 templateUrl: 'search-maintenance.html',

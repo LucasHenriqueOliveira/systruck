@@ -5882,3 +5882,16 @@ input:-webkit-autofill:active {
         -webkit-transform:  rotate(360deg);
     }
 }
+
+.message-km {
+    font-weight: 300;
+    font-size: 14px;
+    padding-top: 7px;
+    margin-bottom: 0;
+}
+
+.message-padding{
+    padding-left: 0 !important;
+    color: #1fb5ad;
+}
+

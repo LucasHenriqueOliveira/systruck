@@ -133,13 +133,13 @@
             if(JSON.stringify(vm.expenses) === '{}'){
                 $localstorage.setObject('expenses', [{
                     type : expense.type,
-                    value : expense.value,
+                    value : expense.value.toFixed(2),
                     date: expense.date
                 }]);
             } else{
                 vm.expenses.push({
                     type : expense.type,
-                    value : expense.value,
+                    value : expense.value.toFixed(2),
                     date: expense.date
                 });
                 $localstorage.setObject('expenses', vm.expenses);
@@ -160,7 +160,7 @@
 
         vm.checkExpense = function(){
             if(vm.expense.type == 'Despesa adicional sem comprovação de nota (chapa, caixinha de conferente e outros) - 4%') {
-                vm.expense.value = parseFloat((4 / 100) * parseFloat(vm.totalMoney)).toFixed(2);
+                vm.expense.value = parseFloat((4 / 100) * parseFloat(vm.totalMoney));
                 vm.expense.date = vm.dateArrival;
             }
         };

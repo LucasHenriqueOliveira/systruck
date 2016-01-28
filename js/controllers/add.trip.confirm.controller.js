@@ -5,10 +5,15 @@
         .module('app')
         .controller('AddTripConfirmController', AddTripConfirmController);
 
-    AddTripConfirmController.$inject = ['$location', '$localstorage', 'DataService'];
+    AddTripConfirmController.$inject = ['$location', '$localstorage', 'DataService', '$timeout'];
 
-    function AddTripConfirmController($location, $localstorage, DataService) {
+    function AddTripConfirmController($location, $localstorage, DataService, $timeout) {
         var vm = this;
+        vm.loading = true;
+
+        $timeout(function() {
+            vm.loading = false;
+        }, 2000);
 
         vm.trip = DataService.getTrip();
         vm.truck = vm.trip.trucks[vm.trip.truckSelect].name;
@@ -32,6 +37,7 @@
         vm.trip.sumPriceExpenses = sumPriceExpenses;
         vm.trip.average = (vm.trip.traveled/sumLts).toFixed(2);
         vm.trip.advance = parseInt(vm.trip.moneyCompany) + parseInt(vm.trip.moneyComplement);
+        vm.trip.result = (vm.trip.sumPriceExpenses + vm.trip.sumPriceFuel) - vm.trip.advance;
 
         $localstorage.remove('fuels');
         $localstorage.remove('expenses');
