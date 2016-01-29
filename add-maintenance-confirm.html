@@ -1,0 +1,106 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper" ng-show="vm.loading">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" ng-show="!vm.loading">
+        <!-- page start-->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li class="active">Confirmação de cadastro de manutenção</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Confirmação de cadastro de manutenção
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="alert alert-success fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <strong>Pronto!</strong> O cadastro da manutenção foi realizado com sucesso.
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-truck"></i></span> Caminhão</h2>
+                                    <div class="location-info">
+                                        <p>
+                                            <strong>Scania P310</strong> <br>
+                                            <strong>Frota:</strong> 20.314 <br>
+                                            <strong>Placa:</strong> HGL-1876 <br>
+                                            <strong>Placa semi-reboque:</strong> HGL-1875 <br>
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-road"></i></span> Quilometragem (Km)</h2>
+                                    <div class="location-info">
+                                        <p><strong>Atual:</strong> 380.029 <br>
+                                            <strong>Manutenção:</strong> 390.500
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
+                                    <div class="location-info">
+                                        <p><strong>Cadastro:</strong> 03/12/2015 <br>
+                                            <strong>Manutenção:</strong> 05/12/2015
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-road"></i></span> Peça/Item</h2>
+                                    <div class="location-info">
+                                        <p><strong>Óleo </strong><br>
+                                            <strong>Preço Unitário:</strong> R$1.200,00<br>
+                                            <strong>Quantidade:</strong> 1
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-money"></i></span> Preço</h2>
+                                    <div class="location-info">
+                                        <p><strong>Peças:</strong> R$1.200,00 <br>
+                                            <strong>Manutenção:</strong> R$3.200,00
+                                        </p>
+                                        <p>
+                                            Status: <span class="label label-success label-mini">Resolvido</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-11 text-center">
+                                <button type="button" class="btn btn-default "><i class="fa fa-pencil"></i> Editar</button>
+                                <button type="button" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->
