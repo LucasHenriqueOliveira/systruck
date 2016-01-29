@@ -1,0 +1,121 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper" ng-show="vm.loading">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" ng-show="!vm.loading">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li class="active">Lista de Manutenções</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Lista de Manutenções
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table editable-table ">
+                            <table class="display table table-hover table-bordered table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Caminhão</th>
+                                    <th class="text-center">Peça/Item</th>
+                                    <th class="text-center">Km Manutenção</th>
+                                    <th class="text-center">Data</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Ação</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            <li>20.279 - Scania P310</li>
+                                            <li>Placa: HGL-1909</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">Óleo</td>
+                                    <td class="center">300.000</td>
+                                    <td class="center">10/12/2015</td>
+                                    <td class="center"><span class="label label-success label-mini">Resolvido</span></td>
+                                    <td class="center">
+                                        <div class="todo-actionlist">
+                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#/maintenance/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            <li>20.280 - Scania P340</li>
+                                            <li>Placa: HTT-0109</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">Revisão de alternador</td>
+                                    <td class="center">400.000</td>
+                                    <td class="center">12/12/2015</td>
+                                    <td class="center"><span class="label label-success label-mini">Resolvido</span></td>
+                                    <td class="center">
+                                        <div class="todo-actionlist">
+                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#/maintenance/2" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            <li>20.314 - Scania P310</li>
+                                            <li>Placa: HHL-2123</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">Suspensão</td>
+                                    <td class="center">390.500</td>
+                                    <td class="center"> - </td>
+                                    <td class="center"><span class="label label-danger label-mini">Pendente</span></td>
+                                    <td class="center">
+                                        <div class="todo-actionlist">
+                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-11 text-center">
+                                <button type="button" class="btn btn-default " ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->
