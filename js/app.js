@@ -93,6 +93,12 @@
                 controllerAs: 'vm'
             })
 
+            .when('/maintenance/:id', {
+                controller: 'MaintenanceController',
+                templateUrl: 'maintenance.html',
+                controllerAs: 'vm'
+            })
+
             .when('/add-maintenance', {
                 controller: 'AddMaintenanceController',
                 templateUrl: 'add-maintenance.html',
@@ -108,6 +114,12 @@
             .when('/search-maintenance', {
                 controller: 'SearchMaintenanceController',
                 templateUrl: 'search-maintenance.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/research-maintenance', {
+                controller: 'ResearchMaintenanceController',
+                templateUrl: 'research-maintenance.html',
                 controllerAs: 'vm'
             })
 
@@ -142,10 +154,9 @@
                 $rootScope.login = false;
             }
             // redirect to login page if not logged in and trying to access a restricted page
-            //var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
+            var restrictedPage = $rootScope.login;
             var loggedIn = $rootScope.globals.currentUser;
-            //if (restrictedPage && !loggedIn) {
-            if (!loggedIn) {
+            if (!restrictedPage && !loggedIn) {
                 $location.path('/login');
             }
         });
