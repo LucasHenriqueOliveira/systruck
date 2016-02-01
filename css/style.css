@@ -63,10 +63,10 @@ a,a:hover,a:focus {
     margin:0;
     padding:35px 15px;
     text-align:center;
-    background:#aec785;
+    background:#1fb5ad;
     border-radius:5px 5px 0 0;
     -webkit-border-radius:5px 5px 0 0;
-    border-bottom:10px solid #a0b87e;
+    border-bottom:10px solid #6ecfc9;
 }
 
 .logo-login{
@@ -1154,6 +1154,9 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
 }
 .badge.bg-inverse {
     background: #2A3542;
+}
+.badge.bg-default {
+    background: #dbdce0;
 }
 /*timeline*/
 .timeline {
@@ -3135,7 +3138,7 @@ input:focus:invalid:focus,textarea:focus:invalid:focus,select:focus:invalid:focu
     padding-top:8px;
 }
 .daterangepicker td.active,.daterangepicker td.active:hover,.datepicker td.active:hover,.datepicker td.active:hover:hover,.datepicker td.active:active,.datepicker td.active:hover:active,.datepicker td.active.active,.datepicker td.active.active:hover,.datepicker td.active.disabled,.datepicker td.active.disabled:hover,.datepicker td.active[disabled],.datepicker td.active[disabled]:hover,.datepicker td span.active:hover,.datepicker td span.active:active,.datepicker td span.active.active,.datepicker td span.active.disabled,.datepicker td span.active[disabled] {
-    background:#41CAC0;
+    background:#41CAC0 !important;
 }
 .daterangepicker .calendar th,.daterangepicker .calendar td {
     font-family:'Open Sans',sans-serif;
@@ -3158,6 +3161,7 @@ input:focus:invalid:focus,textarea:focus:invalid:focus,select:focus:invalid:focu
     border-radius:3px;
     -webkit-border-radius: 3px;
 }
+.datepicker{z-index:1151 !important;}
 /*ck editor*/
 .cke_top,.cke_bottom {
     background:#F5F5F5 !important;
@@ -4869,13 +4873,13 @@ div.tagsinput span.tag {
     background-color:#99cce3;
 }
 .alert-danger .alert-icon {
-    background-color:#fcb1ae;
+    background-color:#ff6c60;
 }
 .alert-success .alert-icon {
     background-color:#98d7ad;
 }
 .alert-warning .alert-icon {
-    background-color:#ffe699;
+    background-color:#FCB322;
 }
 .notification-sender {
     color:#414147;
@@ -5895,3 +5899,18 @@ input:-webkit-autofill:active {
     color: #1fb5ad;
 }
 
+.popover {
+    background-color: #FFF;
+    font-size: 11px;
+    padding: 0px !important;
+    width: 200px;
+}
+
+.alert-warning {
+    background-color: #faebcc !important;
+}
+
+.information {
+    position: absolute;
+    top: 0px;
+}
