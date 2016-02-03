@@ -19,6 +19,7 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li> Manutenções</li>
                     <li class="active">Confirmação de cadastro de manutenção</li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -56,35 +57,69 @@
                                     </div>
                                     <h2> <span><i class="fa fa-road"></i></span> Quilometragem (Km)</h2>
                                     <div class="location-info">
-                                        <p><strong>Atual:</strong> 380.029 <br>
-                                            <strong>Manutenção:</strong> 390.500
-                                        </p>
-                                    </div>
-                                    <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
-                                    <div class="location-info">
-                                        <p><strong>Cadastro:</strong> 03/12/2015 <br>
-                                            <strong>Manutenção:</strong> 05/12/2015
+                                        <p><strong>Atual:</strong> {{vm.maintenance.qtd_km | number}} <br>
+                                            <strong>Manutenção:</strong> {{vm.maintenance.km | number}}
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="prf-contacts">
-                                    <h2> <span><i class="fa fa-road"></i></span> Peça/Item</h2>
+                                    <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
                                     <div class="location-info">
-                                        <p><strong>Óleo </strong><br>
-                                            <strong>Preço Unitário:</strong> R$1.200,00<br>
-                                            <strong>Quantidade:</strong> 1
+                                        <p><strong>Cadastro:</strong> {{vm.maintenance.date_add}} <br>
+                                            <strong>Manutenção:</strong> {{vm.maintenance.date}}
                                         </p>
                                     </div>
                                     <h2> <span><i class="fa fa-money"></i></span> Preço</h2>
                                     <div class="location-info">
-                                        <p><strong>Peças:</strong> R$1.200,00 <br>
-                                            <strong>Manutenção:</strong> R$3.200,00
+                                        <p><strong>Peças:</strong> {{vm.maintenance.sumPricePart | currency}} <br>
+                                            <strong>Manutenção:</strong> {{vm.maintenance.price | currency}} <br>
+                                            <strong>Total:</strong> {{vm.maintenance.total | currency}}
                                         </p>
                                         <p>
-                                            Status: <span class="label label-success label-mini">Resolvido</span>
+                                            Status: <span class="label label-success label-mini">Realizada</span>
                                         </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-battery-half"></i></span> Peças/Itens</h2>
+                                    <div class="location-info">
+                                        <table class="table table-bordered table-striped table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th>Peça/Item</th>
+                                                <th class="text-center">Quantidade</th>
+                                                <th class="text-center">Preço Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="part in vm.maintenance.parts track by $index">
+                                                <td>{{part.name}}</td>
+                                                <td class="text-center">{{part.qtd}}</td>
+                                                <td class="text-center">{{part.price | currency}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align: right"><strong>Total</strong></td>
+                                                <td class="text-center"><strong>{{vm.maintenance.sumPricePart | currency}}</strong></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space15" ng-show="vm.maintenance.comments"></div>
+                        <div class="row" ng-show="vm.maintenance.comments">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-comments"></i></span> Observações</h2>
+                                    <div class="location-info">
+                                        <p>{{vm.maintenance.comments}}</p>
                                     </div>
                                 </div>
                             </div>
