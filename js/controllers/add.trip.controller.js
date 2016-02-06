@@ -5,9 +5,9 @@
         .module('app')
         .controller('AddTripController', AddTripController);
 
-    AddTripController.$inject = ['$scope', 'DataService', '$localstorage', '$location'];
+    AddTripController.$inject = ['DataService', '$localstorage', '$location'];
 
-    function AddTripController($scope, DataService, $localstorage, $location) {
+    function AddTripController(DataService, $localstorage, $location) {
         var vm = this;
 
         vm.truckSelect = '';
@@ -124,6 +124,10 @@
             vm.fuel = {};
             jQuery(document).ready(function(){
                 jQuery("#myFuel").modal("hide");
+
+                var bodyHeight = jQuery(this).height();
+                jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+                jQuery(".content .clearfix").parent().animate({ height: (bodyHeight/2) }, "slow");
             });
         };
 
@@ -149,6 +153,10 @@
             vm.expense = {};
             jQuery(document).ready(function(){
                 jQuery("#myExpense").modal("hide");
+
+                var bodyHeight = jQuery(this).height();
+                jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+                jQuery(".content .clearfix").parent().animate({ height: (bodyHeight/2) }, "slow");
             });
         };
 
@@ -164,6 +172,16 @@
                 vm.expense.date = vm.dateArrival;
             }
         };
+
+        jQuery(document).ready(function(){
+            jQuery('.popovers').popover();
+
+            jQuery('.default-date-picker').datepicker({
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+                language: 'pt-BR'
+            });
+        });
     }
 
 })();
