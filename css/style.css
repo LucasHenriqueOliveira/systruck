@@ -5807,10 +5807,6 @@ right: -1px;
     margin-bottom: 0px;
 }
 
-.truck-field{
-    margin-top: -12px;
-}
-
 .icon-center{
     float: none !important;
 }
@@ -5904,6 +5900,7 @@ input:-webkit-autofill:active {
     font-size: 11px;
     padding: 0px !important;
     width: 200px;
+    container: 'body';
 }
 
 .alert-warning {
@@ -5913,4 +5910,10 @@ input:-webkit-autofill:active {
 .information {
     position: absolute;
     top: 0px;
+}
+
+.breadcrumb {
+    font-size: 10px;
+    margin-bottom: 10px !important;
+    margin-top: -5px !important;
 }
