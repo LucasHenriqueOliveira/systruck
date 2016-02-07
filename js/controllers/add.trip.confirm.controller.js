@@ -5,9 +5,9 @@
         .module('app')
         .controller('AddTripConfirmController', AddTripConfirmController);
 
-    AddTripConfirmController.$inject = ['$location', '$localstorage', 'DataService', '$timeout'];
+    AddTripConfirmController.$inject = ['$location', '$localstorage', 'DataService', '$timeout', '$window'];
 
-    function AddTripConfirmController($location, $localstorage, DataService, $timeout) {
+    function AddTripConfirmController($location, $localstorage, DataService, $timeout, $window) {
         var vm = this;
         vm.loading = true;
 
@@ -41,6 +41,13 @@
 
         $localstorage.remove('fuels');
         $localstorage.remove('expenses');
+
+        vm.printIt = function(){
+            var table = document.getElementById('print').innerHTML;
+            var myWindow = $window.open('', '', 'width=800, height=600');
+            myWindow.document.write(table);
+            myWindow.print();
+        };
 
     }
 
