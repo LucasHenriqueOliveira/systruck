@@ -7,6 +7,7 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li> Manutenções</li>
                     <li class="active">Pesquisar manutenção</li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -24,14 +25,17 @@
                             </span>
                     </header>
                     <div class="panel-body">
-                        <form role="form" class="form-horizontal">
+                        <form role="form" class="form-horizontal" ng-submit="vm.submitSearchMaintenance(vm)">
                             <div class="form-group">
-                                <label class="col-lg-3 col-sm-3 control-label">Data</label>
+                                <label class="col-lg-3 col-sm-3 control-label">Data
+                                <span data-content="Período que deseja pesquisar as manutenções."
+                                      data-placement="top" data-trigger="hover" class="badge bg-default popovers information">?</span>
+                                </label>
                                 <div class="col-lg-4 col-sm-4">
                                     <div class="input-group input-large">
-                                        <input type="text" class="form-control dpd1" name="from">
+                                        <input type="text" class="form-control dpd1 default-date-picker" name="from" ng-model="vm.from" ui-mask="99/99/9999" model-view-value="true">
                                         <span class="input-group-addon">até</span>
-                                        <input type="text" class="form-control dpd2" name="to">
+                                        <input type="text" class="form-control dpd2 default-date-picker" name="to" ng-model="vm.to" ui-mask="99/99/9999" model-view-value="true">
                                     </div>
                                 </div>
                             </div>
@@ -71,9 +75,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Status
+                                <span data-content="Situação da manutenção, se está pendente para ser realizada, ou se já foi realizada."
+                                      data-placement="top" data-trigger="hover" class="badge bg-default popovers information">?</span>
+                                </label>
+                                <div class="col-lg-2 col-sm-2">
+                                    <select class="form-control" ng-model="vm.status">
+                                        <option value="1">Pendente</option>
+                                        <option value="2">Realizada</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="col-lg-11 text-center">
-                                    <button class="btn btn-default" type="reset">Limpar</button>
-                                    <button class="btn btn-primary" type="submit">Pesquisar</button>
+                                    <button class="btn btn-default" type="reset"><i class="fa fa-eraser"></i> Limpar</button>
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Pesquisar</button>
                                 </div>
                             </div>
                         </form>
