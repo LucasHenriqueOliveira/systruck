@@ -1,13 +1,25 @@
 <!--main content start-->
 <div id="main-content">
-    <div class="wrapper">
+
+    <div class="wrapper" ng-show="vm.loading">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" ng-show="!vm.loading">
         <!-- page start-->
         <div class="row">
             <div class="col-md-12">
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
-                    <li class="active">Usuários</li>
+                    <li class="active">Usuário</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
@@ -17,227 +29,56 @@
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Usuários
+                        Usuário
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                                 <a href="javascript:;" class="fa fa-times"></a>
                             </span>
                     </header>
                     <div class="panel-body">
-                        <div class="adv-table editable-table ">
-                            <div class="clearfix">
-                                <div class="btn-group">
-                                    <a href data-target="#myModal" data-toggle="modal" id="editable-sample_new" class="btn btn-primary">
-                                        Novo <i class="fa fa-plus"></i>
-                                    </a>
-                                </div>
-                                <div class="btn-group pull-right">
-                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
-                                        <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
-                                        <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
-                                    </ul>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-user"></i></span> Dados</h2>
+                                    <div class="location-info">
+                                        <p><strong>Função:</strong> Motorista <br>
+                                            <strong>Nome:</strong> Guilherme Azevedo Reis <br>
+                                            <strong>E-mail:</strong> guilherme.azevedo@gmail.com<br>
+                                            <strong>CNH:</strong> 322432423
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-user-md"></i></span> Exame Periódico</h2>
+                                    <div class="location-info">
+                                        <p>
+                                            <strong>Vencimento:</strong> 17/03/2016
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space15"></div>
-                            <table class="display table table-hover table-bordered table-striped table-condensed">
-                                <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Email</th>
-                                    <th>Cart. Habilitação</th>
-                                    <th>Função</th>
-                                    <th class="text-center">Ação</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Sérgio de Oliveira</td>
-                                    <td>sergio@gmail.com</td>
-                                    <td> - </td>
-                                    <td>Gerente</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Priscila Ramos de Melo</td>
-                                    <td>priscilaramos@gmail.com</td>
-                                    <td> - </td>
-                                    <td>Administrativo</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Lucas Henrique de Oliveira</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Arthur Felipe R. Costa</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Gilberto Oliveira</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Guilherme Azevedo Reis</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>José Lucas Ferreira e Silva</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Paulo Holanda Ribeiro Netto</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Matheus André da Silva</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ruy Arruda Cassiano</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
+                                    <div class="location-info">
+                                        <p><strong>Ativação:</strong> 10/11/2015 <br>
+                                            <strong>Desativação:</strong> -
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-phone"></i></span> Contato</h2>
+                                    <div class="location-info">
+                                        <p><strong>Telefone:</strong> (31) 99375-4325 <br>
+                                            <strong>Telefone:</strong> (31) 3565-2367
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Usuários Desativados
-                                <span class="tools pull-right">
-                                    <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                    <a href="javascript:;" class="fa fa-times"></a>
-                                </span>
-                    </header>
-                    <div class="panel-body">
-                        <div class="adv-table editable-table ">
-                            <div class="clearfix">
-                                <div class="btn-group pull-right">
-                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
-                                        <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
-                                        <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
-                                    </ul>
-                                </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-11 text-center">
+                                <button type="button" class="btn btn-default " ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
+                                <button type="button" class="btn btn-default "><i class="fa fa-pencil"></i> Editar</button>
+                                <button type="button" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</button>
                             </div>
-                            <div class="space15"></div>
-                            <table class="display table table-hover table-bordered table-striped table-condensed" id="hidden-table-info">
-                                <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Email</th>
-                                    <th>Cart. Habilitação</th>
-                                    <th>Função</th>
-                                    <th class="text-center">Ação</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Lucas Henrique de Oliveira</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-done icon-center" title="Reativar"><i class="fa fa-check"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Arthur Felipe R. Costa</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-done icon-center" title="Reativar"><i class="fa fa-check"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Gilberto Oliveira</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-done icon-center" title="Reativar"><i class="fa fa-check"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </section>
@@ -247,56 +88,3 @@
     <!-- page end-->
 </div>
 <!--main content end-->
-
-<!-- Modal -->
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 class="modal-title">Inclusão de novo usuário</h4>
-            </div>
-            <div class="modal-body">
-
-                <form role="form">
-                    <div class="form-group">
-                        <label for="inputNome">Nome</label>
-                        <input type="text" class="form-control" id="inputNome" placeholder="Nome">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputCNH">Carteira de Habilitação</label>
-                        <input type="text" class="form-control" id="inputCNH" placeholder="Carteira de Habilitação">
-                    </div>
-                    <div class="form-group">
-                        <label for="selectFuncao">Função</label>
-                        <select class="form-control" style="width: 100%" id="selectFuncao">
-                            <option></option>
-                            <option value="CA">Gerente</option>
-                            <option value="CS">Administrativo</option>
-                            <option value="NV">Motorista</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputTelefone1">Telefone</label>
-                        <input type="text" class="form-control" id="inputTelefone1" ng-model="vm.phone1" placeholder="(xx) xxxxx-xxxx" ui-br-phone-number>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputTelefone2">Telefone</label>
-                        <input type="text" class="form-control" id="inputTelefone2" ng-model="vm.phone2" placeholder="(xx) xxxxx-xxxx" ui-br-phone-number>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputTelefone3">Telefone</label>
-                        <input type="text" class="form-control" id="inputTelefone3" ng-model="vm.phone3" placeholder="(xx) xxxxx-xxxx" ui-br-phone-number>
-                    </div>
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Fechar</button>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- modal -->
