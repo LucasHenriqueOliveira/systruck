@@ -48,7 +48,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control">
+                                    <select class="form-control" ng-model="vm.truck">
                                         <option></option>
                                         <option value="BE">20.279 - Scania P310</option>
                                         <option value="AK">20.280 - Scania P340</option>
@@ -66,7 +66,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Motorista</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control">
+                                    <select class="form-control" ng-model="vm.driver">
                                         <option></option>
                                         <option value="BE">Lucas Henrique de Oliveira</option>
                                         <option value="AK">Arthur Felipe R. Costa</option>
@@ -82,7 +82,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Cidade Origem</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control">
+                                    <select class="form-control" ng-model="vm.cityHome">
                                         <option></option>
                                         <option value="Betim">Betim</option>
                                         <option value="Contagem">Contagem</option>
@@ -97,7 +97,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Cidade Destino</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control">
+                                    <select class="form-control" ng-model="vm.cityDestination">
                                         <option></option>
                                         <option value="Betim">Betim</option>
                                         <option value="Contagem">Contagem</option>
@@ -112,7 +112,7 @@
                             <div class="form-group">
                                 <div class="col-lg-11 text-center">
                                     <button class="btn btn-default" type="reset"><i class="fa fa-eraser"></i> Limpar</button>
-                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Pesquisar</button>
+                                    <button class="btn btn-primary" type="submit" ng-disabled="!vm.numberTrip && !vm.from && !vm.to && !vm.truck && !vm.driver && !vm.cityHome && !vm.cityDestination"><i class="fa fa-search"></i> Pesquisar</button>
                                 </div>
                             </div>
                         </form>

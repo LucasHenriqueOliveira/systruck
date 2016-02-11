@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .controller('ReportProfitController', ReportProfitController);
+        .controller('ReportTruckController', ReportTruckController);
 
-    ReportProfitController.$inject = ['$location', '$timeout'];
+    ReportTruckController.$inject = ['$location', '$timeout'];
 
-    function ReportProfitController($location, $timeout) {
+    function ReportTruckController($location, $timeout) {
         var vm = this;
         vm.loading = false;
         vm.chart_select = false;
@@ -20,18 +20,18 @@
             }
         };
 
-        vm.data = [{ name: '20.279', data: [5245.7], dataLabels: vm.dataLabels},
-            { name:'20.280', data: [5236.1], dataLabels: vm.dataLabels},
-            { name:'20.314', data: [5124.2], dataLabels: vm.dataLabels},
-            { name:'20.654', data: [5234.0], dataLabels: vm.dataLabels},
-            { name:'20.323', data: [5012.5], dataLabels: vm.dataLabels},
-            { name:'20.259', data: [4912.1], dataLabels: vm.dataLabels},
-            { name:'23.423', data: [5111.8], dataLabels: vm.dataLabels},
-            { name:'20.675', data: [5211.7], dataLabels: vm.dataLabels},
-            { name:'20.876', data: [5111.1], dataLabels: vm.dataLabels},
-            { name:'20.856', data: [5311.1], dataLabels: vm.dataLabels}];
+        vm.data = [{ name: 'HGL-1909', data: [5245.7], dataLabels: vm.dataLabels},
+            { name:'HTT-0109', data: [5236.1], dataLabels: vm.dataLabels},
+            { name:'HHL-2123', data: [5124.2], dataLabels: vm.dataLabels},
+            { name:'HOL-2338', data: [5234.0], dataLabels: vm.dataLabels},
+            { name:'HGL-2432', data: [5012.5], dataLabels: vm.dataLabels},
+            { name:'HGL-1914', data: [4912.1], dataLabels: vm.dataLabels},
+            { name:'HQR-4234', data: [5111.8], dataLabels: vm.dataLabels},
+            { name:'HGL-1909', data: [5211.7], dataLabels: vm.dataLabels},
+            { name:'HGL-6474', data: [5111.1], dataLabels: vm.dataLabels},
+            { name:'HFB-5758', data: [5311.1], dataLabels: vm.dataLabels}];
 
-        vm.submitChartProfit = function(form) {
+        vm.submitChartTruck = function(form) {
             vm.loading = true;
 
             $timeout(function() {
@@ -47,7 +47,7 @@
                         }
                     },
                     title: {
-                        text: 'Lucro por caminhão'
+                        text: 'Resultado por caminhão'
                     },
                     subtitle: {
                         text: '01/01/2016 a 31/01/2016'
@@ -61,7 +61,7 @@
                         min: 0,
                         allowDecimals: true,
                         title: {
-                            text: 'Lucro (R$)'
+                            text: 'Resultado (R$)'
                         }
                     },
                     series: vm.data,

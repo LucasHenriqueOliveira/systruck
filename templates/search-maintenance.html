@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control">
+                                    <select class="form-control" ng-model="vm.truck">
                                         <option></option>
                                         <option value="BE">20.279 - Scania P310</option>
                                         <option value="AK">20.280 - Scania P340</option>
@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Peça/Item</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control">
+                                    <select class="form-control" ng-model="vm.part">
                                         <option></option>
                                         <option value="BE">Óleo</option>
                                         <option value="AK">Suspensão</option>
@@ -89,7 +89,7 @@
                             <div class="form-group">
                                 <div class="col-lg-11 text-center">
                                     <button class="btn btn-default" type="reset"><i class="fa fa-eraser"></i> Limpar</button>
-                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Pesquisar</button>
+                                    <button class="btn btn-primary" type="submit" ng-disabled="!vm.from && !vm.to && !vm.truck && !vm.part && !vm.status"><i class="fa fa-search"></i> Pesquisar</button>
                                 </div>
                             </div>
                         </form>
