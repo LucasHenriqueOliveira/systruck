@@ -1,0 +1,78 @@
+<!--main content start-->
+<div id="main-content">
+
+    <div class="wrapper" ng-show="vm.loading">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" ng-show="!vm.loading">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li class="active">Perfil</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Perfil
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body profile-information">
+                        <div class="col-md-3">
+                            <div class="profile-pic text-center">
+                                <i class="fa fa-user fa-10x"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile-desk">
+                                <h1>Lucas Henrique</h1>
+                                <span class="text-muted">Gerente</span>
+                                <br>
+                                <ul>
+                                    <li>Email: lucashdads@gmail.com</li>
+                                    <li ng-show="vm.driver">CNH: 3123423523</li>
+                                    <li ng-show="vm.driver">Exame Periódico: 03/06/2016</li>
+                                    <li>Data do cadastro: 11/12/2015</li>
+                                </ul>
+                                <br>
+                                <button type="button" class="btn btn-primary"><i class="fa fa-refresh"></i> Trocar usuário</button>
+                                <button type="button" class="btn btn-primary"><i class="fa fa-key"></i> Trocar senha</button>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="prf-contacts text-center">
+                                <h2> <span><i class="fa fa-phone"></i></span></h2>
+                            </div>
+                            <div class="profile-statistics text-center" style="margin-top: 30px;">
+                                <h1>(31) 99435-4562</h1>
+                                <p>Telefone</p>
+                                <h1>(31) 2563-4562</h1>
+                                <p>Telefone</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->
