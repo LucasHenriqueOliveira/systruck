@@ -1,0 +1,102 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li> Relatórios</li>
+                    <li class="active">Viagem</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Pesquisa Viagem
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="col-lg-12 col-sm-12">
+                            <form role="form" class="form-inline" ng-submit="vm.submitChartTravel(vm)">
+                                <div class="form-group">
+                                    <select class="form-control" ng-model="vm.chart" ng-change="vm.getChart(vm.chart)">
+                                        <option value="0">Selecione o tipo de gráfico</option>
+                                        <option value="1">Viagem x Total</option>
+                                        <option value="2">Viagem x Caminhão</option>
+                                        <option value="3">Viagem x Motorista</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" ng-show="vm.showDates">
+                                    <input type="text" class="form-control dpd1 default-date-picker" name="from" ng-model="vm.from" ui-mask="99/99/9999" model-view-value="true">
+                                    <span>até</span>
+                                    <input type="text" class="form-control dpd2 default-date-picker" name="to" ng-model="vm.to" ui-mask="99/99/9999" model-view-value="true">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Pesquisar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row" ng-show="vm.loading && vm.chart_select">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="!vm.loading && vm.chart_select">
+            <div class="col-lg-12 col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Gráfico
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="col-lg-12 col-sm-12">
+                            <highchart id="chart1" config="vm.highchartsNG"></highchart>
+                        </div>
+                        <br/>
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="panel-body">
+                                <div class="adv-table editable-table ">
+                                    <table class="display table table-hover table-bordered table-striped table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" ng-repeat="title in vm.data.title track by $index">{{title}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="data in vm.data.data track by $index">
+                                            <td class="center" ng-repeat="value in vm.data.field track by $index">{{data[value]}}</td>
+                                        </tr>
+                                        <tr ng-show="vm.data.total">
+                                            <td class="center" colspan="{{vm.qtdTitles}}"><strong>Total</strong></td>
+                                            <td class="center"><strong>{{vm.data.total | currency}}</strong></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->
