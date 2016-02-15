@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies', 'ui.utils.masks', 'ui.mask', 'ngAnimate'])
+        .module('app', ['ngRoute', 'ngCookies', 'ui.utils.masks', 'ui.mask', 'ngAnimate', 'highcharts-ng'])
         .config(config)
         .run(run);
 
@@ -11,127 +11,193 @@
         $routeProvider
             .when('/', {
                 controller: 'DashboardController',
-                templateUrl: 'dashboard.html',
+                templateUrl: 'templates/dashboard.html',
                 controllerAs: 'vm'
             })
 
             .when('/login', {
                 controller: 'LoginController',
-                templateUrl: 'login.html',
+                templateUrl: 'templates/login.html',
                 controllerAs: 'vm'
             })
 
             .when('/register', {
                 controller: 'RegisterController',
-                templateUrl: 'register.html',
+                templateUrl: 'templates/register.html',
                 controllerAs: 'vm'
             })
 
-            .when('/user', {
+            .when('/profile', {
+                controller: 'ProfileController',
+                templateUrl: 'templates/profile.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/users', {
+                controller: 'UsersController',
+                templateUrl: 'templates/users.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/user/:id', {
                 controller: 'UserController',
-                templateUrl: 'user.html',
+                templateUrl: 'templates/user.html',
                 controllerAs: 'vm'
             })
 
-            .when('/truck', {
+            .when('/trucks', {
+                controller: 'TrucksController',
+                templateUrl: 'templates/trucks.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/truck/:id', {
                 controller: 'TruckController',
-                templateUrl: 'truck.html',
+                templateUrl: 'templates/truck.html',
                 controllerAs: 'vm'
             })
 
             .when('/parts', {
                 controller: 'PartsController',
-                templateUrl: 'parts.html',
+                templateUrl: 'templates/parts.html',
                 controllerAs: 'vm'
             })
 
             .when('/company', {
                 controller: 'CompanyController',
-                templateUrl: 'company.html',
+                templateUrl: 'templates/company.html',
                 controllerAs: 'vm'
             })
 
             .when('/edit-company', {
                 controller: 'EditCompanyController',
-                templateUrl: 'edit-company.html',
+                templateUrl: 'templates/edit-company.html',
                 controllerAs: 'vm'
             })
 
             .when('/trip/:id', {
                 controller: 'TripController',
-                templateUrl: 'trip.html',
+                templateUrl: 'templates/trip.html',
                 controllerAs: 'vm'
             })
 
             .when('/add-trip', {
                 controller: 'AddTripController',
-                templateUrl: 'add-trip.html',
+                templateUrl: 'templates/add-trip.html',
                 controllerAs: 'vm'
             })
 
             .when('/add-trip-confirm', {
                 controller: 'AddTripConfirmController',
-                templateUrl: 'add-trip-confirm.html',
+                templateUrl: 'templates/add-trip-confirm.html',
                 controllerAs: 'vm'
             })
 
             .when('/search-trip', {
                 controller: 'SearchTripController',
-                templateUrl: 'search-trip.html',
+                templateUrl: 'templates/search-trip.html',
                 controllerAs: 'vm'
             })
 
             .when('/research-trip', {
                 controller: 'ResearchTripController',
-                templateUrl: 'research-trip.html',
+                templateUrl: 'templates/research-trip.html',
                 controllerAs: 'vm'
             })
 
             .when('/last-trip', {
                 controller: 'LastTripController',
-                templateUrl: 'last-trip.html',
+                templateUrl: 'templates/last-trip.html',
                 controllerAs: 'vm'
             })
 
             .when('/maintenance/:id', {
                 controller: 'MaintenanceController',
-                templateUrl: 'maintenance.html',
+                templateUrl: 'templates/maintenance.html',
                 controllerAs: 'vm'
             })
 
             .when('/add-maintenance', {
                 controller: 'AddMaintenanceController',
-                templateUrl: 'add-maintenance.html',
+                templateUrl: 'templates/add-maintenance.html',
                 controllerAs: 'vm'
             })
 
             .when('/add-maintenance-confirm', {
                 controller: 'AddMaintenanceConfirmController',
-                templateUrl: 'add-maintenance-confirm.html',
+                templateUrl: 'templates/add-maintenance-confirm.html',
                 controllerAs: 'vm'
             })
 
             .when('/search-maintenance', {
                 controller: 'SearchMaintenanceController',
-                templateUrl: 'search-maintenance.html',
+                templateUrl: 'templates/search-maintenance.html',
                 controllerAs: 'vm'
             })
 
             .when('/research-maintenance', {
                 controller: 'ResearchMaintenanceController',
-                templateUrl: 'research-maintenance.html',
+                templateUrl: 'templates/research-maintenance.html',
                 controllerAs: 'vm'
             })
 
             .when('/last-maintenance', {
                 controller: 'LastMaintenanceController',
-                templateUrl: 'last-maintenance.html',
+                templateUrl: 'templates/last-maintenance.html',
                 controllerAs: 'vm'
             })
 
             .when('/realized-maintenance', {
                 controller: 'RealizedMaintenanceController',
-                templateUrl: 'realized-maintenance.html',
+                templateUrl: 'templates/realized-maintenance.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/all-periodics', {
+                controller: 'AllPeriodicsController',
+                templateUrl: 'templates/all-periodics.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/report-profit', {
+                controller: 'ReportProfitController',
+                templateUrl: 'templates/reports/profit.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/report-expense', {
+                controller: 'ReportExpenseController',
+                templateUrl: 'templates/reports/expense.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/report-maintenance', {
+                controller: 'ReportMaintenanceController',
+                templateUrl: 'templates/reports/maintenance.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/report-truck', {
+                controller: 'ReportTruckController',
+                templateUrl: 'templates/reports/truck.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/report-driver', {
+                controller: 'ReportDriverController',
+                templateUrl: 'templates/reports/driver.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/report-travel', {
+                controller: 'ReportTravelController',
+                templateUrl: 'templates/reports/travel.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/report-part', {
+                controller: 'ReportPartController',
+                templateUrl: 'templates/reports/part.html',
                 controllerAs: 'vm'
             })
 
@@ -147,12 +213,7 @@
         }
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var path = $location.path();
-            if(path === '/login'){
-                $rootScope.login = true;
-            } else {
-                $rootScope.login = false;
-            }
+            $rootScope.location = $location;
             // redirect to login page if not logged in and trying to access a restricted page
             var restrictedPage = $rootScope.login;
             var loggedIn = $rootScope.globals.currentUser;
