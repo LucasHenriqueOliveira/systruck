@@ -1,0 +1,21 @@
+<form class="form-profile" name="form" ng-submit="vm.login(vm)" role="form">
+    <h2 class="form-profile-heading logo-login"><img src="images/carlive.svg" width="200px"></h2>
+    <div class="login-wrap">
+        <div class="user-login-info">
+            <table class="table table-condensed">
+                <tbody>
+                <tr ng-repeat="profile in vm.profiles track by $index" style="background-color: #fff">
+                    <td class="center">
+                        <input type="radio" ng-model="vm.option" name="optionProfile" value="{{profile.empresa_id}}_{{profile.tipo_perfil_id}}" required>
+                    </td>
+                    <td class="center">{{profile.empresa_nome}}</td>
+                    <td class="center">{{profile.tipo_perfil_nome}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-lg btn-login btn-block" ng-disabled="form.$invalid" type="submit">Entrar</button>
+        </div>
+    </div>
+</form>
