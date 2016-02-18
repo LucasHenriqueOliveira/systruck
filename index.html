@@ -42,13 +42,13 @@
 </head>
 <body class="body">
 
-<section id="container">
-    <ng-include ng-hide="login" src="'header.html'"></ng-include>
-    <ng-include ng-hide="login" src="'sidebar.html'"></ng-include>
+    <section id="container" ng-controller="AppController">
+        <ng-include ng-if="location.path() !== '/login' && location.path() !== '/select-profile'" src="'templates/header.html'"></ng-include>
+        <ng-include ng-if="location.path() !== '/login' && location.path() !== '/select-profile'" src="'templates/sidebar.html'"></ng-include>
 
-    <div ng-view autoscroll="true" class="transition">
-    </div>
-</section>
+        <div ng-view autoscroll="true" class="transition">
+        </div>
+    </section>
 
 <!--Core js-->
 <script src="js/jquery.min.js"></script>
@@ -78,8 +78,11 @@
 <!-- Real user service that uses an api -->
 <script src="js/services/user.service.js"></script>
 
+<script src="js/controllers/app.controller.js"></script>
 <script src="js/controllers/dashboard.controller.js"></script>
 <script src="js/controllers/login.controller.js"></script>
+<script src="js/controllers/select.profile.controller.js"></script>
+<script src="js/controllers/profile.controller.js"></script>
 <script src="js/controllers/user.controller.js"></script>
 <script src="js/controllers/users.controller.js"></script>
 <script src="js/controllers/truck.controller.js"></script>
@@ -101,7 +104,13 @@
 <script src="js/controllers/last.maintenance.controller.js"></script>
 <script src="js/controllers/realized.maintenance.controller.js"></script>
 <script src="js/controllers/all.periodics.controller.js"></script>
-<script src="js/controllers/report.profit.controller.js"></script>
+<script src="js/controllers/reports/profit.controller.js"></script>
+<script src="js/controllers/reports/expense.controller.js"></script>
+<script src="js/controllers/reports/maintenance.controller.js"></script>
+<script src="js/controllers/reports/truck.controller.js"></script>
+<script src="js/controllers/reports/driver.controller.js"></script>
+<script src="js/controllers/reports/travel.controller.js"></script>
+<script src="js/controllers/reports/part.controller.js"></script>
 <!--<script src="register/register.controller.js"></script> -->
 
 <!-- HighCharts -->
