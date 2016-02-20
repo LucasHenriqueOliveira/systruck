@@ -50,7 +50,7 @@
                 $(".leftside-navigation").scrollTo("+=" + Math.abs(diff), 500);
         });
 
-        $('.sidebar-toggle-box .fa-bars').click(function (e) {
+        $('.sidebar-toggle-box .fa-exchange').click(function (e) {
             $(".leftside-navigation").niceScroll({
                 cursorcolor: "#1FB5AD",
                 cursorborder: "0px solid #fff",
@@ -101,6 +101,11 @@
             $(this).parents(".panel").parent().remove();
         });
 
+        $("#wizard").steps({
+            headerTag: "h2",
+            bodyTag: "section",
+            transitionEffect: "slideLeft"
+        });
 
     });
 
