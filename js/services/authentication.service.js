@@ -5,65 +5,71 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
-    function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
+    AuthenticationService.$inject = ['$http', '$rootScope', '$timeout', 'UserService', '$localstorage'];
+    function AuthenticationService($http, $rootScope, $timeout, UserService, $localstorage) {
         var service = {};
 
         service.Login = Login;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
+        service.IsLogged = IsLogged;
+        service.GetEmail = GetEmail;
+        service.GetName = GetName;
+        service.GetRoles = GetRoles;
 
         return service;
 
         function Login(email, password, callback) {
 
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
-            $timeout(function () {
-                var response;
-                response = { success: true };
-                callback(response);
-                /*
-                UserService.GetByUsername(email)
-                    .then(function (user) {
-                        if (user !== null && user.password === password) {
-                            response = { success: true };
-                        } else {
-                            response = { success: false, message: 'Username or password is incorrect' };
-                        }
-                        callback(response);
-                    });
-                */
-            }, 1000);
-
             /* Use this for real authentication
              ----------------------------------------------*/
-            //$http.post('/api/authenticate', { email: email, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
-
+            $http.post('http://localhost:8080/login', { username: email, password: password })
+                .then(function(response) {
+                        callback(response);
+                    }, function(error) {
+                        //alert("Login failure" + JSON.stringify(error));
+                        console.log(error);
+                    });
         }
 
-        function SetCredentials(email, password) {
-            var authdata = Base64.encode(email + ':' + password);
+        function SetCredentials(data) {
 
-            $rootScope.globals = {
-                currentUser: {
-                    email: email,
-                    authdata: authdata
-                }
-            };
+            $localstorage.set('id', data.user.id);
+            $localstorage.set('email', data.user.email);
+            $localstorage.set('name', data.user.nome);
+            $localstorage.set('token', data.token);
+            $localstorage.set('company', data.user.empresa);
+            $localstorage.set('roles', data.user.perfil);
 
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-            $cookieStore.put('globals', $rootScope.globals);
+            $rootScope.$broadcast("login-done");
+
         }
 
         function ClearCredentials() {
-            $rootScope.globals = {};
-            $cookieStore.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic';
+            $localstorage.remove('id');
+            $localstorage.remove('email');
+            $localstorage.remove('name');
+            $localstorage.remove('token');
+            $localstorage.remove('company');
+            $localstorage.remove('roles');
         }
+
+        function IsLogged() {
+            return ($localstorage.get('email') && $localstorage.get('token') && $localstorage.get('name'));
+        }
+
+        function GetEmail() {
+            return $localstorage.get('email');
+        }
+
+        function GetName() {
+            return $localstorage.get('name');
+        }
+
+        function GetRoles() {
+            return $localstorage.get('roles');
+        }
+
     }
 
     // Base64 encoding service used by AuthenticationService
