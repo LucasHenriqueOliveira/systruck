@@ -13,9 +13,15 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="alert alert-block alert-danger fade in" style="margin-bottom: 0px;" ng-show="vm.message">
+                <strong>Erro! </strong> {{vm.message}}
+            </div>
         </div>
-        <div class="text-center">
+        <div class="text-center" ng-show="!vm.message">
             <button class="btn btn-lg btn-login btn-block" ng-disabled="form.$invalid" type="submit">Entrar</button>
+        </div>
+        <div class="text-center" ng-show="vm.message">
+            <button type="button" class="btn btn-lg btn-login btn-block " ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
         </div>
     </div>
 </form>
