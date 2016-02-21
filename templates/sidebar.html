@@ -39,12 +39,13 @@
                         <span>Relatórios</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="#/report-profit">Resultado</a></li>
-                        <li><a href="google_map.html">Despesa</a></li>
-                        <li><a href="vector_map.html">Manutenção</a></li>
-                        <li><a href="vector_map.html">Caminhão</a></li>
-                        <li><a href="vector_map.html">Motorista</a></li>
-                        <li><a href="vector_map.html">Estoque de peças</a></li>
+                        <li ng-show="showResult"><a href="#/report-profit">Resultado</a></li>
+                        <li><a href="#/report-expense">Despesa</a></li>
+                        <li><a href="#/report-maintenance">Manutenção</a></li>
+                        <li><a href="#/report-truck">Caminhão</a></li>
+                        <li><a href="#/report-driver">Motorista</a></li>
+                        <li><a href="#/report-travel">Viagem</a></li>
+                        <li><a href="#/report-part">Estoque de peças</a></li>
                     </ul>
                 </li>
                 <li>
@@ -78,4 +79,4 @@
 </aside>
 <!--sidebar end-->
 
-<script src="../js/scripts.js"></script>
+<script src="js/scripts.js"></script>
