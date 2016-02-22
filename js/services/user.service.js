@@ -5,8 +5,8 @@
         .module('app')
         .factory('UserService', UserService);
 
-    UserService.$inject = ['$http'];
-    function UserService($http) {
+    UserService.$inject = ['$http', '$rootScope', '$localstorage'];
+    function UserService($http, $rootScope, $localstorage) {
         var service = {};
 
         service.GetAll = GetAll;
@@ -23,7 +23,7 @@
         }
 
         function GetById(id) {
-            return $http.get('/api/users/' + id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get('http://localhost:8080/api/v1/users/' + id).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByUsername(username) {
