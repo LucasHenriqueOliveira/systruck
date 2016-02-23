@@ -5,23 +5,25 @@
         .module('app')
         .controller('SelectProfileController', SelectProfileController);
 
-    SelectProfileController.$inject = ['$location', '$timeout', '$localstorage', 'UserService'];
+    SelectProfileController.$inject = ['$location', '$timeout', '$localstorage', 'UserService', '$rootScope', 'AuthenticationService', '$window'];
 
-    function SelectProfileController($location, $timeout, $localstorage, UserService) {
+    function SelectProfileController($location, $timeout, $localstorage, UserService, $rootScope, AuthenticationService, $window) {
         var vm = this;
-        vm.loading = true;
         vm.init = init();
         vm.profiles = {};
-
-        $timeout(function() {
-            vm.loading = false;
-        }, 2000);
+        vm.message = '';
 
         function init() {
             var id = $localstorage.get('id');
 
             UserService.GetById(id).then(function (data) {
-                vm.profiles = data;
+
+                if(data.error) {
+                    vm.message = data.message;
+                    AuthenticationService.ClearCredentials();
+                } else {
+                    vm.profiles = data;
+                }
             });
         }
 
@@ -30,7 +32,13 @@
             $localstorage.set('company', res[0]);
             $localstorage.set('roles', res[1]);
 
+            $rootScope.$broadcast("login-done");
+
             $location.path('/');
+        };
+
+        vm.back = function(){
+            $window.history.back();
         };
     }
 })();
