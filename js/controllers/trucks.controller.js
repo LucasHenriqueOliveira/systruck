@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .controller('TruckController', TruckController);
+        .controller('TrucksController', TrucksController);
 
-    TruckController.$inject = ['$location'];
+    TrucksController.$inject = ['$location'];
 
-    function TruckController($location) {
+    function TrucksController($location) {
         var vm = this;
 
     }
