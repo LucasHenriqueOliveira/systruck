@@ -9,8 +9,8 @@
 
     function LoginController($location, AuthenticationService, FlashService) {
         var vm = this;
-
         vm.login = login;
+        vm.message = '';
 
         (function initController() {
             // reset login status
@@ -20,15 +20,29 @@
         function login() {
             vm.dataLoading = true;
             AuthenticationService.Login(vm.email, vm.password, function (response) {
-                if (response.success) {
-                    AuthenticationService.SetCredentials(vm.email, vm.password);
-                    $location.path('/');
+
+                if(!response.data.error) {
+                    AuthenticationService.SetCredentials(response.data);
+
+                    if(response.data.user.qtd > 1){
+                        $location.path('/select-profile');
+                    } else {
+                        $location.path('/');
+                    }
+
                 } else {
-                    FlashService.Error(response.message);
+                    vm.message = response.data.message;
                     vm.dataLoading = false;
                 }
             });
         };
+
+        jQuery(document).ready(function(){
+            jQuery("html").css('background-image', 'url("./images/slide.jpg")');
+            jQuery("html").css('background-repeat', 'no-repeat');
+            jQuery("html").css('background-position', 'center center');
+            jQuery("html").css('background-attachment', 'fixed');
+        });
     }
 
 })();

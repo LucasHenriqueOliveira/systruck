@@ -1,6 +1,17 @@
 <!--main content start-->
 <div id="main-content">
-    <div class="wrapper">
+    <div class="wrapper" ng-show="vm.loading">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" ng-show="!vm.loading">
         <!-- page start-->
         <div class="row">
             <div class="col-md-12">
@@ -25,7 +36,101 @@
                     </header>
                     <div class="panel-body">
                         <div class="col-lg-12 col-sm-12">
-
+                            <highchart id="chart1" config="vm.highchartsNG"></highchart>
+                        </div>
+                        <br/>
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="panel-body">
+                                <div class="adv-table editable-table ">
+                                    <table class="display table table-hover table-bordered table-striped table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">Peça/Item</th>
+                                            <th class="text-center">Valor Unitário</th>
+                                            <th class="text-center">Manutenção (Km)</th>
+                                            <th class="text-center">Estoque (unid.)</th>
+                                            <th class="text-center">Valor Total</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="center">Óleo</td>
+                                            <td class="center">R$ 150,00</td>
+                                            <td class="center">20.000</td>
+                                            <td class="center">15</td>
+                                            <td class="center">R$ 2.250,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Pneu</td>
+                                            <td class="center">R$ 1.000,00</td>
+                                            <td class="center"> - </td>
+                                            <td class="center">8</td>
+                                            <td class="center">R$ 8.000,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Amortecedores</td>
+                                            <td class="center">R$ 6.000,00</td>
+                                            <td class="center"> - </td>
+                                            <td class="center">2</td>
+                                            <td class="center">R$ 12.000,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Freio</td>
+                                            <td class="center">R$ 1.500,00</td>
+                                            <td class="center">150.000</td>
+                                            <td class="center">3</td>
+                                            <td class="center">R$ 4.500,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Rolamento de roda</td>
+                                            <td class="center">R$ 1.500,00</td>
+                                            <td class="center"> - </td>
+                                            <td class="center">2</td>
+                                            <td class="center">R$ 3.000,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Revisão de alternador</td>
+                                            <td class="center">R$ 500,00</td>
+                                            <td class="center">100.000</td>
+                                            <td class="center">0</td>
+                                            <td class="center">R$ 0,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Suspensão</td>
+                                            <td class="center">R$ 3.000,00</td>
+                                            <td class="center"> - </td>
+                                            <td class="center">0</td>
+                                            <td class="center">R$ 0,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Feixe de molas</td>
+                                            <td class="center">R$ 2.500,00</td>
+                                            <td class="center"> - </td>
+                                            <td class="center">0</td>
+                                            <td class="center">R$ 0,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Molas Pneumáticas</td>
+                                            <td class="center">R$ 4.500,00</td>
+                                            <td class="center"> - </td>
+                                            <td class="center">0</td>
+                                            <td class="center">R$ 0,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Barra de direção</td>
+                                            <td class="center">R$ 9.500,00</td>
+                                            <td class="center"> - </td>
+                                            <td class="center">0</td>
+                                            <td class="center">R$ 0,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center" colspan="4"><strong>Total</strong></td>
+                                            <td class="center"><strong>R$ 40.000,00</strong></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>

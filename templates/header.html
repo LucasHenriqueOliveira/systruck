@@ -4,11 +4,8 @@
     <div class="brand">
 
         <a href="#/" class="logo">
-            <img src="../images/carlive.svg" width="180px" alt="">
+            <img src="images/carlive.svg" width="180px" alt="">
         </a>
-        <div class="sidebar-toggle-box">
-            <div class="fa fa-bars"></div>
-        </div>
     </div>
     <!--logo end-->
 
@@ -126,7 +123,7 @@
                         <a href="#">
                             <span class="subject">
                             <span class="from">Gilberto Oliveira</span>
-                            <span class="time">15/02/2016</span>
+                            <span class="time">25/02/2016</span>
                             </span>
                             <span class="message">
                                 Faltam 10 dias para o vencimento.
@@ -137,7 +134,7 @@
                         <a href="#">
                             <span class="subject">
                             <span class="from">José Lucas Ferreira e Silva</span>
-                            <span class="time">16/02/2016</span>
+                            <span class="time">26/02/2016</span>
                             </span>
                             <span class="message">
                                 Faltam 11 dias para o vencimento.
@@ -162,15 +159,20 @@
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle icon-user" href="javascript:;">
                     <i class="fa fa-user"></i>
-                    <span class="username">Lucas Henrique</span>
+                    <span class="username">{{username}}</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu extended logout">
-                    <li><a href="#"><i class=" fa fa-suitcase"></i>Perfil</a></li>
-                    <li><a href="#/login"><i class="fa fa-key"></i> Sair</a></li>
+                    <li><a href="#/profile"><i class=" fa fa-suitcase"></i>Perfil</a></li>
+                    <li><a href="" ng-click="logout()"><i class="fa fa-key"></i> Sair</a></li>
                 </ul>
             </li>
             <!-- user login dropdown end -->
+            <li>
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-exchange"></div>
+                </div>
+            </li>
         </ul>
         <!--search & user info end-->
     </div>

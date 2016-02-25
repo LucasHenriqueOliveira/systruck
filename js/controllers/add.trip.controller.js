@@ -96,7 +96,7 @@
                 }
             ];
 
-            vm.driverSelect = vm.drivers[1];
+            vm.driverSelect = vm.drivers[vm.truckSelect.id-1];
             vm.kmOutput = '788592';
         };
 

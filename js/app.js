@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ui.utils.masks', 'ui.mask', 'ngAnimate', 'highcharts-ng'])
+        .module('app', ['ngRoute', 'ui.utils.masks', 'ui.mask', 'ngAnimate', 'highcharts-ng', 'jkuri.slimscroll'])
         .config(config)
         .run(run);
 
@@ -319,6 +319,13 @@
             // redirect to login page if not logged in and trying to access a restricted page
 
             if ((nextRoute.access && nextRoute.access.requiredLogin) && !AuthenticationService.IsLogged) {
+                $location.path("/login");
+            }
+        });
+
+        $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+
+            if ((nextRoute.access && nextRoute.access.requiredLogin) && !AuthenticationService.IsLogged()) {
                 $location.path("/login");
             }
         });

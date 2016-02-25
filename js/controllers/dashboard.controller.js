@@ -5,18 +5,25 @@
         .module('app')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$location'];
+    DashboardController.$inject = ['$location', 'AuthenticationService', 'DataService'];
 
-    function DashboardController($location) {
+    function DashboardController($location, AuthenticationService, DataService) {
         var vm = this;
+        vm.showResult = false;
+
+        DataService.getDataDashboard().then(function (data) {
+            vm.dash = data;
+        });
+
+        if(AuthenticationService.GetRoles() == 1){
+            vm.showResult = true;
+        } else {
+            vm.showResult = false;
+        }
 
         jQuery(document).ready(function(){
-            if (jQuery.fn.slimScroll) {
-                jQuery('.to-do-list').slimscroll({
-                    height: '300px',
-                    wheelStep: 35
-                });
-            }
+
+            jQuery("html").css('background-image', 'none');
         });
     }
 

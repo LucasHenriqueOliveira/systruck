@@ -43,11 +43,11 @@
                         </div>
                         <div class="col-md-6">
                             <div class="profile-desk">
-                                <h1>Lucas Henrique</h1>
-                                <span class="text-muted">Gerente</span>
+                                <h1>{{vm.username}}</h1>
+                                <span class="text-muted">{{vm.userfunction}}</span>
                                 <br>
                                 <ul>
-                                    <li>Email: lucashdads@gmail.com</li>
+                                    <li>Email: {{vm.useremail}}</li>
                                     <li ng-show="vm.driver">CNH: 3123423523</li>
                                     <li ng-show="vm.driver">Exame Periódico: 03/06/2016</li>
                                     <li>Data do cadastro: 11/12/2015</li>

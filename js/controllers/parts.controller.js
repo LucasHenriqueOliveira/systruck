@@ -10,6 +10,9 @@
     function PartsController($location) {
         var vm = this;
 
+        jQuery(document).ready(function(){
+            jQuery('.popovers').popover();
+        });
     }
 
 })();

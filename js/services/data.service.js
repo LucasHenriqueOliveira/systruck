@@ -5,9 +5,9 @@
         .module('app')
         .factory('DataService', DataService);
 
-    DataService.$inject = ['$localstorage', '$timeout'];
+    DataService.$inject = ['$localstorage', '$timeout', '$http', '$q'];
 
-    function DataService($localstorage, $timeout){
+    function DataService($localstorage, $timeout, $http, $q){
         return {
             getFuel: function() {
                 var arrFuels = [];
@@ -69,6 +69,34 @@
 
                 }
                 return trip;
+            },
+
+            getDataDashboard: function() {
+
+                var company = $localstorage.getObject('company');
+                var roles = $localstorage.getObject('roles');
+
+                var deferred = $q.defer();
+
+                 $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/api/v1/dash/',
+                    data: {
+                        company: company,
+                        roles: roles
+                    }
+                 })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        alert("Login failure" + JSON.stringify(error));
+                        console.log(error);
+                    });
+
+                return deferred.promise;
             },
 
             getMaintenance: function() {

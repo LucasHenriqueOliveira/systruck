@@ -27,19 +27,17 @@
                         <div class="col-lg-12 col-sm-12">
                             <form role="form" class="form-inline" ng-submit="vm.submitChartProfit(vm)">
                                 <div class="form-group">
+                                    <select class="form-control" ng-model="vm.chart" ng-change="vm.getChart(vm.chart)">
+                                        <option value="0">Selecione o tipo de gráfico</option>
+                                        <option value="1">Resultado x Total</option>
+                                        <option value="2">Resultado x Caminhão</option>
+                                        <option value="3">Resultado x Motorista</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" ng-show="vm.showDates">
                                     <input type="text" class="form-control dpd1 default-date-picker" name="from" ng-model="vm.from" ui-mask="99/99/9999" model-view-value="true">
                                     <span>até</span>
                                     <input type="text" class="form-control dpd2 default-date-picker" name="to" ng-model="vm.to" ui-mask="99/99/9999" model-view-value="true">
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control">
-                                        <option>Selecione o tipo de gráfico</option>
-                                        <option value="1">Resultado Total</option>
-                                        <option value="2">Resultado x Caminhão</option>
-                                        <option value="3">Resultado x Motorista</option>
-                                        <option value="4">Resultado x Despesa</option>
-                                        <option value="5">Resultado x Viagem</option>
-                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Pesquisar</button>
@@ -78,87 +76,16 @@
                                     <table class="display table table-hover table-bordered table-striped table-condensed">
                                         <thead>
                                         <tr>
-                                            <th class="text-center">Frota</th>
-                                            <th class="text-center">Caminhão</th>
-                                            <th class="text-center">Placa</th>
-                                            <th class="text-center">Placa semi-reboque</th>
-                                            <th class="text-center">Valor</th>
+                                            <th class="text-center" ng-repeat="title in vm.data.title track by $index">{{title}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td class="center">20.279</td>
-                                            <td class="center">Scania P310</td>
-                                            <td class="center">HGL-1909</td>
-                                            <td class="center">HGL-1908</td>
-                                            <td class="center">R$ 5.245</td>
+                                        <tr ng-repeat="data in vm.data.data track by $index">
+                                            <td class="center" ng-repeat="value in vm.data.field track by $index">{{data[value]}}</td>
                                         </tr>
                                         <tr>
-                                            <td class="center">20.280</td>
-                                            <td class="center">Scania P340</td>
-                                            <td class="center">HTT-0109</td>
-                                            <td class="center">HTT-0108</td>
-                                            <td class="center">R$ 5.236</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">20.314</td>
-                                            <td class="center">Scania P310</td>
-                                            <td class="center">HHL-2123</td>
-                                            <td class="center">HHL-2122</td>
-                                            <td class="center">R$ 5.124</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">20.654</td>
-                                            <td class="center">Scania P340</td>
-                                            <td class="center">HOL-2338</td>
-                                            <td class="center">HOL-2337</td>
-                                            <td class="center">R$ 5.234</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">20.323</td>
-                                            <td class="center">Iveco Stralis 420</td>
-                                            <td class="center">HGL-2432</td>
-                                            <td class="center">HGL-2431</td>
-                                            <td class="center">R$ 5.012</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">20.259</td>
-                                            <td class="center">Scania P310</td>
-                                            <td class="center">HGL-1914</td>
-                                            <td class="center">HGL-1913</td>
-                                            <td class="center">R$ 4.912</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">23.423</td>
-                                            <td class="center">Iveco Stralis 420</td>
-                                            <td class="center">HQR-4234</td>
-                                            <td class="center">HQR-4233</td>
-                                            <td class="center">R$ 5.111</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">20.675</td>
-                                            <td class="center">Scania P310</td>
-                                            <td class="center">HGL-1909</td>
-                                            <td class="center">HGL-1908</td>
-                                            <td class="center">R$ 5.211</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">20.876</td>
-                                            <td class="center">Scania P340</td>
-                                            <td class="center">HGL-6474</td>
-                                            <td class="center">HGL-6473</td>
-                                            <td class="center">R$ 5.111</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">20.856</td>
-                                            <td class="center">Scania P340</td>
-                                            <td class="center">HFB-5758</td>
-                                            <td class="center">HFB-5757</td>
-                                            <td class="center">R$ 5.311</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center" colspan="4"><strong>Total</strong></td>
-                                            <td class="center"><strong>R$ 58.542</strong></td>
+                                            <td class="center" colspan="{{vm.qtdTitles}}"><strong>Total</strong></td>
+                                            <td class="center"><strong>{{vm.data.total | currency}}</strong></td>
                                         </tr>
                                         </tbody>
                                     </table>
