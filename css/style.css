@@ -5930,3 +5930,7 @@ input:-webkit-autofill:active {
 .fa-10x {
     font-size: 10em;
 }
+
+.text-transform-header {
+    text-transform: none !important;
+}
