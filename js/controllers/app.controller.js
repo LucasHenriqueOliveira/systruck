@@ -5,9 +5,9 @@
         .module('app')
         .controller('AppController', AppController);
 
-    AppController.$inject = ['$location', '$scope', 'AuthenticationService', '$rootScope'];
+    AppController.$inject = ['$location', '$scope', 'AuthenticationService', '$rootScope', 'DataService'];
 
-    function AppController($location, $scope, AuthenticationService, $rootScope) {
+    function AppController($location, $scope, AuthenticationService, $rootScope, DataService) {
 
         if(AuthenticationService.IsLogged()) {
             $location.path('/');
@@ -16,6 +16,13 @@
         }
 
         $scope.showResult = false;
+
+        DataService.getDataHeader().then(function (data) {
+            $scope.numberLastTrip = data.getLastTrip.length;
+            $scope.numberNextPeriodic = data.getNextPeriodic.length;
+            $scope.header = data;
+            console.log($scope.header);
+        });
 
         $scope.username = AuthenticationService.GetName();
         if(AuthenticationService.GetRoles() == 1){
