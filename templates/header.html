@@ -16,48 +16,18 @@
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
                     <i class="fa fa-tasks"></i>
-                    <span class="badge bg-success">8</span>
+                    <span class="badge bg-success">{{numberLastTrip}}</span>
                 </a>
                 <ul class="dropdown-menu extended tasks-bar">
                     <li>
                         <p>Últimas Viagens</p>
                     </li>
-                    <li>
+                    <li ng-repeat="trip in header.getLastTrip | limitTo: 4">
                         <a href="#">
                             <div class="task-info clearfix">
                                 <div class="desc pull-left">
-                                    <h5 class="task-title">Frota 20.279</h5> - <h6 class="task-title">10/12 a 12/12</h6>
-                                    <p>De Betim para Recife</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="task-info clearfix">
-                                <div class="desc pull-left">
-                                    <h5 class="task-title">Frota 20.280</h5> - <h6 class="task-title">02/12 a 03/12</h6>
-                                    <p>De Betim para Rio de Janeiro</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="task-info clearfix">
-                                <div class="desc pull-left">
-                                    <h5 class="task-title">Frota 20.654</h5>  - <h6 class="task-title">04/12 a 07/12</h6>
-                                    <p>De Betim para Recife</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="task-info clearfix">
-                                <div class="desc pull-left">
-                                    <h5 class="task-title">Frota 20.675</h5>  - <h6 class="task-title">08/12 a 10/12</h6>
-                                    <p>De Betim para São Paulo</p>
+                                    <h5 class="task-title text-transform-header">Veículo {{trip.carro_placa}}</h5> - <h6 class="task-title">{{trip.data_saida}} a {{trip.data_chegada}}</h6>
+                                    <p>De {{trip.cidade_origem}} para {{trip.cidade_destino}}</p>
                                 </div>
                             </div>
                         </a>
@@ -113,31 +83,20 @@
             <li id="header_inbox_bar" class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
                     <i class="fa fa-user-md"></i>
-                    <span class="badge bg-warning">2</span>
+                    <span class="badge bg-warning">{{numberNextPeriodic}}</span>
                 </a>
                 <ul class="dropdown-menu extended inbox">
                     <li>
                         <p class="red">Exames Periódicos</p>
                     </li>
-                    <li>
+                    <li ng-repeat="periodic in header.getNextPeriodic | limitTo: 4">
                         <a href="#">
                             <span class="subject">
-                            <span class="from">Gilberto Oliveira</span>
-                            <span class="time">25/02/2016</span>
+                            <span class="from">{{periodic.usuario_nome}}</span>
+                            <span class="time">{{periodic.data_exame}}</span>
                             </span>
                             <span class="message">
-                                Faltam 10 dias para o vencimento.
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="subject">
-                            <span class="from">José Lucas Ferreira e Silva</span>
-                            <span class="time">26/02/2016</span>
-                            </span>
-                            <span class="message">
-                                Faltam 11 dias para o vencimento.
+                                Faltam {{periodic.dias}} dias para o vencimento.
                             </span>
                         </a>
                     </li>
