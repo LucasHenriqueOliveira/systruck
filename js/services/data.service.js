@@ -99,6 +99,29 @@
                 return deferred.promise;
             },
 
+            getDataHeader: function() {
+
+                var company = $localstorage.getObject('company');
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/api/v1/header/' + company
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        alert("Login failure" + JSON.stringify(error));
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
             getMaintenance: function() {
 
                 var maintenance = $localstorage.getObject('maintenance');
