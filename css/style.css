@@ -457,7 +457,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     color:#414147;
 }
 .dropdown-menu.extended .alert {
-    margin-bottom:10px;
+    margin-bottom:4px;
 }
 .dropdown-menu.extended .alert-icon {
     border-radius:100%;
@@ -476,7 +476,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     border-radius:5px;
     -webkit-border-radius:5px;
     padding:10px;
-    margin-bottom:10px;
+    margin-bottom:4px;
     float:left;
     width:100%;
 }
