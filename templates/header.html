@@ -44,33 +44,21 @@
                 <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
 
                     <i class="fa fa-bell-o"></i>
-                    <span class="badge bg-important">10</span>
+                    <span class="badge bg-important">{{numberNextMaintenance}}</span>
                 </a>
                 <ul class="dropdown-menu extended notification">
                     <li>
                         <p>Próximas Manutenções</p>
                     </li>
-                    <li>
-                        <div class="alert alert-danger clearfix alert_review">
+                    <li ng-repeat="maintenance in header.getNextMaintenance | limitTo: 3">
+                        <div class="alert clearfix alert_review" ng-class="maintenance.km > 0 ? 'alert-warning' : 'alert-danger' ">
                             <span class="alert-icon"><i class="fa fa-wrench"></i></span>
                             <div class="noti-info">
-                                <a href="#"> Excedeu <strong>50km</strong> da manutenção de troca de óleo da frota <strong>20.279</strong>.</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="alert alert-warning clearfix alert_review">
-                            <span class="alert-icon"><i class="fa fa-wrench"></i></span>
-                            <div class="noti-info">
-                                <a href="#"> Falta <strong> 1.000km</strong> da manutenção de revisão de alternador da frota <strong>20.280</strong>.</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="alert alert-warning clearfix alert_review">
-                            <span class="alert-icon"><i class="fa fa-wrench"></i></span>
-                            <div class="noti-info">
-                                <a href="#"> Falta <strong>20.000km</strong> da manutenção de suspensão da frota <strong>20.314</strong>.</a>
+                                <a href="#"> <span ng-if="maintenance.km < 0">Excedeu </span> <span ng-if="maintenance.km > 0">Falta </span><strong>
+                                    {{maintenance.km | positive}}km</strong> da manutenção de
+                                    <span ng-repeat="part in maintenance.parts">{{part}}, </span>
+                                    da placa <strong>{{maintenance.carro_placa}}</strong>.
+                                </a>
                             </div>
                         </div>
                     </li>
