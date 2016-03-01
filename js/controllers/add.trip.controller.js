@@ -10,95 +10,35 @@
     function AddTripController(DataService, $localstorage, $location) {
         var vm = this;
 
-        vm.truckSelect = '';
         vm.driverSelect = '';
         vm.kmOutput = '';
         vm.dateArrival = '';
         vm.totalMoney = '';
+        vm.trucks = {};
+        vm.drivers = {};
+        vm.cities = {};
+
         vm.fuels = DataService.getFuel();
         vm.expenses = DataService.getExpense();
-        vm.trucks = [
-            {
-                id: 1,
-                name: "20.279 - Scania P310"
-            },
-            {
-                id: 2,
-                name: "20.280 - Scania P340"
-            },
-            {
-                id: 3,
-                name: "20.314 - Scania P310"
-            },
-            {
-                id: 4,
-                name: "20.654 - Scania P340"
-            },
-            {
-                id: 5,
-                name: "20.323 - Iveco Stralis 420"
-            },
-            {
-                id: 6,
-                name: "20.279 - Scania P310"
-            },
-            {
-                id: 7,
-                name: "23.423 - Iveco Stralis 420"
-            },
-            {
-                id: 8,
-                name: "20.675 - Scania P310"
-            },
-            {
-                id: 9,
-                name: "20.876 - Scania P340"
-            },
-            {
-                id: 10,
-                name: "20.856 - Scania P340"
-            }
-        ];
+
+        DataService.getTrucksDrivers().then(function (data) {
+            vm.trucks = data.getTrucks;
+            vm.drivers = data.getDrivers;
+        });
 
         vm.selectDriver = function(){
-            vm.drivers = [
-                {
-                    id: 1,
-                    name: "Lucas Henrique de Oliveira"
-                },
-                {
-                    id: 2,
-                    name: "Arthur Felipe R. Costa"
-                },
-                {
-                    id: 3,
-                    name: "Gilberto Oliveira"
-                },
-                {
-                    id: 4,
-                    name: "Guilherme Azevedo Reis"
-                },
-                {
-                    id: 5,
-                    name: "José Lucas Ferreira e Silva"
-                },
-                {
-                    id: 6,
-                    name: "Paulo Holanda Ribeiro Netto"
-                },
-                {
-                    id: 7,
-                    name: "Matheus André da Silva"
-                },
-                {
-                    id: 8,
-                    name: "Ruy Arruda Cassiano"
-                }
-            ];
-
-            vm.driverSelect = vm.drivers[vm.truckSelect.id-1];
-            vm.kmOutput = '788592';
+            DataService.getDriverToTruck(vm.truckSelect.id).then(function (data) {
+                var obj = {
+                    id: data.getDriverToTruck.usuario_id
+                };
+                vm.driverSelect = obj;
+            });
+            vm.kmOutput = vm.truckSelect.km;
         };
+
+        DataService.getCities().then(function (data) {
+            vm.cities = data.getCities;
+        });
 
         vm.submitFuel = function(fuel){
             vm.fuels = $localstorage.getObject('fuels');
