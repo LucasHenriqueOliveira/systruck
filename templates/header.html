@@ -23,7 +23,7 @@
                         <p>Últimas Viagens</p>
                     </li>
                     <li ng-repeat="trip in header.getLastTrip | limitTo: 4">
-                        <a href="#">
+                        <a href="#/trip/{{trip.viagem_id}}">
                             <div class="task-info clearfix">
                                 <div class="desc pull-left">
                                     <h5 class="task-title text-transform-header">Veículo {{trip.carro_placa}}</h5> - <h6 class="task-title">{{trip.data_saida}} a {{trip.data_chegada}}</h6>
@@ -54,7 +54,7 @@
                         <div class="alert clearfix alert_review" ng-class="maintenance.km > 0 ? 'alert-warning' : 'alert-danger' ">
                             <span class="alert-icon"><i class="fa fa-wrench"></i></span>
                             <div class="noti-info">
-                                <a href="#"> <span ng-if="maintenance.km < 0">Excedeu </span> <span ng-if="maintenance.km > 0">Falta </span><strong>
+                                <a href="#/maintenance/{{maintenance.revisao_id}}"> <span ng-if="maintenance.km < 0">Excedeu </span> <span ng-if="maintenance.km > 0">Falta </span><strong>
                                     {{maintenance.km | positive}}km</strong> da manutenção de
                                     <span ng-repeat="part in maintenance.parts">{{part}}, </span>
                                     da placa <strong>{{maintenance.carro_placa}}</strong>.
@@ -78,7 +78,7 @@
                         <p class="red">Exames Periódicos</p>
                     </li>
                     <li ng-repeat="periodic in header.getNextPeriodic | limitTo: 4">
-                        <a href="#">
+                        <a href="#/user/{{periodic.usuario_id}}">
                             <span class="subject">
                             <span class="from">{{periodic.usuario_nome}}</span>
                             <span class="time">{{periodic.data_exame}}</span>
