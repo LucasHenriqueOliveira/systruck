@@ -17,12 +17,21 @@
 
         $scope.showResult = false;
 
-        DataService.getDataHeader().then(function (data) {
-            $scope.numberLastTrip = data.getLastTrip.length;
-            $scope.numberNextPeriodic = data.getNextPeriodic.length;
-            $scope.header = data;
-            console.log($scope.header);
-        });
+        $scope.getDataHeader = function() {
+            DataService.getDataHeader().then(function (data) {
+                if(data.error){
+                    alert(data.message);
+                    $location.path('/login');
+                    return false;
+                }
+                $scope.numberLastTrip = data.getLastTrip.length;
+                $scope.numberNextPeriodic = data.getNextPeriodic.length;
+                $scope.numberNextMaintenance = data.getNextMaintenance.length;
+                $scope.header = data;
+            });
+        };
+
+        $scope.getDataHeader();
 
         $scope.username = AuthenticationService.GetName();
         if(AuthenticationService.GetRoles() == 1){
@@ -39,6 +48,8 @@
             } else {
                 $scope.showResult = false;
             }
+
+            $scope.getDataHeader();
         });
 
         $scope.logout = function() {
