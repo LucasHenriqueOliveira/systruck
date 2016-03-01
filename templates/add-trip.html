@@ -50,7 +50,7 @@
                                         <select class="form-control" name="truckSelect" ng-model="vm.truckSelect" ng-change="vm.selectDriver()"
                                                 ng-options="truck.name for truck in vm.trucks track by truck.id" required>
                                         </select>
-                                        <span ng-show="form.truckSelect.$dirty && form.truckSelect.$error.required" class="help-block">Informe a senha.</span>
+                                        <span ng-show="form.truckSelect.$dirty && form.truckSelect.$error.required" class="help-block">Selecione o caminhão.</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -64,30 +64,16 @@
                                 <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">Cidade Origem</label>
                                     <div class="col-lg-7 col-sm-7">
-                                        <select class="form-control" ng-model="vm.cityHome" required>
-                                            <option></option>
-                                            <option value="Betim">Betim</option>
-                                            <option value="Contagem">Contagem</option>
-                                            <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                            <option value="Recife">Recife</option>
-                                            <option value="São Paulo">São Paulo</option>
-                                            <option value="Natal">Natal</option>
-                                            <option value="Fortaleza">Fortaleza</option>
+                                        <select class="form-control" ng-model="vm.cityHome"
+                                                ng-options="city.name for city in vm.cities track by city.id" required>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">Cidade Destino</label>
                                     <div class="col-lg-7 col-sm-7">
-                                        <select class="form-control" ng-model="vm.cityDestination" required>
-                                            <option></option>
-                                            <option value="Betim">Betim</option>
-                                            <option value="Contagem">Contagem</option>
-                                            <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                            <option value="Recife">Recife</option>
-                                            <option value="São Paulo">São Paulo</option>
-                                            <option value="Natal">Natal</option>
-                                            <option value="Fortaleza">Fortaleza</option>
+                                        <select class="form-control" ng-model="vm.cityDestination"
+                                                ng-options="city.name for city in vm.cities track by city.id" required>
                                         </select>
                                     </div>
                                 </div>
