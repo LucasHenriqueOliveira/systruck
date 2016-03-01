@@ -80,7 +80,7 @@
 
                  $http({
                     method: 'POST',
-                    url: 'http://localhost:8080/api/v1/dash/',
+                    url: 'http://localhost:8080/api/v1/dash',
                     data: {
                         company: company,
                         roles: roles
@@ -108,6 +108,71 @@
                 $http({
                     method: 'GET',
                     url: 'http://localhost:8080/api/v1/header/' + company
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        alert("Login failure" + JSON.stringify(error));
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getTrucksDrivers: function() {
+
+                var company = $localstorage.getObject('company');
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/api/v1/add-trip/' + company
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        alert("Login failure" + JSON.stringify(error));
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getDriverToTruck: function(truck) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/api/v1/driver-to-truck/' + truck
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        alert("Login failure" + JSON.stringify(error));
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getCities: function() {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/api/v1/cities'
                 })
                     .then(function(response) {
 
