@@ -5,9 +5,9 @@
         .module('app')
         .controller('AddTripController', AddTripController);
 
-    AddTripController.$inject = ['DataService', '$localstorage', '$location'];
+    AddTripController.$inject = ['DataService', '$localstorage', '$location', '$rootScope'];
 
-    function AddTripController(DataService, $localstorage, $location) {
+    function AddTripController(DataService, $localstorage, $location, $rootScope) {
         var vm = this;
 
         vm.driverSelect = '';
@@ -21,24 +21,22 @@
         vm.fuels = DataService.getFuel();
         vm.expenses = DataService.getExpense();
 
-        DataService.getTrucksDrivers().then(function (data) {
+        DataService.getTrucksDriversCities().then(function (data) {
             vm.trucks = data.getTrucks;
             vm.drivers = data.getDrivers;
+            vm.cities = data.getCities;
         });
 
         vm.selectDriver = function(){
             DataService.getDriverToTruck(vm.truckSelect.id).then(function (data) {
                 var obj = {
-                    id: data.getDriverToTruck.usuario_id
+                    id: data.getDriverToTruck.usuario_id,
+                    name: data.getDriverToTruck.usuario_nome
                 };
                 vm.driverSelect = obj;
             });
             vm.kmOutput = vm.truckSelect.km;
         };
-
-        DataService.getCities().then(function (data) {
-            vm.cities = data.getCities;
-        });
 
         vm.submitFuel = function(fuel){
             vm.fuels = $localstorage.getObject('fuels');
@@ -74,14 +72,19 @@
         vm.submitExpense = function(expense){
             vm.expenses = $localstorage.getObject('expenses');
 
+            var elt = document.getElementById('expenseType');
+            var name = elt.options[elt.selectedIndex].text;
+
             if(JSON.stringify(vm.expenses) === '{}'){
                 $localstorage.setObject('expenses', [{
+                    name : name,
                     type : expense.type,
                     value : expense.value.toFixed(2),
                     date: expense.date
                 }]);
             } else{
                 vm.expenses.push({
+                    name : name,
                     type : expense.type,
                     value : expense.value.toFixed(2),
                     date: expense.date
@@ -101,13 +104,59 @@
         };
 
         vm.submitAddTrip = function(form){
-            $localstorage.remove('trip');
-            $localstorage.setObject('trip', form);
-            $location.path('/add-trip-confirm');
+
+            var postData = {
+                cityDestinationId: form.cityDestination.id,
+                cityHomeId: form.cityHome.id,
+                comments: form.comments,
+                dateArrival: form.dateArrival,
+                dateOutput: form.dateOutput,
+                driverSelect: form.driverSelect.id,
+                kmArrival: form.kmArrival,
+                kmOutput: form.kmOutput,
+                kmPaid: form.kmPaid,
+                moneyCompany: form.moneyCompany,
+                moneyComplement: form.moneyComplement,
+                totalMoney: form.totalMoney,
+                truckSelect: form.truckSelect.id,
+                fuelsNumber: form.fuels.length,
+                expensesNumber: form.expenses.length,
+                company: $localstorage.getObject('company'),
+                id_user: $localstorage.getObject('id')
+            };
+
+            for(var i = 0; i < form.fuels.length; i++) {
+                postData['date_fuel_' + i] = form.fuels[i].date;
+                postData['name_fuel_' + i] = form.fuels[i].name;
+                postData['price_fuel_' + i] = form.fuels[i].price;
+                postData['qtd_fuel_' + i] = form.fuels[i].qtd;
+            }
+
+            for(i = 0; i < form.expenses.length; i++) {
+                postData['name_expense_' + i] = form.expenses[i].name;
+                postData['date_expense_' + i] = form.expenses[i].date;
+                postData['type_expense_' + i] = form.expenses[i].type;
+                postData['value_expense_' + i] = form.expenses[i].value;
+            }
+
+            DataService.submitAddTrip(postData).then(function(response) {
+
+                if(response.error === false) {
+                    $rootScope.$broadcast("login-done");
+
+                    form.id = response.viagem_id;
+                    $localstorage.remove('trip');
+                    $localstorage.setObject('trip', form);
+                    $location.path('/add-trip-confirm');
+
+                } else {
+                    alert(response.message);
+                }
+            });
         };
 
         vm.checkExpense = function(){
-            if(vm.expense.type == 'Despesa adicional sem comprovação de nota (chapa, caixinha de conferente e outros) - 4%') {
+            if(vm.expense.type == 7) {
                 vm.expense.value = parseFloat((4 / 100) * parseFloat(vm.totalMoney));
                 vm.expense.date = vm.dateArrival;
             }
