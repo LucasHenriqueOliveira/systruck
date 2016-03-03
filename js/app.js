@@ -15,6 +15,7 @@
                 controller: 'DashboardController',
                 templateUrl: 'templates/dashboard.html',
                 controllerAs: 'vm',
+                cache: false,
                 access: {
                     requiredLogin: true
                 }
@@ -168,6 +169,7 @@
                 controller: 'LastTripController',
                 templateUrl: 'templates/last-trip.html',
                 controllerAs: 'vm',
+                cache: false,
                 access: {
                     requiredLogin: true
                 }
