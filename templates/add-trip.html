@@ -203,8 +203,8 @@
                                             </thead>
                                             <tbody>
                                             <tr ng-repeat="expense in vm.expenses track by $index" style="background-color: #fff">
-                                                <td>{{expense.type}}</td>
-                                                <td class="text-center">R$ {{expense.value}}</td>
+                                                <td>{{expense.name}}</td>
+                                                <td class="text-center">{{expense.value | currency}}</td>
                                                 <td class="text-center">{{expense.date}}</td>
                                                 <td class="text-center">
                                                     <div class="todo-actionlist">
@@ -302,19 +302,19 @@
 
                 <form name="formExpense" ng-submit="vm.submitExpense(vm.expense)">
                     <div class="form-group" ng-class="{ 'has-error': formExpense.expenseType.$dirty && formExpense.expenseType.$error.required }">
-                        <label class="control-label" for="inputTipo">Tipo</label>
-                        <select class="form-control" name="expenseType" id="inputTipo" ng-model="vm.expense.type" ng-change="vm.checkExpense()" required>
+                        <label class="control-label" for="expenseType">Tipo</label>
+                        <select class="form-control" name="expenseType" id="expenseType" ng-model="vm.expense.type" ng-change="vm.checkExpense()" required>
                             <option></option>
-                            <option value="Borracharia">Borracharia</option>
-                            <option value="Lavagem/Limpeza">Lavagem/Limpeza</option>
-                            <option value="Serviço elétrico">Serviço elétrico</option>
-                            <option value="Serviço mecânico">Serviço mecânico</option>
-                            <option value="Serviço de solda">Serviço de solda</option>
-                            <option value="Serviço de mola">Serviço de mola</option>
-                            <option value="Despesa adicional sem comprovação de nota (chapa, caixinha de conferente e outros) - 4%">Despesa adicional sem comprovação de nota (chapa, caixinha de conferente e outros) - 4%</option>
-                            <option value="Despesas com Pedágio">Despesas com Pedágio</option>
-                            <option value="Despesas com Posto Fiscal">Despesas com Posto Fiscal</option>
-                            <option value="Outros">Outros</option>
+                            <option value="1">Borracharia</option>
+                            <option value="2">Lavagem/Limpeza</option>
+                            <option value="3">Serviço elétrico</option>
+                            <option value="4">Serviço mecânico</option>
+                            <option value="5">Serviço de solda</option>
+                            <option value="6">Serviço de mola</option>
+                            <option value="7">Despesa adicional sem comprovação de nota (chapa, caixinha de conferente e outros) - 4%</option>
+                            <option value="8">Despesas com Pedágio</option>
+                            <option value="9">Despesas com Posto Fiscal</option>
+                            <option value="10">Outros</option>
                         </select>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error': formExpense.expenseValue.$dirty && formExpense.expenseValue.$error.required }">
