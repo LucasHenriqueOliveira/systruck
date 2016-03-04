@@ -25,7 +25,13 @@
                             </span>
                     </header>
                     <div class="panel-body">
-                        <form role="form" class="form-horizontal" ng-submit="vm.submitSearchTrip(vm)">
+                        <div class="alert alert-danger fade in" ng-show="vm.message">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <strong>{{vm.message}}</strong>
+                        </div>
+                        <form role="form" class="form-horizontal" ng-submit="vm.submitSearchTrip()">
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Nº viagem</label>
                                 <div class="col-lg-4 col-sm-4">
@@ -48,64 +54,32 @@
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control" ng-model="vm.truck">
-                                        <option></option>
-                                        <option value="BE">20.279 - Scania P310</option>
-                                        <option value="AK">20.280 - Scania P340</option>
-                                        <option value="HI">20.314 - Scania P310</option>
-                                        <option value="CA">20.654 - Scania P340</option>
-                                        <option value="OH">20.323 - Iveco Stralis 420</option>
-                                        <option value="PA">20.279 - Scania P310</option>
-                                        <option value="RI">23.423 - Iveco Stralis 420</option>
-                                        <option value="SC">20.675 - Scania P310</option>
-                                        <option value="VT">20.876 - Scania P340</option>
-                                        <option value="VA">20.856 - Scania P340</option>
+                                    <select class="form-control" name="truckSelect" ng-model="vm.truckSelect" ng-change="vm.selectDriver()"
+                                            ng-options="truck.name for truck in vm.trucks track by truck.id" required>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Motorista</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control" ng-model="vm.driver">
-                                        <option></option>
-                                        <option value="BE">Lucas Henrique de Oliveira</option>
-                                        <option value="AK">Arthur Felipe R. Costa</option>
-                                        <option value="HI">Gilberto Oliveira</option>
-                                        <option value="CA">Guilherme Azevedo Reis</option>
-                                        <option value="OH">José Lucas Ferreira e Silva</option>
-                                        <option value="PA">Paulo Holanda Ribeiro Netto</option>
-                                        <option value="RI">Matheus André da Silva</option>
-                                        <option value="SC">Ruy Arruda Cassiano</option>
+                                    <select class="form-control" ng-model="vm.driverSelect"
+                                            ng-options="driver.name for driver in vm.drivers track by driver.id" required>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Cidade Origem</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control" ng-model="vm.cityHome">
-                                        <option></option>
-                                        <option value="Betim">Betim</option>
-                                        <option value="Contagem">Contagem</option>
-                                        <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                        <option value="Recife">Recife</option>
-                                        <option value="São Paulo">São Paulo</option>
-                                        <option value="Natal">Natal</option>
-                                        <option value="Fortaleza">Fortaleza</option>
+                                    <select class="form-control" ng-model="vm.cityHome"
+                                            ng-options="city.name for city in vm.cities track by city.id" required>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Cidade Destino</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control" ng-model="vm.cityDestination">
-                                        <option></option>
-                                        <option value="Betim">Betim</option>
-                                        <option value="Contagem">Contagem</option>
-                                        <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                        <option value="Recife">Recife</option>
-                                        <option value="São Paulo">São Paulo</option>
-                                        <option value="Natal">Natal</option>
-                                        <option value="Fortaleza">Fortaleza</option>
+                                    <select class="form-control" ng-model="vm.cityDestination"
+                                            ng-options="city.name for city in vm.cities track by city.id" required>
                                     </select>
                                 </div>
                             </div>
