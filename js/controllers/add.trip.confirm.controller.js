@@ -16,7 +16,6 @@
         }, 2000);
 
         vm.trip = DataService.getTrip();
-        vm.truck = vm.trip.trucks[vm.trip.truckSelect].name;
         vm.trip.traveled = vm.trip.kmArrival - vm.trip.kmOutput;
         vm.trip.diffTraveled = vm.trip.traveled - (2 * vm.trip.kmPaid);
 
