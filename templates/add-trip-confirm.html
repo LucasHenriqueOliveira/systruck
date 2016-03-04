@@ -48,20 +48,20 @@
                                     <div class="prf-contacts">
                                         <h2> <span><i class="fa fa-map-marker"></i></span> Viagem</h2>
                                         <div class="location-info">
-                                            <p><strong>Nº viagem:</strong> 13.543 <br>
+                                            <p><strong>Nº viagem:</strong> {{vm.trip.id | number}} <br>
                                                 <strong>Saída:</strong> {{vm.trip.dateOutput}} <br>
                                                 <strong>Chegada:</strong> {{vm.trip.dateArrival}}<br>
-                                                <strong>Origem:</strong> {{vm.trip.cityHome}}<br>
-                                                <strong>Destino:</strong> {{vm.trip.cityDestination}}
+                                                <strong>Origem:</strong> {{vm.trip.cityHome.name}}<br>
+                                                <strong>Destino:</strong> {{vm.trip.cityDestination.name}}
                                             </p>
                                         </div>
                                         <h2> <span><i class="fa fa-truck"></i></span> Veículo</h2>
                                         <div class="location-info">
                                             <p>
-                                                <strong>Caminhão:</strong> {{vm.truck}} <br>
-                                                <strong>Frota:</strong> {{vm.truck}} <br>
-                                                <strong>Placa:</strong> HGL-1876 <br>
-                                                <strong>Placa semi-reboque:</strong> HGL-1875 <br>
+                                                <strong>Caminhão:</strong> {{vm.trip.truckSelect.carro_nome}} <br>
+                                                <strong>Frota:</strong> {{vm.trip.truckSelect.frota}} <br>
+                                                <strong>Placa:</strong> {{vm.trip.truckSelect.placa}} <br>
+                                                <strong>Placa semi-reboque:</strong> {{vm.trip.truckSelect.placa_semi_reboque}} <br>
                                                 <strong>Motorista:</strong> {{vm.trip.driverSelect.name}}</p>
                                         </div>
                                     </div>
@@ -138,7 +138,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr ng-repeat="expense in vm.trip.expenses track by $index">
-                                                    <td>{{expense.type}}</td>
+                                                    <td>{{expense.name}}</td>
                                                     <td class="text-center">{{expense.value | currency}}</td>
                                                     <td class="text-center">{{expense.date}}</td>
                                                 </tr>
