@@ -35,6 +35,7 @@
                     expenses.forEach(function (expense) {
 
                         arrExpenses.push({
+                            name : expense.name,
                             type : expense.type,
                             value : expense.value,
                             date: expense.date
@@ -92,7 +93,6 @@
 
 
                     }, function(error) {
-                        alert("Login failure" + JSON.stringify(error));
                         console.log(error);
                     });
 
@@ -115,14 +115,13 @@
 
 
                     }, function(error) {
-                        alert("Login failure" + JSON.stringify(error));
                         console.log(error);
                     });
 
                 return deferred.promise;
             },
 
-            getTrucksDrivers: function() {
+            getTrucksDriversCities: function() {
 
                 var company = $localstorage.getObject('company');
 
@@ -130,7 +129,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/api/v1/add-trip/' + company
+                    url: 'http://localhost:8080/api/v1/trucks-drivers-cities/' + company
                 })
                     .then(function(response) {
 
@@ -138,7 +137,6 @@
 
 
                     }, function(error) {
-                        alert("Login failure" + JSON.stringify(error));
                         console.log(error);
                     });
 
@@ -159,20 +157,20 @@
 
 
                     }, function(error) {
-                        alert("Login failure" + JSON.stringify(error));
                         console.log(error);
                     });
 
                 return deferred.promise;
             },
 
-            getCities: function() {
+            submitAddTrip: function(postData) {
 
                 var deferred = $q.defer();
 
                 $http({
-                    method: 'GET',
-                    url: 'http://localhost:8080/api/v1/cities'
+                    method: 'POST',
+                    url: 'http://localhost:8080/api/v1/add-trip',
+                    data: postData
                 })
                     .then(function(response) {
 
@@ -180,7 +178,49 @@
 
 
                     }, function(error) {
-                        alert("Login failure" + JSON.stringify(error));
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getLastTrip: function() {
+
+                var company = $localstorage.getObject('company');
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/api/v1/last-trip/' + company
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getSearchTrip: function(postData) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/api/v1/search-trip/',
+                    data: postData
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
                         console.log(error);
                     });
 
