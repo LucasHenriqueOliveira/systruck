@@ -26,7 +26,7 @@
                     </header>
                     <div class="panel-body">
                         <div class="adv-table editable-table ">
-                            <table class="display table table-hover table-bordered table-striped table-condensed">
+                            <table class="display table table-hover table-bordered table-striped table-condensed" ng-show="vm.lastTrip.length">
                                 <thead>
                                 <tr>
                                     <th class="text-center">Caminhão</th>
@@ -37,298 +37,38 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
+                                <tr ng-repeat="trip in vm.lastTrip">
                                     <td>
                                         <ul>
-                                            <li>Scania P310</li>
-                                            <li>Frota: 20.279</li>
-                                            <li>Placa: HGL-1909</li>
-                                            <li>Placa semi-reboque: HGL-1908</li>
+                                            <li>{{trip.carro_nome}}</li>
+                                            <li>Frota: {{trip.carro_frota}}</li>
+                                            <li>Placa: {{trip.carro_placa}}</li>
+                                            <li>Placa semi-reboque: {{trip.carro_placa_semi_reboque}}</li>
                                         </ul>
                                     </td>
-                                    <td class="center">Lucas Henrique de Oliveira</td>
+                                    <td class="center">{{trip.usuario_nome}}</td>
                                     <td>
                                         <ul>
-                                            <li>Origem: Betim</li>
-                                            <li>Destino: São Paulo</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li>Saída: 10/12/2015</li>
-                                            <li>Chegada: 12/12/2015</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/trip/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>Scania P340</li>
-                                            <li>Frota: 20.280</li>
-                                            <li>Placa: HTT-0109</li>
-                                            <li>Placa semi-reboque: HTT-0108</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Arthur Felipe R. Costa	</td>
-                                    <td>
-                                        <ul>
-                                            <li>Origem: Betim</li>
-                                            <li>Destino: Recife</li>
+                                            <li>Origem: {{trip.cidade_origem}}</li>
+                                            <li>Destino: {{trip.cidade_destino}}</li>
                                         </ul>
                                     </td>
                                     <td>
                                         <ul>
-                                            <li>Saída: 07/12/2015</li>
-                                            <li>Chegada: 09/12/2015</li>
+                                            <li>Saída: {{trip.data_saida}}</li>
+                                            <li>Chegada: {{trip.data_chegada}}</li>
                                         </ul>
                                     </td>
                                     <td class="center">
                                         <div class="todo-actionlist">
-                                            <a href="#/trip/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>Scania P310</li>
-                                            <li>Frota: 20.314</li>
-                                            <li>Placa: HHL-2123</li>
-                                            <li>Placa semi-reboque: HHL-2122</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Gilberto Oliveira</td>
-                                    <td>
-                                        <ul>
-                                            <li>Origem: Betim</li>
-                                            <li>Destino: São Paulo</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li>Saída: 10/12/2015</li>
-                                            <li>Chegada: 12/12/2015</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/trip/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>Scania P340</li>
-                                            <li>Frota: 20.654</li>
-                                            <li>Placa: HOL-2338</li>
-                                            <li>Placa semi-reboque: HOL-2337</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Guilherme Azevedo Reis</td>
-                                    <td>
-                                        <ul>
-                                            <li>Origem: Betim</li>
-                                            <li>Destino: São Paulo</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li>Saída: 10/12/2015</li>
-                                            <li>Chegada: 12/12/2015</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/trip/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>Iveco Stralis 420</li>
-                                            <li>Frota: 20.323</li>
-                                            <li>Placa: HGL-2432</li>
-                                            <li>Placa semi-reboque: HGL-2431</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">José Lucas Ferreira e Silva</td>
-                                    <td>
-                                        <ul>
-                                            <li>Origem: Betim</li>
-                                            <li>Destino: São Paulo</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li>Saída: 10/12/2015</li>
-                                            <li>Chegada: 12/12/2015</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/trip/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>Scania P310</li>
-                                            <li>Frota: 20.259</li>
-                                            <li>Placa: HGL-1914</li>
-                                            <li>Placa semi-reboque: HGL-1913</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Paulo Holanda Ribeiro Netto</td>
-                                    <td>
-                                        <ul>
-                                            <li>Origem: Betim</li>
-                                            <li>Destino: São Paulo</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li>Saída: 10/12/2015</li>
-                                            <li>Chegada: 12/12/2015</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/trip/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>Iveco Stralis 420</li>
-                                            <li>Frota: 23.423</li>
-                                            <li>Placa: HQR-4234</li>
-                                            <li>Placa semi-reboque: HQR-4233</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Matheus André da Silva</td>
-                                    <td>
-                                        <ul>
-                                            <li>Origem: Betim</li>
-                                            <li>Destino: São Paulo</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li>Saída: 10/12/2015</li>
-                                            <li>Chegada: 12/12/2015</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/trip/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>Scania P310</li>
-                                            <li>Frota: 20.675</li>
-                                            <li>Placa: HGL-6423</li>
-                                            <li>Placa semi-reboque: HGL-6422</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Ruy Arruda Cassiano</td>
-                                    <td>
-                                        <ul>
-                                            <li>Origem: Betim</li>
-                                            <li>Destino: São Paulo</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li>Saída: 10/12/2015</li>
-                                            <li>Chegada: 12/12/2015</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/trip/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>Scania P340</li>
-                                            <li>Frota: 20.876</li>
-                                            <li>Placa: HGL-6474</li>
-                                            <li>Placa semi-reboque: HGL-6473</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Lucas Henrique de Oliveira</td>
-                                    <td>
-                                        <ul>
-                                            <li>Origem: Betim</li>
-                                            <li>Destino: São Paulo</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li>Saída: 10/12/2015</li>
-                                            <li>Chegada: 12/12/2015</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/trip/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>Scania P340</li>
-                                            <li>Frota: 20.856</li>
-                                            <li>Placa: HFB-5758</li>
-                                            <li>Placa semi-reboque: HFB-5757</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Guilherme Azevedo Reis</td>
-                                    <td>
-                                        <ul>
-                                            <li>Origem: Betim</li>
-                                            <li>Destino: São Paulo</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li>Saída: 10/12/2015</li>
-                                            <li>Chegada: 12/12/2015</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/trip/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href="#/trip/{{trip.viagem_id}}" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                            <a href="#/edit-trip/{{trip.viagem_id}}" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
                                         </div>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
+                            <p ng-show="!vm.lastTrip.length">Não existe viagem cadastrada nos últimos 15 dias.</p>
                         </div>
                     </div>
                 </section>
