@@ -156,15 +156,6 @@
                 }
             })
 
-            .when('/research-trip', {
-                controller: 'ResearchTripController',
-                templateUrl: 'templates/research-trip.html',
-                controllerAs: 'vm',
-                access: {
-                    requiredLogin: true
-                }
-            })
-
             .when('/last-trip', {
                 controller: 'LastTripController',
                 templateUrl: 'templates/last-trip.html',
