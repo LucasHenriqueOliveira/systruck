@@ -65,6 +65,7 @@
                                 <div class="col-lg-6 col-sm-6">
                                     <select class="form-control" name="truckSelect" ng-model="vm.truckSelect" ng-change="vm.selectDriver()"
                                             ng-options="truck.name for truck in vm.trucks track by truck.id" required>
+                                        <option value="0"></option>
                                     </select>
                                 </div>
                             </div>
@@ -73,6 +74,7 @@
                                 <div class="col-lg-6 col-sm-6">
                                     <select class="form-control" name="driverSelect" ng-model="vm.driverSelect"
                                             ng-options="driver.name for driver in vm.drivers track by driver.id" required>
+                                        <option value="0"></option>
                                     </select>
                                 </div>
                             </div>
@@ -81,6 +83,7 @@
                                 <div class="col-lg-6 col-sm-6">
                                     <select class="form-control" ng-model="vm.cityHome"
                                             ng-options="city.name for city in vm.cities track by city.id" required>
+                                        <option value="0"></option>
                                     </select>
                                 </div>
                             </div>
@@ -89,6 +92,7 @@
                                 <div class="col-lg-6 col-sm-6">
                                     <select class="form-control" ng-model="vm.cityDestination"
                                             ng-options="city.name for city in vm.cities track by city.id" required>
+                                        <option value="0"></option>
                                     </select>
                                 </div>
                             </div>
@@ -108,7 +112,11 @@
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Resultado pesquisa de viagem
+                        Resultado encontrado:
+                        <strong>
+                            {{vm.results.length}} <span ng-show="vm.results.length > 1">viagens</span>
+                            <span ng-show="vm.results.length == 1">viagem</span>
+                        </strong>
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                                 <a href="javascript:;" class="fa fa-times"></a>
