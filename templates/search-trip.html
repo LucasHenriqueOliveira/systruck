@@ -14,7 +14,16 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" ng-show="vm.loading">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="!vm.results.length && !vm.loading">
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
@@ -62,7 +71,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Motorista</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control" ng-model="vm.driverSelect"
+                                    <select class="form-control" name="driverSelect" ng-model="vm.driverSelect"
                                             ng-options="driver.name for driver in vm.drivers track by driver.id" required>
                                     </select>
                                 </div>
@@ -86,10 +95,76 @@
                             <div class="form-group">
                                 <div class="col-lg-11 text-center">
                                     <button class="btn btn-default" type="reset"><i class="fa fa-eraser"></i> Limpar</button>
-                                    <button class="btn btn-primary" type="submit" ng-disabled="!vm.numberTrip && !vm.from && !vm.to && !vm.truck && !vm.driver && !vm.cityHome && !vm.cityDestination"><i class="fa fa-search"></i> Pesquisar</button>
+                                    <button class="btn btn-primary" type="submit" ng-disabled="!vm.numberTrip && !vm.from && !vm.to && !vm.truckSelect && !vm.driverSelect && !vm.cityHome && !vm.cityDestination"><i class="fa fa-search"></i> Pesquisar</button>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="row" ng-show="vm.results.length && !vm.loading">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Resultado pesquisa de viagem
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table editable-table ">
+                            <table class="display table table-hover table-bordered table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Caminhão</th>
+                                    <th class="text-center">Motorista</th>
+                                    <th class="text-center">Cidade</th>
+                                    <th class="text-center">Data</th>
+                                    <th class="text-center">Ação</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="trip in vm.results">
+                                    <td>
+                                        <ul>
+                                            <li>{{trip.carro_nome}}</li>
+                                            <li>Frota: {{trip.carro_frota}}</li>
+                                            <li>Placa: {{trip.carro_placa}}</li>
+                                            <li>Placa semi-reboque: {{trip.carro_placa_semi_reboque}}</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">{{trip.usuario_nome}}</td>
+                                    <td>
+                                        <ul>
+                                            <li>Origem: {{trip.cidade_origem}}</li>
+                                            <li>Destino: {{trip.cidade_destino}}</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>Saída: {{trip.data_saida}}</li>
+                                            <li>Chegada: {{trip.data_chegada}}</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">
+                                        <div class="todo-actionlist">
+                                            <a href="#/trip/{{trip.viagem_id}}" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                            <a href="#/edit-trip/{{trip.viagem_id}}" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-11 text-center">
+                                <button type="button" class="btn btn-default " ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
