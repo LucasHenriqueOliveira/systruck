@@ -12,12 +12,13 @@
         vm.numberTrip = '';
         vm.from = '';
         vm.to = '';
-        vm.truckSelect = {};
-        vm.driverSelect = {};
-        vm.cityHome = {};
-        vm.cityDestination = {};
+        vm.truckSelect = 0;
+        vm.driverSelect = 0;
+        vm.cityHome = 0;
+        vm.cityDestination = 0;
         vm.message = '';
-        vm.results = {};
+        vm.results = '';
+        vm.loading = false;
 
         DataService.getTrucksDriversCities().then(function (data) {
             vm.trucks = data.getTrucks;
@@ -27,6 +28,7 @@
 
         vm.submitSearchTrip = function(){
             vm.message = '';
+            vm.loading = true;
 
             var postData = {
                 numberTrip: vm.numberTrip,
@@ -40,13 +42,18 @@
             };
 
             DataService.getSearchTrip(postData).then(function(response) {
-
                 if(response.error === false) {
                     vm.results = response.trip;
                 } else {
                     vm.message = response.message;
                 }
+                vm.loading = false;
             });
+        };
+
+        vm.back = function(){
+            vm.results = '';
+            $location.path('/search-trip');
         };
 
         jQuery(document).ready(function(){
