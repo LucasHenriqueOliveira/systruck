@@ -5,22 +5,24 @@
         .module('app')
         .controller('EditCompanyController', EditCompanyController);
 
-    EditCompanyController.$inject = ['$location', '$window'];
+    EditCompanyController.$inject = ['$window', 'DataService'];
 
-    function EditCompanyController($location, $window) {
+    function EditCompanyController($window, DataService) {
         var vm = this;
-        vm.company = {};
-        vm.company.address = 'Rua São José';
-        vm.company.number = '165';
-        vm.company.complement = '';
-        vm.company.neighboorhod = 'Sítios Guarani';
-        vm.company.zip = '32.600-000';
-        vm.company.phone1 = '3135948229';
+        vm.cities = {};
+        vm.company = DataService.getCompanyLocal();
+        vm.cidade_id = {
+            id: vm.company.empresa_cidade_id,
+            name: vm.company.cidade_nome
+        };
+
+        DataService.getCities().then(function (data) {
+            vm.cities = data;
+        });
 
         vm.back = function(){
             $window.history.back();
         };
-
     }
 
 })();
