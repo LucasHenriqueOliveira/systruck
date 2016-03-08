@@ -30,16 +30,18 @@
                                     <div class="prf-contacts">
                                         <h2> <span><i class="fa fa-map-marker"></i></span> Empresa</h2>
                                         <div class="location-info">
-                                            <p><strong>Transportadora Ripase</strong></p>
-                                            <p>Rua São José, 165<br>
-                                                Sítios Guarani<br>
-                                                Betim/MG<br>
-                                                CEP: 32.600-000
+                                            <p><strong>{{vm.company.empresa_nome}}</strong></p>
+                                            <p>{{vm.company.empresa_logradouro}}, {{vm.company.empresa_numero}}<br>
+                                                <span ng-show="vm.company.empresa_complemento">{{vm.company.empresa_complemento}} - </span>
+                                                {{vm.company.empresa_bairro}}<br>
+                                                {{vm.company.cidade_nome}}/{{vm.company.estado_uf}}<br>
+                                                CEP: {{vm.company.empresa_cep}}
                                             </p>
                                         </div>
                                         <h2> <span><i class="fa fa-phone"></i></span> Contato</h2>
                                         <div class="location-info">
-                                            <p>Telefone: (31) 3594-8229</p>
+                                            <p>Telefone: {{vm.company.empresa_telefone_1 | tel}}</p>
+                                            <p ng-show="vm.company.empresa_telefone_2">Telefone: {{vm.company.empresa_telefone_2 | tel}}</p>
                                             <p>
                                                 <button type="button" class="btn btn-default" ng-click="vm.editCompany()"><i class="fa fa-pencil"></i> Editar</button>
                                             </p>
@@ -47,7 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div id="map-canvas" ng-init="vm.initialize()"></div>
+                                    <div id="map-canvas"></div>
                                 </div>
                             </div>
                         </div>
