@@ -16,7 +16,7 @@
         function init() {
             var id = $localstorage.get('id');
 
-            UserService.GetById(id).then(function (data) {
+            UserService.getProfileById(id).then(function (data) {
 
                 if(data.error) {
                     vm.message = data.message;
