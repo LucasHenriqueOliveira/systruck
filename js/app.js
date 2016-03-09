@@ -66,7 +66,7 @@
                 }
             })
 
-            .when('/user/:id', {
+            .when('/user', {
                 controller: 'UserController',
                 templateUrl: 'templates/user.html',
                 controllerAs: 'vm',
