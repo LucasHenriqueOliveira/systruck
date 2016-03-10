@@ -1,0 +1,92 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li>Usuário</li>
+                    <li class="active"> Editar Usuário</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Editar Usuário
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+
+                        <form name="formEditUser" role="form" class="form-horizontal">
+                            <div class="form-group" ng-class="{ 'has-error': formEditUser.function.$dirty && formEditUser.function.$error.required }">
+                                <label class="col-lg-3 col-sm-3 control-label">Função</label>
+                                <div class="col-lg-6 col-sm-6">
+                                    <select class="form-control" id="function" name="function" ng-model="vm.user.tipo_perfil_id" ng-change="vm.getFunction(vm.user.tipo_perfil_id)" required>
+                                        <option value="1" ng-selected="vm.user.tipo_perfil_id == 1">Gerente</option>
+                                        <option value="2" ng-selected="vm.user.tipo_perfil_id == 2">Administrativo</option>
+                                        <option value="3" ng-selected="vm.user.tipo_perfil_id == 3">Motorista</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': formEditUser.name.$dirty && formEditUser.name.$error.required }">
+                                <label class="col-lg-3 col-sm-3 control-label">Name</label>
+                                <div class="col-lg-6 col-sm-6">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Nome" ng-model="vm.user.usuario_nome" required>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="!vm.show_driver">
+                                <label class="col-lg-3 col-sm-3 control-label">Email</label>
+                                <div class="col-lg-6 col-sm-6">
+                                    <input type="text" name="email" class="form-control" placeholder="Email" ng-model="vm.user.usuario_email">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="vm.show_driver">
+                                <label class="col-lg-3 col-sm-3 control-label">Carteira de Habilitação</label>
+                                <div class="col-lg-2 col-sm-6">
+                                    <input type="text" class="form-control" name="cnh" id="cnh" placeholder="Carteira de Habilitação" ng-model="vm.user.usuario_cnh">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="vm.show_driver">
+                                <label class="col-lg-3 col-sm-3 control-label">Data do último exame periódico</label>
+                                <div class="col-lg-2 col-sm-6">
+                                    <input type="text" class="form-control default-date-picker" id="inputDatePeriodic" ng-model="vm.user.usuario_data_exame" ui-mask="99/99/9999" model-view-value="true">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': formEditUser.phone1.$dirty && formEditUser.phone1.$error.required }">
+                                <label class="col-lg-3 col-sm-3 control-label">Telefone</label>
+                                <div class="col-lg-2 col-sm-6">
+                                    <input type="text" class="form-control" name="phone1" id="phone1" ng-model="vm.user.usuario_telefone1" placeholder="(xx) xxxxx-xxxx" ui-br-phone-number required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Telefone</label>
+                                <div class="col-lg-2 col-sm-6">
+                                    <input type="text" class="form-control" id="inputTelefone2" ng-model="vm.user.usuario_telefone2" placeholder="(xx) xxxxx-xxxx" ui-br-phone-number>
+                                </div>
+                            </div>
+                            <div class="space15"></div>
+                            <div class="form-group">
+                                <div class="col-lg-11 text-center">
+                                    <button type="button" class="btn btn-default " ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
+                                    <button class="btn btn-primary" type="submit" ng-disabled="formEditUser.$invalid" ng-click="vm.editUser(vm)"><i class="fa fa-check"></i> Salvar</button>
+                                </div>
+                            </div>
+                            <span id="toastrOptions"></span>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->
