@@ -33,7 +33,7 @@
                             <div class="form-group" ng-class="{ 'has-error': formCompany.address.$dirty && formCompany.address.$error.required }">
                                 <label class="col-lg-3 col-sm-3 control-label">Endereço</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="address" class="form-control" ng-model="vm.company.empresa_nome" required>
+                                    <input type="text" name="address" class="form-control" ng-model="vm.company.empresa_logradouro" required>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="{ 'has-error': formCompany.number.$dirty && formCompany.number.$error.required }">
@@ -84,9 +84,10 @@
                             <div class="form-group">
                                 <div class="col-lg-11 text-center">
                                     <button type="button" class="btn btn-default " ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
-                                    <button class="btn btn-primary" type="submit" ng-disabled="formCompany.$invalid"><i class="fa fa-check"></i> Salvar</button>
+                                    <button class="btn btn-primary" type="submit" ng-disabled="formCompany.$invalid" ng-click="vm.editCompany(vm)"><i class="fa fa-check"></i> Salvar</button>
                                 </div>
                             </div>
+                            <span id="toastrOptions"></span>
                         </form>
                     </div>
                 </section>
