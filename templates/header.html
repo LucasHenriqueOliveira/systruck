@@ -78,13 +78,16 @@
                         <p class="red">Exames Periódicos</p>
                     </li>
                     <li ng-repeat="periodic in header.getNextPeriodic | limitTo: 4">
-                        <a href="#/user/{{periodic.usuario_id}}">
+                        <a href ng-click="getUser(periodic.perfil_id)">
                             <span class="subject">
                             <span class="from">{{periodic.usuario_nome}}</span>
                             <span class="time">{{periodic.data_exame}}</span>
                             </span>
-                            <span class="message">
+                            <span class="message" ng-if="periodic.dias !== 1">
                                 Faltam {{periodic.dias}} dias para o vencimento.
+                            </span>
+                            <span class="message" ng-if="periodic.dias === 1">
+                                Falta {{periodic.dias}} dia para o vencimento.
                             </span>
                         </a>
                     </li>
