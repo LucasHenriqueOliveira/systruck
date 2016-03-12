@@ -24,7 +24,7 @@
                             </span>
                     </header>
                     <div class="panel-body">
-                        <div class="adv-table editable-table ">
+                        <div class="adv-table editable-table" ng-show="vm.usersAvailable.length">
                             <div class="clearfix">
                                 <div class="btn-group">
                                     <a href data-target="#myModal" data-toggle="modal" id="editable-sample_new" class="btn btn-primary">
@@ -53,118 +53,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Sérgio de Oliveira</td>
-                                    <td>sergio@gmail.com</td>
-                                    <td> - </td>
-                                    <td>Gerente</td>
+                                <tr ng-repeat="user in vm.usersAvailable">
+                                    <td>{{user.usuario_nome}}</td>
+                                    <td>{{user.usuario_email}}</td>
+                                    <td>{{user.usuario_cnh}}</td>
+                                    <td>{{user.tipo_perfil_nome}}</td>
                                     <td class="todo-actionlist center">
-                                        <a href="#/user/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Priscila Ramos de Melo</td>
-                                    <td>priscilaramos@gmail.com</td>
-                                    <td> - </td>
-                                    <td>Administrativo</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/user/2" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Lucas Henrique de Oliveira</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/user/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Arthur Felipe R. Costa</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/user/4" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Gilberto Oliveira</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/user/5" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Guilherme Azevedo Reis</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/user/6" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>José Lucas Ferreira e Silva</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/user/7" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Paulo Holanda Ribeiro Netto</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/user/8" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Matheus André da Silva</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/user/9" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ruy Arruda Cassiano</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/user/10" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
+                                        <a href ng-click="vm.getUser(user)" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                        <a href ng-click="vm.editUser(user)" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                        <a href ng-click="vm.removeUser(user)" class="todo-remove icon-center" title="Desativar"><i class="ico-close"></i></a>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div ng-show="!vm.usersAvailable.length">
+                            <p>Não existem usuários ativos.</p>
                         </div>
                     </div>
                 </section>
@@ -182,7 +86,7 @@
                                 </span>
                     </header>
                     <div class="panel-body">
-                        <div class="adv-table editable-table ">
+                        <div class="adv-table editable-table" ng-show="vm.usersUnavailable.length">
                             <div class="clearfix">
                                 <div class="btn-group pull-right">
                                     <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
@@ -206,40 +110,24 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Lucas Henrique de Oliveira</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
+                                <tr ng-repeat="user in vm.usersUnavailable">
+                                    <td>{{user.usuario_nome}}</td>
+                                    <td>{{user.usuario_email}}</td>
+                                    <td>{{user.usuario_cnh}}</td>
+                                    <td>{{user.tipo_perfil_nome}}</td>
                                     <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-done icon-center" title="Reativar"><i class="fa fa-check"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Arthur Felipe R. Costa</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-done icon-center" title="Reativar"><i class="fa fa-check"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Gilberto Oliveira</td>
-                                    <td> - </td>
-                                    <td>31314342423</td>
-                                    <td>Motorista</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-done icon-center" title="Reativar"><i class="fa fa-check"></i></a>
+                                        <a href ng-click="vm.getUser(user)" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                        <a href ng-click="vm.activeUser(user)" class="todo-done icon-center" title="Ativar"><i class="fa fa-check"></i></a>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
+                        <div ng-show="!vm.usersUnavailable.length">
+                            <p>Não existem usuários desativados.</p>
+                        </div>
                     </div>
+                    <span id="toastrOptions"></span>
                 </section>
             </div>
         </div>
@@ -274,30 +162,30 @@
                     </div>
                     <div class="form-group" ng-show="!vm.show_driver">
                         <label class="control-label" for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                        <input type="email" class="form-control" id="inputEmail" ng-model="vm.user.email" placeholder="Email">
                     </div>
                     <div class="form-group" ng-show="vm.show_driver">
                         <label class="control-label" for="inputCNH">Carteira de Habilitação</label>
-                        <input type="text" class="form-control" id="inputCNH" placeholder="Carteira de Habilitação">
+                        <input type="text" class="form-control" id="inputCNH" ng-model="vm.user.cnh" placeholder="Carteira de Habilitação">
                     </div>
                     <div class="form-group" ng-show="vm.show_driver">
                         <label class="control-label" for="inputDatePeriodic">Data do último exame periódico</label>
-                        <input type="text" class="form-control default-date-picker" id="inputDatePeriodic" ng-model="vm.date_periodic" ui-mask="99/99/9999" model-view-value="true">
+                        <input type="text" class="form-control default-date-picker" id="inputDatePeriodic" ng-model="vm.user.date_periodic" ui-mask="99/99/9999" model-view-value="true">
                     </div>
                     <div class="form-group" ng-class="{ 'has-error': formUser.phone1.$dirty && formUser.phone1.$error.required }">
                         <label class="control-label" for="phone1">Telefone</label>
-                        <input type="text" class="form-control" name="phone1" id="phone1" ng-model="vm.phone1" placeholder="(xx) xxxxx-xxxx" ui-br-phone-number required>
+                        <input type="text" class="form-control" name="phone1" id="phone1" ng-model="vm.user.phone1" placeholder="(xx) xxxxx-xxxx" ui-br-phone-number required>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="inputTelefone2">Telefone</label>
-                        <input type="text" class="form-control" id="inputTelefone2" ng-model="vm.phone2" placeholder="(xx) xxxxx-xxxx" ui-br-phone-number>
+                        <label class="control-label" for="phone2">Telefone</label>
+                        <input type="text" class="form-control" name="phone2" id="phone2" ng-model="vm.user.phone2" placeholder="(xx) xxxxx-xxxx" ui-br-phone-number>
                     </div>
                     <div class="form-group">
                         <div class="btn-group">
                             <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
                         </div>
                         <div class="btn-group pull-right">
-                            <button type="submit" class="btn btn-primary" ng-disabled="formUser.$invalid"><i class="fa fa-check"></i> Salvar</button>
+                            <button type="submit" class="btn btn-primary" ng-disabled="formUser.$invalid" ng-click="vm.submitUser(vm)"><i class="fa fa-check"></i> Salvar</button>
                         </div>
                     </div>
                 </form>
