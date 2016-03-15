@@ -5934,3 +5934,11 @@ input:-webkit-autofill:active {
 .text-transform-header {
     text-transform: none !important;
 }
+
+.display_none {
+    display: none;
+}
+
+.display_inline {
+    display: inline;
+}
