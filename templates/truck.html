@@ -41,14 +41,14 @@
                                 <div class="prf-contacts">
                                     <h2> <span><i class="fa fa-truck"></i></span> Veículo</h2>
                                     <div class="location-info">
-                                        <p><strong>Caminhão:</strong> Scania P310 <br>
-                                            <strong>Frota:</strong> 20.279
+                                        <p><strong>Caminhão:</strong> {{vm.truck.carro_nome}} <br>
+                                            <strong>Frota:</strong> {{vm.truck.carro_frota}}
                                         </p>
                                     </div>
                                     <h2> <span><i class="fa fa-road"></i></span> Quilometragem</h2>
                                     <div class="location-info">
                                         <p>
-                                            <strong>Atual:</strong> 110.000
+                                            <strong>Atual:</strong> {{vm.truck.carro_km | number}}
                                         </p>
                                     </div>
                                 </div>
@@ -57,15 +57,38 @@
                                 <div class="prf-contacts">
                                     <h2> <span><i class="fa fa-location-arrow"></i></span> Identificação</h2>
                                     <div class="location-info">
-                                        <p><strong>Placa:</strong> HGL-1909 <br>
-                                            <strong>Semi-reboque:</strong> HGL-1908
+                                        <p><strong>Placa:</strong> {{vm.truck.carro_placa}} <br>
+                                            <strong>Semi-reboque:</strong> {{vm.truck.carro_placa_semi_reboque}}
                                         </p>
                                     </div>
                                     <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
                                     <div class="location-info">
-                                        <p><strong>Ativação:</strong> 10/11/2015 <br>
-                                            <strong>Desativação:</strong> -
+                                        <p><strong>Ativação:</strong> {{vm.truck.carro_data_ativacao}} <br>
+                                            <strong>Desativação:</strong> <span ng-show="!vm.truck.carro_data_desativacao"> - </span> {{vm.truck.carro_data_desativacao}}
                                         </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="vm.truckPart.length">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-wrench"></i></span> Peça/Item</h2>
+                                    <div class="location-info">
+                                        <table class="table table-condensed table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Descrição</th>
+                                                <th class="text-center">Vida Útil</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="part in vm.truckPart track by $index">
+                                                <td>{{part.item_nome}}</td>
+                                                <td class="text-center">{{part.carro_item_vida_util | number}} km</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
