@@ -169,7 +169,7 @@
                         <input type="text" class="form-control" id="inputCNH" ng-model="vm.user.cnh" placeholder="Carteira de Habilitação">
                     </div>
                     <div class="form-group" ng-show="vm.show_driver">
-                        <label class="control-label" for="inputDatePeriodic">Data do último exame periódico</label>
+                        <label class="control-label" for="inputDatePeriodic">Data do próximo exame periódico</label>
                         <input type="text" class="form-control default-date-picker" id="inputDatePeriodic" ng-model="vm.user.date_periodic" ui-mask="99/99/9999" model-view-value="true">
                     </div>
                     <div class="form-group" ng-class="{ 'has-error': formUser.phone1.$dirty && formUser.phone1.$error.required }">
