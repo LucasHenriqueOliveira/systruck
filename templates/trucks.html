@@ -23,11 +23,11 @@
                                 <a href="javascript:;" class="fa fa-times"></a>
                             </span>
                     </header>
-                    <div class="panel-body">
+                    <div class="panel-body" ng-show="vm.trucksAvailable.length">
                         <div class="adv-table editable-table ">
                             <div class="clearfix">
                                 <div class="btn-group">
-                                    <a href data-target="#myModal" data-toggle="modal" id="editable-sample_new" class="btn btn-primary">
+                                    <a href="#/add-truck" class="btn btn-primary">
                                         <i class="fa fa-plus"></i> Novo
                                     </a>
                                 </div>
@@ -54,128 +54,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="center">20.279</td>
-                                    <td>Scania P310</td>
-                                    <td class="center">HGL-1909</td>
-                                    <td class="center">HGL-1908</td>
-                                    <td class="center">110.000</td>
+                                <tr ng-repeat="truck in vm.trucksAvailable">
+                                    <td class="center">{{truck.carro_frota}}</td>
+                                    <td>{{truck.carro_nome}}</td>
+                                    <td class="center">{{truck.carro_placa}}</td>
+                                    <td class="center">{{truck.carro_placa_semi_reboque}}</td>
+                                    <td class="center">{{truck.carro_km | number}}</td>
                                     <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">20.280</td>
-                                    <td>Scania P340</td>
-                                    <td class="center">HTT-0109</td>
-                                    <td class="center">HTT-0108</td>
-                                    <td class="center">160.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">20.314</td>
-                                    <td>Scania P310</td>
-                                    <td class="center">HHL-2123</td>
-                                    <td class="center">HHL-2122</td>
-                                    <td class="center">400.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">20.654</td>
-                                    <td>Scania P340</td>
-                                    <td class="center">HOL-2338</td>
-                                    <td class="center">HOL-2337</td>
-                                    <td class="center">300.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">20.323</td>
-                                    <td>Iveco Stralis 420</td>
-                                    <td class="center">HGL-2432</td>
-                                    <td class="center">HGL-2431</td>
-                                    <td class="center">220.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">20.259</td>
-                                    <td>Scania P310</td>
-                                    <td class="center">HGL-1914</td>
-                                    <td class="center">HGL-1913</td>
-                                    <td class="center">110.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">23.423</td>
-                                    <td>Iveco Stralis 420</td>
-                                    <td class="center">HQR-4234</td>
-                                    <td class="center">HQR-4233</td>
-                                    <td class="center">230.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">20.675</td>
-                                    <td>Scania P310</td>
-                                    <td class="center">HGL-6423</td>
-                                    <td class="center">HGL-6422</td>
-                                    <td class="center">110.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">20.876</td>
-                                    <td>Scania P340</td>
-                                    <td class="center">HGL-6474</td>
-                                    <td class="center">HGL-6473</td>
-                                    <td class="center">330.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">20.856</td>
-                                    <td>Scania P340</td>
-                                    <td class="center">HFB-5758</td>
-                                    <td class="center">HFB-5757</td>
-                                    <td class="center">400.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
+                                        <a href ng-click="vm.getTruck(truck)" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                        <a href ng-click="vm.editTruck(truck)" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                        <a href ng-click="vm.removeTruck(truck)" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div ng-show="!vm.trucksAvailable.length">
+                            <p>Não existem caminhões ativos.</p>
                         </div>
                     </div>
                 </section>
@@ -193,7 +88,7 @@
                                 </span>
                     </header>
                     <div class="panel-body">
-                        <div class="adv-table editable-table ">
+                        <div class="adv-table editable-table" ng-show="vm.trucksUnavailable.length">
                             <div class="clearfix">
                                 <div class="btn-group pull-right">
                                     <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
@@ -218,41 +113,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="center">18.675</td>
-                                    <td>Scania P310</td>
-                                    <td class="center">HDS-2525</td>
-                                    <td class="center">HDS-2524</td>
-                                    <td class="center">700.000</td>
+                                <tr ng-repeat="truck in vm.trucksUnavailable">
+                                    <td class="center">{{truck.carro_frota}}</td>
+                                    <td>{{truck.carro_nome}}</td>
+                                    <td class="center">{{truck.carro_placa}}</td>
+                                    <td class="center">{{truck.carro_placa_semi_reboque}}</td>
+                                    <td class="center">{{truck.carro_km | number}}</td>
                                     <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-done icon-center" title="Reativar"><i class="fa fa-check"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">19.423</td>
-                                    <td>Scania P310</td>
-                                    <td class="center">HEW-6544</td>
-                                    <td class="center">HEW-6543</td>
-                                    <td class="center">800.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-done icon-center" title="Reativar"><i class="fa fa-check"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="center">19.534</td>
-                                    <td>Scania P310</td>
-                                    <td class="center">HTE-5423</td>
-                                    <td class="center">HTE-5422</td>
-                                    <td class="center">750.000</td>
-                                    <td class="todo-actionlist center">
-                                        <a href="#/truck/1" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                        <a href="#" class="todo-done icon-center" title="Reativar"><i class="fa fa-check"></i></a>
+                                        <a href ng-click="vm.getTruck(truck)" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                        <a href ng-click="vm.activeTruck(truck)" class="todo-done icon-center" title="Reativar"><i class="fa fa-check"></i></a>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div ng-show="!vm.trucksUnavailable.length">
+                            <p>Não existem caminhões desativados.</p>
                         </div>
                     </div>
                 </section>
@@ -262,49 +138,3 @@
     <!-- page end-->
 </div>
 <!--main content end-->
-
-<!-- Modal -->
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 class="modal-title">Inclusão de novo caminhão</h4>
-            </div>
-            <div class="modal-body">
-
-                <form name="formTruck" role="form">
-                    <div class="form-group" ng-class="{ 'has-error': formTruck.number.$dirty && formTruck.number.$error.required }">
-                        <label class="control-label" for="number">Frota</label>
-                        <input type="text" class="form-control" name="number" id="number" placeholder="Frota" required>
-                    </div>
-                    <div class="form-group" ng-class="{ 'has-error': formTruck.truck.$dirty && formTruck.truck.$error.required }">
-                        <label class="control-label" for="truck">Caminhão</label>
-                        <input type="text" class="form-control" name="truck" id="truck" placeholder="Caminhão" required>
-                    </div>
-                    <div class="form-group" ng-class="{ 'has-error': formTruck.plate.$dirty && formTruck.plate.$error.required }">
-                        <label class="control-label" for="plate">Placa</label>
-                        <input type="text" class="form-control" name="plate" id="plate" ng-model="vm.plate" ui-mask="AAA-9999" ui-mask-placeholder required>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="inputPlacaReboque">Placa semi-reboque</label>
-                        <input type="text" class="form-control" id="inputPlacaReboque" ng-model="vm.placaReboque" ui-mask="AAA-9999" ui-mask-placeholder>
-                    </div>
-                    <div class="form-group" ng-class="{ 'has-error': formTruck.km.$dirty && formTruck.km.$error.required }">
-                        <label class="control-label" for="km">Quilometragem</label>
-                        <input type="text" class="form-control" name="km" id="km" placeholder="Quilometragem (Km)" ng-model="vm.km_truck" ui-number-mask="0" required>
-                    </div>
-                    <div class="form-group">
-                        <div class="btn-group">
-                            <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
-                        </div>
-                        <div class="btn-group pull-right">
-                            <button type="submit" class="btn btn-primary" ng-disabled="formTruck.$invalid"><i class="fa fa-check"></i> Salvar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- modal -->
