@@ -16,6 +16,7 @@
         service.GetEmail = GetEmail;
         service.GetName = GetName;
         service.GetRoles = GetRoles;
+        service.IsLoginDefault = IsLoginDefault;
 
         return service;
 
@@ -40,6 +41,7 @@
             $localstorage.set('token', data.token);
             $localstorage.set('company', data.user.empresa);
             $localstorage.set('roles', data.user.perfil);
+            $localstorage.set('login_default', data.user.primeiro_acesso);
 
             $rootScope.$broadcast("login-done");
 
@@ -52,6 +54,9 @@
             $localstorage.remove('token');
             $localstorage.remove('company');
             $localstorage.remove('roles');
+            $localstorage.remove('companyData');
+            $localstorage.remove('trip');
+            $localstorage.remove('login_default');
         }
 
         function IsLogged() {
@@ -68,6 +73,10 @@
 
         function GetRoles() {
             return $localstorage.get('roles');
+        }
+
+        function IsLoginDefault() {
+            return ($localstorage.get('login_default') == 1) ? true : false;
         }
 
     }
