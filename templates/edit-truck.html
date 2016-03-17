@@ -1,0 +1,249 @@
+<!--main content start-->
+<div id="main-content">
+
+    <div class="wrapper" ng-show="vm.loading">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" ng-show="!vm.loading">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li><a href="#/trucks">Caminhões</a></li>
+                    <li class="active">Editar caminhão</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Editar caminhão
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <script>
+                            (function ($) {
+                                $("#wizard_truck_edit").steps({
+                                    headerTag: "h3",
+                                    bodyTag: "section",
+                                    transitionEffect: "slideLeft",
+                                    onStepChanged: function (event, currentIndex, priorIndex)
+                                    {
+                                        if(currentIndex == 1) {
+                                            $("#button_submit").addClass("display_inline");
+                                        } else{
+                                            $("#button_submit").removeClass("display_inline");
+                                        }
+                                    },
+                                    labels: {
+                                        next: 'Próximo <i class="fa fa-chevron-right"></i>',
+                                        previous: '<i class="fa fa-chevron-left"></i> Anterior'
+                                    }
+                                });
+                            })(jQuery);
+                        </script>
+
+                        <form name="formTruck" role="form" class="form-horizontal" ng-submit="vm.submitEditTruck(vm)">
+                            <div id="wizard_truck_edit">
+                                <h3>Dados do caminhão</h3>
+                                <section>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 col-sm-4 control-label">Frota</label>
+                                        <div class="col-lg-4 col-sm-4">
+                                            <input type="text" class="form-control" name="frota" placeholder="Frota" ng-model="vm.truck.carro_frota">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-class="{ 'has-error': formTruck.nome.$dirty && formTruck.nome.$error.required }">
+                                        <label class="col-lg-4 col-sm-4 control-label">Caminhão</label>
+                                        <div class="col-lg-4 col-sm-4">
+                                            <input type="text" class="form-control" name="nome" placeholder="Caminhão" ng-model="vm.truck.carro_nome" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-class="{ 'has-error': formTruck.placa.$dirty && formTruck.placa.$error.required }">
+                                        <label class="col-lg-4 col-sm-4 control-label">Placa</label>
+                                        <div class="col-lg-4 col-sm-4">
+                                            <input type="text" class="form-control" name="placa" ng-model="vm.truck.carro_placa" ui-mask="AAA-9999" ui-mask-placeholder model-view-value="true" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-class="{ 'has-error': formTruck.placa_semi_reboque.$dirty && formTruck.placa_semi_reboque.$error.required }">
+                                        <label class="col-lg-4 col-sm-4 control-label">Placa semi-reboque</label>
+                                        <div class="col-lg-4 col-sm-4">
+                                            <input type="text" class="form-control" name="placa_semi_reboque" ng-model="vm.truck.carro_placa_semi_reboque" ui-mask="AAA-9999" ui-mask-placeholder model-view-value="true" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-class="{ 'has-error': formTruck.km.$dirty && formTruck.km.$error.required }">
+                                        <label class="col-lg-4 col-sm-4 control-label">Quilometragem Atual</label>
+                                        <div class="col-lg-4 col-sm-4">
+                                            <input type="text" class="form-control" name="km" placeholder="Quilometragem" ng-model="vm.truck.carro_km" ui-number-mask="0" required>
+                                        </div>
+                                    </div>
+                                </section>
+                                <h3>Manutenções programadas</h3>
+                                <section>
+                                    <div class="form-group">
+                                        <div class="col-lg-10 col-sm-10" ng-show="vm.parts_truck.length > 0">
+                                            <p>As peças/itens das manutenções programadas do caminhão:</p>
+                                        </div>
+                                        <div class="col-lg-10 col-sm-10" ng-show="!vm.parts_truck.length > 0">
+                                            <p>Não existem peças/itens das manutenções programadas para este caminhão!</p>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <div class="btn-group pull-right">
+                                                <a href data-target="#myModal" data-toggle="modal" class="btn btn-primary">
+                                                    <i class="fa fa-plus"></i> Novo
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="vm.parts_truck.length > 0">
+                                        <div class="col-lg-12 col-sm-12">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                <tr>
+                                                    <th>Peça/Item</th>
+                                                    <th class="text-center">Vida útil</th>
+                                                    <th class="text-center">Última troca</th>
+                                                    <th class="text-center" style="width:13%">Ação</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="part_truck in vm.parts_truck track by $index" style="background-color: #fff">
+                                                    <td>{{part_truck.item_nome}}</td>
+                                                    <td class="text-center">{{part_truck.carro_item_vida_util | number}} km</td>
+                                                    <td class="text-center">{{part_truck.carro_item_ultima_km | number}} km</td>
+                                                    <td class="text-center">
+                                                        <div class="todo-actionlist">
+                                                            <a href ng-click="vm.editPart(part_truck)" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                                            <a href ng-click="vm.removePart(part_truck)" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12 text-center">
+                                    <button type="button" class="btn btn-default" ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar a lista de caminhões</button>
+                                    <button type="submit" id="button_submit" class="btn btn-primary display_none" ng-disabled="formTruck.$invalid"><i class="fa fa-pencil"></i> Editar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <span id="toastrOptions"></span>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Adicionar peça/item programada</h4>
+            </div>
+            <div class="modal-body">
+                <form name="formPart" role="form" ng-submit="vm.submitPart(vm)">
+                    <div class="form-group" ng-class="{ 'has-error': formPart.partSelect.$dirty && formPart.partSelect.$invalid }">
+                        <label class="control-label" for="part">Peça/Item</label>
+                        <select class="form-control" id="part" ng-model="vm.part.partSelect" name="partSelect"
+                                ng-options="part.name for part in vm.parts track by part.id" required>
+                        </select>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formPart.timeChange.$dirty && formPart.timeChange.$invalid }">
+                        <label class="control-label" for="timeChange">Vida útil da peça/item em km
+                        <span data-content="Informe o tempo de vida útil em km da peça/item para que o sistema informe automaticamente as próximas manutenções."
+                              data-placement="top" data-trigger="hover" class="badge bg-default popovers">?</span>
+                        </label>
+                        <input type="text" class="form-control" name="timeChange" id="timeChange" ng-model="vm.part.timeChange" placeholder="Vida útil" ui-number-mask="0" required>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formPart.lastChange.$dirty && formPart.lastChange.$invalid }">
+                        <label class="control-label" for="lastChange">Km da última troca</label>
+                        <input type="text" class="form-control" name="lastChange" id="lastChange" ng-model="vm.part.lastChange" placeholder="Quilometragem" ui-number-mask="0" required>
+                    </div>
+                    <div class="form-group alert alert-block alert-danger fade in" ng-show="vm.message_part">
+                        <p>{{vm.message_part}}</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn btn-primary" ng-disabled="formPart.$invalid"><i class="fa fa-check"></i> Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModalEdit" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Alterar peça/item programada</h4>
+            </div>
+            <div class="modal-body">
+                <form name="formEditPart" role="form" ng-submit="vm.submitEditPart(vm)">
+                    <input type="hidden" ng-value="vm.partEdit.carroItemId" ng-model="vm.partEdit.carroItemId">
+                    <div class="form-group" ng-class="{ 'has-error': formEditPart.partSelect.$dirty && formEditPart.partSelect.$invalid }">
+                        <label class="control-label" for="partSelect">Peça/Item</label>
+                        <select class="form-control" id="partSelect" ng-model="vm.partEdit.partSelect" name="partSelect"
+                                ng-options="part.name for part in vm.parts track by part.id" required>
+                        </select>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formEditPart.timeEditChange.$dirty && formEditPart.timeEditChange.$invalid }">
+                        <label class="control-label" for="timeEditChange">Vida útil da peça/item em km
+                        <span data-content="Informe o tempo de vida útil em km da peça/item para que o sistema informe automaticamente as próximas manutenções."
+                              data-placement="top" data-trigger="hover" class="badge bg-default popovers">?</span>
+                        </label>
+                        <input type="text" class="form-control" name="timeEditChange" id="timeEditChange" ng-model="vm.partEdit.timeChange" placeholder="Vida útil" ui-number-mask="0" required>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formEditPart.lastEditChange.$dirty && formEditPart.lastEditChange.$invalid }">
+                        <label class="control-label" for="lastEditChange">Km da última troca</label>
+                        <input type="text" class="form-control" name="lastEditChange" id="lastEditChange" ng-model="vm.partEdit.lastChange" placeholder="Quilometragem" ui-number-mask="0" required>
+                    </div>
+                    <div class="form-group alert alert-block alert-danger fade in" ng-show="vm.message_part_edit">
+                        <p>{{vm.message_part_edit}}</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn btn-primary" ng-disabled="formEditPart.$invalid"><i class="fa fa-pencil"></i> Editar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
