@@ -55,7 +55,7 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="truck in vm.trucksAvailable">
-                                    <td class="center">{{truck.carro_frota}}</td>
+                                    <td class="center"><span ng-show="!truck.carro_frota"> - </span> {{truck.carro_frota}}</td>
                                     <td>{{truck.carro_nome}}</td>
                                     <td class="center">{{truck.carro_placa}}</td>
                                     <td class="center">{{truck.carro_placa_semi_reboque}}</td>
@@ -114,7 +114,7 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="truck in vm.trucksUnavailable">
-                                    <td class="center">{{truck.carro_frota}}</td>
+                                    <td class="center"><span ng-show="!truck.carro_frota"> - </span> {{truck.carro_frota}}</td>
                                     <td>{{truck.carro_nome}}</td>
                                     <td class="center">{{truck.carro_placa}}</td>
                                     <td class="center">{{truck.carro_placa_semi_reboque}}</td>
