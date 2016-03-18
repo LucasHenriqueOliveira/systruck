@@ -5,19 +5,22 @@
         .module('app')
         .controller('UserController', UserController);
 
-    UserController.$inject = ['$location', '$window', '$timeout'];
+    UserController.$inject = ['$window', 'UserService', '$location'];
 
-    function UserController($location, $window, $timeout) {
+    function UserController($window, UserService, $location) {
         var vm = this;
-        vm.loading = true;
-
-        $timeout(function() {
-            vm.loading = false;
-        }, 2000);
+        vm.user = {};
 
         vm.back = function(){
             $window.history.back();
         };
+
+        vm.user = UserService.getCurrentUser();
+
+        if(!vm.user) {
+            alert('Erro ao consultar usuário.');
+            $location.path('/users');
+        }
     }
 
 })();
