@@ -13,6 +13,8 @@
 
         service.getTrucks = getTrucks;
         service.getById = getById;
+        service.getTruckPart = getTruckPart;
+        service.removeTruckPart = removeTruckPart;
         service.create = create;
         service.update = update;
         service.removeTruck = removeTruck;
@@ -29,6 +31,14 @@
 
         function getById(id) {
             return $http.get(baseURL + 'truck/' + id).then(handleSuccess, handleError('Error getting truck by id'));
+        }
+
+        function getTruckPart(id) {
+            return $http.get(baseURL + 'truck-part/' + id).then(handleSuccess, handleError('Error getting truck part by id'));
+        }
+
+        function removeTruckPart(id, truck) {
+            return $http.put(baseURL + 'remove-truck-part/' + id, truck).then(handleSuccess, handleError('Error remove truck part'));
         }
 
         function create(truck) {
