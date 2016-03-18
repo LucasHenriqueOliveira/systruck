@@ -42,7 +42,7 @@
                                     <h2> <span><i class="fa fa-truck"></i></span> Veículo</h2>
                                     <div class="location-info">
                                         <p><strong>Caminhão:</strong> {{vm.truck.carro_nome}} <br>
-                                            <strong>Frota:</strong> {{vm.truck.carro_frota}}
+                                            <strong>Frota:</strong> <span ng-show="!vm.truck.carro_frota"> - </span> {{vm.truck.carro_frota}}
                                         </p>
                                     </div>
                                     <h2> <span><i class="fa fa-road"></i></span> Quilometragem</h2>
