@@ -53,9 +53,31 @@
                     parts.forEach(function (part) {
 
                         arrParts.push({
-                            name : part.name,
+                            id_part: part.id_part,
+                            name_part : part.name_part,
                             qtd : part.qtd,
-                            price : part.price
+                            price : part.price,
+                            price_unit: part.price_unit,
+                            id_stock: part.id_stock,
+                            desc_stock: part.desc_stock
+                        });
+                    });
+                }
+                return arrParts;
+            },
+
+            getPartTruck: function() {
+                var arrParts = [];
+                var parts = $localstorage.getObject('truck_parts');
+
+                if(JSON.stringify(parts) !== '{}'){
+                    parts.forEach(function (part) {
+
+                        arrParts.push({
+                            name : part.name,
+                            id : part.id,
+                            time : part.time,
+                            last: part.last
                         });
                     });
                 }
@@ -214,6 +236,143 @@
                     method: 'POST',
                     url: 'http://localhost:8080/api/v1/search-trip/',
                     data: postData
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getCompany: function() {
+
+                var company = $localstorage.getObject('company');
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/api/v1/company/' + company
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getCities: function() {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/api/v1/cities'
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getCompanyLocal: function() {
+
+                var company = $localstorage.getObject('companyData');
+
+                if(JSON.stringify(company) !== '{}'){
+
+                }
+                return company;
+            },
+
+            editCompany: function(dataCompany) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'PUT',
+                    url: 'http://localhost:8080/api/v1/edit-company',
+                    data: dataCompany
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getParts: function() {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/api/v1/parts'
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getRealizedMaintenance: function() {
+
+                var company = $localstorage.getObject('company');
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/api/v1/realized-maintenance/' + company
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getLastMaintenance: function() {
+
+                var company = $localstorage.getObject('company');
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/api/v1/last-maintenance/' + company
                 })
                     .then(function(response) {
 
