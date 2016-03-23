@@ -13,7 +13,9 @@
 
         service.getParts = getParts;
         service.getById = getById;
+        service.getAllParts = getAllParts;
         service.create = create;
+        service.createMaintenance = createMaintenance;
         service.update = update;
         service.removePart = removePart;
         service.activePart = activePart;
@@ -31,8 +33,17 @@
             return $http.get(baseURL + 'part/' + id).then(handleSuccess, handleError('Error getting part by id'));
         }
 
+        function getAllParts() {
+            var id = $localstorage.getObject('company');
+            return $http.get(baseURL + 'all-parts/' + id).then(handleSuccess, handleError('Error getting all parts'));
+        }
+
         function create(part) {
             return $http.post(baseURL + 'part', part).then(handleSuccess, handleError('Error creating part'));
+        }
+
+        function createMaintenance(maintenance) {
+            return $http.post(baseURL + 'maintenance', maintenance).then(handleSuccess, handleError('Error creating maintenance'));
         }
 
         function activePart(id, part) {
