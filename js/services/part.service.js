@@ -18,6 +18,8 @@
         service.createMaintenance = createMaintenance;
         service.update = update;
         service.removePart = removePart;
+        service.removePartMaintenance = removePartMaintenance;
+        service.updateMaintenance = updateMaintenance;
         service.activePart = activePart;
         service.setCurrentPart = setCurrentPart;
         service.getCurrentPart = getCurrentPart;
@@ -54,6 +56,14 @@
             return $http.put(baseURL + 'remove-part/' + id, part).then(handleSuccess, handleError('Error remove part'));
         }
 
+        function removePartMaintenance(id, part) {
+            return $http.put(baseURL + 'remove-maintenance/' + id, part).then(handleSuccess, handleError('Error remove part maintenance'));
+        }
+
+        function updateMaintenance(id, maintenance) {
+            return $http.put(baseURL + 'maintenance/' + id, maintenance).then(handleSuccess, handleError('Error update part maintenance'));
+        }
+
         function update(part) {
             return $http.put(baseURL + 'part/' + part.id, part).then(handleSuccess, handleError('Error updating part'));
         }
@@ -74,7 +84,7 @@
 
         function handleError(error) {
             return function () {
-                return { success: false, message: error };
+                return { success: false, message: error, error: true };
             };
         }
     }
