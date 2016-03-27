@@ -30,6 +30,15 @@
                 }
             })
 
+            .when('/change-password', {
+                controller: 'ChangePasswordController',
+                templateUrl: 'templates/change-password.html',
+                controllerAs: 'vm',
+                access: {
+                    requiredLogin: true
+                }
+            })
+
             .when('/register', {
                 controller: 'RegisterController',
                 templateUrl: 'templates/register.html',
@@ -75,9 +84,27 @@
                 }
             })
 
+            .when('/edit-user', {
+                controller: 'EditUserController',
+                templateUrl: 'templates/edit-user.html',
+                controllerAs: 'vm',
+                access: {
+                    requiredLogin: true
+                }
+            })
+
             .when('/trucks', {
                 controller: 'TrucksController',
                 templateUrl: 'templates/trucks.html',
+                controllerAs: 'vm',
+                access: {
+                    requiredLogin: true
+                }
+            })
+
+            .when('/add-truck', {
+                controller: 'AddTruckController',
+                templateUrl: 'templates/add-truck.html',
                 controllerAs: 'vm',
                 access: {
                     requiredLogin: true
@@ -93,9 +120,18 @@
                 }
             })
 
-            .when('/parts', {
-                controller: 'PartsController',
-                templateUrl: 'templates/parts.html',
+            .when('/edit-truck/:id', {
+                controller: 'EditTruckController',
+                templateUrl: 'templates/edit-truck.html',
+                controllerAs: 'vm',
+                access: {
+                    requiredLogin: true
+                }
+            })
+
+            .when('/stock', {
+                controller: 'StockController',
+                templateUrl: 'templates/stock.html',
                 controllerAs: 'vm',
                 access: {
                     requiredLogin: true
@@ -187,6 +223,15 @@
             .when('/add-maintenance-confirm', {
                 controller: 'AddMaintenanceConfirmController',
                 templateUrl: 'templates/add-maintenance-confirm.html',
+                controllerAs: 'vm',
+                access: {
+                    requiredLogin: true
+                }
+            })
+
+            .when('/edit-maintenance/:id', {
+                controller: 'EditMaintenanceController',
+                templateUrl: 'templates/edit-maintenance.html',
                 controllerAs: 'vm',
                 access: {
                     requiredLogin: true
@@ -311,15 +356,20 @@
             $rootScope.location = $location;
             // redirect to login page if not logged in and trying to access a restricted page
 
-            if ((nextRoute.access && nextRoute.access.requiredLogin) && !AuthenticationService.IsLogged) {
+            if ((nextRoute.access && nextRoute.access.requiredLogin) && !AuthenticationService.IsLogged()) {
                 $location.path("/login");
+            } else if (AuthenticationService.IsLoginDefault() && $location.path() !== '/select-profile') {
+                $location.path("/change-password");
             }
+
         });
 
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
 
             if ((nextRoute.access && nextRoute.access.requiredLogin) && !AuthenticationService.IsLogged()) {
                 $location.path("/login");
+            } else if (AuthenticationService.IsLoginDefault() && $location.path() !== '/select-profile') {
+                $location.path("/change-password");
             }
         });
     }
