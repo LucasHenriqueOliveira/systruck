@@ -5,13 +5,14 @@
         .module('app')
         .controller('AddTruckController', AddTruckController);
 
-    AddTruckController.$inject = ['DataService', '$localstorage', '$location', '$scope', '$filter', 'TruckService'];
+    AddTruckController.$inject = ['DataService', '$localstorage', '$location', '$scope', '$filter', 'TruckService', '$rootScope', 'PartService'];
 
-    function AddTruckController(DataService, $localstorage, $location, $scope, $filter, TruckService) {
+    function AddTruckController(DataService, $localstorage, $location, $scope, $filter, TruckService, $rootScope, PartService) {
         var vm = this;
         vm.message_part = '';
         vm.message_part_edit = '';
         vm.part = {};
+        vm.parts = {};
         vm.truck = {};
         vm.partEdit = {};
 
@@ -23,20 +24,52 @@
             vm.parts_truck = DataService.getPartTruck();
         };
 
-        vm.getParts = function() {
-            DataService.getParts().then(function (data) {
+        vm.getAllParts = function() {
+            PartService.getAllParts().then(function (data) {
                 vm.parts = data.getParts;
             });
         };
 
-        vm.getParts();
+        vm.getAllParts();
         vm.getPartsTruck();
+
+        vm.addPart = function() {
+            vm.part.partSelect = {};
+            vm.part.options = {};
+            vm.part.lastChange = '';
+            vm.part.timeChange = '';
+
+            jQuery(document).ready(function(){
+                jQuery("#myModal").modal("show");
+            });
+        };
+
+        vm.checkPart = function() {
+
+            if(vm.part.partSelect.parts.length) {
+                vm.part.options = vm.part.partSelect.parts;
+            } else {
+                vm.part.options = {};
+            }
+        };
 
         vm.submitPart = function(form) {
 
             if(form.truck.km < form.part.lastChange) {
                 vm.message_part = 'Km da última troca da peça/item deve ser menor ou igual a km atual do caminhão.';
                 return false;
+            }
+
+            if(vm.part.partSelect.parts.length && !form.part.part_option_select){
+                vm.message_part = 'Selecione uma peça/item do estoque.';
+                return false;
+            }
+
+            if(!vm.part.partSelect.parts.length) {
+                form.part.part_option_select = {
+                    estoque_id: null,
+                    estoque_descricao: null
+                };
             }
 
             vm.parts_truck = $localstorage.getObject('truck_parts');
@@ -46,14 +79,18 @@
                     name : form.part.partSelect.name,
                     id : form.part.partSelect.id,
                     time : form.part.timeChange,
-                    last: form.part.lastChange
+                    last: form.part.lastChange,
+                    stock: form.part.part_option_select.estoque_id,
+                    stock_name: form.part.part_option_select.estoque_descricao
                 }]);
             } else{
                 vm.parts_truck.push({
                     name : form.part.partSelect.name,
                     id : form.part.partSelect.id,
                     time : form.part.timeChange,
-                    last: form.part.lastChange
+                    last: form.part.lastChange,
+                    stock: form.part.part_option_select.estoque_id,
+                    stock_name: form.part.part_option_select.estoque_descricao
                 });
                 $localstorage.setObject('truck_parts', vm.parts_truck);
             }
@@ -80,6 +117,23 @@
             vm.partEdit.timeChange = part.time;
             vm.partEdit.lastChange = part.last;
 
+            if(!part.stock) {
+                vm.partEdit.options = {
+                    length: 0
+                };
+            } else {
+                for(var i = 0; i < vm.parts.length; i++) {
+                    if(vm.parts[i].id === part.id){
+                        vm.part.options = vm.parts[i].parts;
+                    }
+                }
+
+                vm.partEdit.part_option_select = {
+                    estoque_id: part.stock,
+                    estoque_descricao: part.stock_name
+                };
+            }
+
             jQuery(document).ready(function(){
                 jQuery("#myModalEdit").modal("show");
             });
@@ -91,9 +145,16 @@
                 return false;
             }
 
+            if(!form.partEdit.part_option_select) {
+                form.partEdit.part_option_select = {
+                    estoque_id: null,
+                    estoque_descricao: null
+                };
+            }
+
             var parts = $localstorage.getObject('truck_parts');
             var found = $filter('filter')(parts, {id: form.partEdit.partSelect.id,
-                name: form.partEdit.partSelect.name}, true);
+                name: form.partEdit.partSelect.name, stock: form.partEdit.part_option_select.estoque_id}, true);
 
             if (found.length) {
                 for(var i = 0; i < parts.length; i++) {
@@ -104,6 +165,8 @@
                         parts[i]['name'] = form.partEdit.partSelect.name;
                         parts[i]['time'] = form.partEdit.timeChange;
                         parts[i]['last'] = form.partEdit.lastChange;
+                        parts[i]['stock'] = form.partEdit.part_option_select.estoque_id;
+                        parts[i]['stock_name'] = form.partEdit.part_option_select.estoque_descricao;
                     }
                     $localstorage.setObject('truck_parts', parts);
                     vm.getPartsTruck();
@@ -132,7 +195,6 @@
                 }
                 $localstorage.setObject('truck_parts', parts);
                 vm.getPartsTruck();
-                toastr.success('Exclusão de peça/item com sucesso', 'Peça/item', {timeOut: 3000});
 
             } else {
                 toastr.error('Erro ao excluir a peça/item', 'Exclusão de peça/item', {timeOut: 3000});
@@ -157,6 +219,7 @@
                 postData['id_part_' + idx] = form.parts_truck[partId].id;
                 postData['time_part_' + idx] = form.parts_truck[partId].time;
                 postData['last_part_' + idx] = form.parts_truck[partId].last;
+                postData['stock_' + idx] = form.parts_truck[partId].stock;
                 idx++;
             });
 
@@ -168,6 +231,7 @@
                     $localstorage.remove('truck_parts');
                     vm.truck = {};
                     $scope.formTruck.$setPristine();
+                    $rootScope.$broadcast("login-done");
                     $location.path('/trucks');
                 }
             });
