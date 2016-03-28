@@ -7,7 +7,7 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
-                    <li> Caminhão</li>
+                    <li><a href="#/trucks">Caminhões</a></li>
                     <li class="active">Adicionar caminhão</li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -27,7 +27,7 @@
                     <div class="panel-body">
                         <script>
                             (function ($) {
-                                $("#wizard").steps({
+                                $("#wizard_truck").steps({
                                     headerTag: "h3",
                                     bodyTag: "section",
                                     transitionEffect: "slideLeft",
@@ -48,13 +48,13 @@
                         </script>
 
                         <form name="formTruck" role="form" class="form-horizontal" ng-submit="vm.submitAddTruck(vm)">
-                            <div id="wizard">
+                            <div id="wizard_truck">
                             <h3>Dados do caminhão</h3>
                             <section>
-                                <div class="form-group" ng-class="{ 'has-error': formTruck.frota.$dirty && formTruck.frota.$error.required }">
+                                <div class="form-group">
                                     <label class="col-lg-4 col-sm-4 control-label">Frota</label>
                                     <div class="col-lg-4 col-sm-4">
-                                        <input type="text" class="form-control" name="frota" placeholder="Frota" ng-model="vm.truck.frota" required>
+                                        <input type="text" class="form-control" name="frota" placeholder="Frota" ng-model="vm.truck.frota">
                                     </div>
                                 </div>
                                 <div class="form-group" ng-class="{ 'has-error': formTruck.nome.$dirty && formTruck.nome.$error.required }">
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-lg-2 col-sm-2">
                                         <div class="btn-group pull-right">
-                                            <a href data-target="#myModal" data-toggle="modal" class="btn btn-primary">
+                                            <a href ng-click="vm.addPart()" class="btn btn-primary">
                                                 <i class="fa fa-plus"></i> Novo
                                             </a>
                                         </div>
@@ -102,6 +102,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Peça/Item</th>
+                                                <th>Tipo</th>
                                                 <th class="text-center">Vida útil</th>
                                                 <th class="text-center">Última troca</th>
                                                 <th class="text-center" style="width:13%">Ação</th>
@@ -110,6 +111,7 @@
                                             <tbody>
                                             <tr ng-repeat="part_truck in vm.parts_truck track by $index" style="background-color: #fff">
                                                 <td>{{part_truck.name}}</td>
+                                                <td>{{part_truck.stock_name}}</td>
                                                 <td class="text-center">{{part_truck.time | number}} km</td>
                                                 <td class="text-center">{{part_truck.last | number}} km</td>
                                                 <td class="text-center">
@@ -154,8 +156,14 @@
                 <form name="formPart" role="form" ng-submit="vm.submitPart(vm)">
                     <div class="form-group" ng-class="{ 'has-error': formPart.partSelect.$dirty && formPart.partSelect.$invalid }">
                         <label class="control-label" for="part">Peça/Item</label>
-                        <select class="form-control" id="part" ng-model="vm.part.partSelect" name="partSelect"
+                        <select class="form-control" id="part" ng-model="vm.part.partSelect" name="partSelect" ng-change="vm.checkPart()"
                                 ng-options="part.name for part in vm.parts track by part.id" required>
+                        </select>
+                    </div>
+                    <div class="form-group" ng-show="vm.part.options.length">
+                        <label class="control-label" for="inputPartsOptions">Opções no estoque</label>
+                        <select class="form-control" name="partOptionSelect" id="inputPartsOptions" ng-model="vm.part.part_option_select"
+                                ng-options="part.estoque_descricao for part in vm.part.options">
                         </select>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error': formPart.timeChange.$dirty && formPart.timeChange.$invalid }">
@@ -168,6 +176,13 @@
                     <div class="form-group" ng-class="{ 'has-error': formPart.lastChange.$dirty && formPart.lastChange.$invalid }">
                         <label class="control-label" for="lastChange">Km da última troca</label>
                         <input type="text" class="form-control" name="lastChange" id="lastChange" ng-model="vm.part.lastChange" placeholder="Quilometragem" ui-number-mask="0" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="message-padding" ng-show="vm.truck.km">
+                            <label class="message-km">
+                                Km atual informada é: <strong>{{vm.truck.km | number}}</strong>
+                            </label>
+                        </div>
                     </div>
                     <div class="form-group alert alert-block alert-danger fade in" ng-show="vm.message_part">
                         <p>{{vm.message_part}}</p>
@@ -203,6 +218,12 @@
                                 ng-options="part.name for part in vm.parts track by part.id" required>
                         </select>
                     </div>
+                    <div class="form-group" ng-show="vm.part.options.length">
+                        <label class="control-label" for="inputPartsEditOptions">Opções no estoque</label>
+                        <select class="form-control" name="partOptionSelect" id="inputPartsEditOptions" ng-model="vm.partEdit.part_option_select"
+                                ng-options="part.estoque_descricao for part in vm.part.options track by part.estoque_id">
+                        </select>
+                    </div>
                     <div class="form-group" ng-class="{ 'has-error': formEditPart.timeEditChange.$dirty && formEditPart.timeEditChange.$invalid }">
                         <label class="control-label" for="timeEditChange">Vida útil da peça/item em km
                         <span data-content="Informe o tempo de vida útil em km da peça/item para que o sistema informe automaticamente as próximas manutenções."
@@ -213,6 +234,13 @@
                     <div class="form-group" ng-class="{ 'has-error': formEditPart.lastEditChange.$dirty && formEditPart.lastEditChange.$invalid }">
                         <label class="control-label" for="lastEditChange">Km da última troca</label>
                         <input type="text" class="form-control" name="lastEditChange" id="lastEditChange" ng-model="vm.partEdit.lastChange" placeholder="Quilometragem" ui-number-mask="0" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="message-padding" ng-show="vm.truck.km">
+                            <label class="message-km">
+                                Km atual informada é: <strong>{{vm.truck.km | number}}</strong>
+                            </label>
+                        </div>
                     </div>
                     <div class="form-group alert alert-block alert-danger fade in" ng-show="vm.message_part_edit">
                         <p>{{vm.message_part_edit}}</p>
