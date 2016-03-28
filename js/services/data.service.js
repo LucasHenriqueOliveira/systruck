@@ -77,7 +77,9 @@
                             name : part.name,
                             id : part.id,
                             time : part.time,
-                            last: part.last
+                            last: part.last,
+                            stock: part.stock,
+                            stock_name: part.stock_name
                         });
                     });
                 }
@@ -235,6 +237,27 @@
                 $http({
                     method: 'POST',
                     url: 'http://localhost:8080/api/v1/search-trip/',
+                    data: postData
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            getSearchMaintenance: function(postData) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/api/v1/search-maintenance/',
                     data: postData
                 })
                     .then(function(response) {
