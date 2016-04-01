@@ -5,9 +5,9 @@
         .module('app')
         .controller('AppController', AppController);
 
-    AppController.$inject = ['$location', '$scope', 'AuthenticationService', '$rootScope', 'DataService'];
+    AppController.$inject = ['$location', '$scope', 'AuthenticationService', '$rootScope', 'DataService', 'UserService'];
 
-    function AppController($location, $scope, AuthenticationService, $rootScope, DataService) {
+    function AppController($location, $scope, AuthenticationService, $rootScope, DataService, UserService) {
 
         if(AuthenticationService.IsLogged()) {
             $location.path('/');
@@ -20,7 +20,6 @@
         $scope.getDataHeader = function() {
             DataService.getDataHeader().then(function (data) {
                 if(data.error){
-                    alert(data.message);
                     $location.path('/login');
                     return false;
                 }
@@ -32,6 +31,13 @@
         };
 
         $scope.getDataHeader();
+
+        $scope.getUser = function(perfil_id) {
+            UserService.getById(perfil_id).then(function (data) {
+                UserService.setCurrentUser(data.getUser);
+                $location.path('/user');
+            });
+        };
 
         $scope.username = AuthenticationService.GetName();
         if(AuthenticationService.GetRoles() == 1){
