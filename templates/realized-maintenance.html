@@ -24,186 +24,38 @@
                                 <a href="javascript:;" class="fa fa-times"></a>
                             </span>
                     </header>
-                    <div class="panel-body">
+                    <div class="panel-body" ng-show="vm.maintenances.length">
                         <div class="adv-table editable-table ">
                             <table class="display table table-hover table-bordered table-striped table-condensed">
                                 <thead>
                                 <tr>
                                     <th class="text-center">Caminhão</th>
                                     <th class="text-center">Peça/Item</th>
-                                    <th class="text-center">Km Manutenção</th>
+                                    <th class="text-center">Km</th>
                                     <th class="text-center">Data</th>
                                     <th class="text-center">Ação</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
+                                <tr ng-repeat="maintenance in vm.maintenances">
                                     <td>
                                         <ul>
-                                            <li>20.279 - Scania P310</li>
-                                            <li>Placa: HGL-1909</li>
+                                            <li>{{maintenance.carro_nome}}</li>
+                                            <li>Placa: {{maintenance.carro_placa}}</li>
+                                            <li>Placa semi-reboque: {{maintenance.carro_placa_semi_reboque}}</li>
                                         </ul>
                                     </td>
-                                    <td class="center">Óleo</td>
-                                    <td class="center">300.000</td>
-                                    <td class="center">10/12/2015</td>
                                     <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>20.280 - Scania P340</li>
-                                            <li>Placa: HTT-0109</li>
+                                        <ul style="padding-left: 0px;">
+                                            <li ng-repeat="part in maintenance.parts">{{part.item_nome}}</li>
                                         </ul>
                                     </td>
-                                    <td class="center">Revisão de alternador</td>
-                                    <td class="center">400.000</td>
-                                    <td class="center">10/12/2015</td>
+                                    <td class="center">{{maintenance.revisao_km | number}}</td>
+                                    <td class="center">{{maintenance.revisao_data}}</td>
                                     <td class="center">
                                         <div class="todo-actionlist">
-                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>20.314 - Scania P310</li>
-                                            <li>Placa: HHL-2123</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Suspensão</td>
-                                    <td class="center">250.000</td>
-                                    <td class="center">10/12/2015</td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>20.654 - Scania P340</li>
-                                            <li>Placa: HOL-2338</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Feixe de molas</td>
-                                    <td class="center">370.000</td>
-                                    <td class="center">10/12/2015</td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>20.323 - Iveco Stralis 420</li>
-                                            <li>Placa: HGL-2432</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Amortecedores</td>
-                                    <td class="center">700.000</td>
-                                    <td class="center">10/12/2015</td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>20.259 - Scania P310</li>
-                                            <li>Placa: HGL-1914</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Freio</td>
-                                    <td class="center">200.000</td>
-                                    <td class="center">10/12/2015</td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>23.423 - Iveco Stralis 420</li>
-                                            <li>Placa: HQR-4234</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Molas Pneumáticas</td>
-                                    <td class="center">500.000</td>
-                                    <td class="center">10/12/2015</td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>20.675 - Scania P310</li>
-                                            <li>Placa: HGL-6423</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Rolamento de roda</td>
-                                    <td class="center">780.000</td>
-                                    <td class="center">10/12/2015</td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>20.876 - Scania P340</li>
-                                            <li>Placa: HGL-6474</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Barra de direção</td>
-                                    <td class="center">430.000</td>
-                                    <td class="center">10/12/2015</td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>20.856 - Scania P340</li>
-                                            <li>Placa: HFB-5758</li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">Revisão de alternador</td>
-                                    <td class="center">400.000</td>
-                                    <td class="center">10/12/2015</td>
-                                    <td class="center">
-                                        <div class="todo-actionlist">
-                                            <a href="#/maintenance/3" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
-                                            <a href="#" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                            <a href ng-click="vm.getMaintenance(maintenance)" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                            <a href ng-click="vm.editMaintenance(maintenance)" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -211,6 +63,10 @@
                             </table>
                         </div>
                     </div>
+                    <div ng-show="!vm.maintenances.length">
+                        <p>Não existem manutenções realizadas.</p>
+                    </div>
+                    <span id="toastrOptions"></span>
                 </section>
             </div>
         </div>
