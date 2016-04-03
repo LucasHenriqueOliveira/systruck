@@ -14,7 +14,16 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" ng-show="vm.loading">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="!vm.results.length && !vm.loading">
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
@@ -25,7 +34,13 @@
                             </span>
                     </header>
                     <div class="panel-body">
-                        <form role="form" class="form-horizontal" ng-submit="vm.submitSearchMaintenance(vm)">
+                        <div class="alert alert-danger fade in" ng-show="vm.message">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <strong>{{vm.message}}</strong>
+                        </div>
+                        <form role="form" name="formSearchMaintenance" class="form-horizontal" ng-submit="vm.submitSearchMaintenance(vm)">
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Data
                                 <span data-content="Período que deseja pesquisar as manutenções."
@@ -33,44 +48,36 @@
                                 </label>
                                 <div class="col-lg-4 col-sm-4">
                                     <div class="input-group input-large">
-                                        <input type="text" class="form-control dpd1 default-date-picker" name="from" ng-model="vm.from" ui-mask="99/99/9999" model-view-value="true">
+                                        <input type="text" class="form-control dpd1 default-date-picker" name="from" ng-model="vm.maintenance.from" ui-mask="99/99/9999" model-view-value="true">
                                         <span class="input-group-addon">até</span>
-                                        <input type="text" class="form-control dpd2 default-date-picker" name="to" ng-model="vm.to" ui-mask="99/99/9999" model-view-value="true">
+                                        <input type="text" class="form-control dpd2 default-date-picker" name="to" ng-model="vm.maintenance.to" ui-mask="99/99/9999" model-view-value="true">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control" ng-model="vm.truck">
+                                    <select class="form-control" name="truckSelect" ng-model="vm.maintenance.truck"
+                                            ng-options="(truck.carro_placa + ' - ' + truck.carro_nome) for truck in vm.trucks">
                                         <option></option>
-                                        <option value="BE">20.279 - Scania P310</option>
-                                        <option value="AK">20.280 - Scania P340</option>
-                                        <option value="HI">20.314 - Scania P310</option>
-                                        <option value="CA">20.654 - Scania P340</option>
-                                        <option value="OH">20.323 - Iveco Stralis 420</option>
-                                        <option value="PA">20.279 - Scania P310</option>
-                                        <option value="RI">23.423 - Iveco Stralis 420</option>
-                                        <option value="SC">20.675 - Scania P310</option>
-                                        <option value="VT">20.876 - Scania P340</option>
-                                        <option value="VA">20.856 - Scania P340</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 col-sm-3 control-label">Peça/Item</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <select class="form-control" ng-model="vm.part">
+                                    <select class="form-control" name="partSelect" ng-model="vm.maintenance.part" ng-change="vm.checkPart()"
+                                            ng-options="part.name for part in vm.parts track by part.id">
                                         <option></option>
-                                        <option value="BE">Óleo</option>
-                                        <option value="AK">Suspensão</option>
-                                        <option value="HI">Feixe de molas</option>
-                                        <option value="CA">Amortecedores</option>
-                                        <option value="OH">Sistema de Freio</option>
-                                        <option value="PA">Molas Pneumáticas</option>
-                                        <option value="RI">Rolamento de roda</option>
-                                        <option value="SC">Barra de direção</option>
-                                        <option value="SE">Braços tensores</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="vm.part.options.length">
+                                <label class="col-lg-3 col-sm-3 control-label">Tipo</label>
+                                <div class="col-lg-6 col-sm-6">
+                                    <select class="form-control" name="partOptionSelect" ng-model="vm.maintenance.option"
+                                            ng-options="part.estoque_descricao for part in vm.part.options track by part.estoque_id">
+                                        <option></option>
                                     </select>
                                 </div>
                             </div>
@@ -80,7 +87,8 @@
                                       data-placement="top" data-trigger="hover" class="badge bg-default popovers information">?</span>
                                 </label>
                                 <div class="col-lg-2 col-sm-2">
-                                    <select class="form-control" ng-model="vm.status">
+                                    <select class="form-control" ng-model="vm.maintenance.status">
+                                        <option></option>
                                         <option value="1">Pendente</option>
                                         <option value="2">Realizada</option>
                                     </select>
@@ -88,11 +96,84 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-11 text-center">
-                                    <button class="btn btn-default" type="reset"><i class="fa fa-eraser"></i> Limpar</button>
-                                    <button class="btn btn-primary" type="submit" ng-disabled="!vm.from && !vm.to && !vm.truck && !vm.part && !vm.status"><i class="fa fa-search"></i> Pesquisar</button>
+                                    <button class="btn btn-default" type="reset" ng-click="vm.resetForm()"><i class="fa fa-eraser"></i> Limpar</button>
+                                    <button class="btn btn-primary" type="submit" ng-disabled="!vm.maintenance.from && !vm.maintenance.to && !vm.maintenance.truck && !vm.maintenance.part && !vm.maintenance.status"><i class="fa fa-search"></i> Pesquisar</button>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="row" ng-show="vm.results.length && !vm.loading">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Resultado encontrado:
+                        <strong>
+                            {{vm.results.length}} <span ng-show="vm.results.length > 1">manutenções</span>
+                            <span ng-show="vm.results.length == 1">manutenção</span>
+                        </strong>
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table editable-table ">
+                            <table class="display table table-hover table-bordered table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Caminhão</th>
+                                    <th class="text-center">Peça/Item</th>
+                                    <th class="text-center">Km atual</th>
+                                    <th class="text-center">Km manutenção</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Ação</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="maintenance in vm.results">
+                                    <td>
+                                        <ul>
+                                            <li>{{maintenance.carro_nome}}</li>
+                                            <li>Placa: {{maintenance.carro_placa}}</li>
+                                            <li>Placa semi-reboque: {{maintenance.carro_placa_semi_reboque}}</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">
+                                        <ul style="padding-left: 0px;">
+                                            <li ng-repeat="part in maintenance.parts">{{part.item_nome}}</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">{{maintenance.carro_km | number}}</td>
+                                    <td class="center">{{maintenance.revisao_km | number}}</td>
+                                    <td class="center">
+                                        <div ng-if="maintenance.revisao_status == 2">
+                                            <span class="label label-success label-mini">Realizada</span>
+                                        </div>
+
+                                        <div ng-if="maintenance.revisao_status == 1">
+                                            <span class="label label-danger label-mini">Pendente</span>
+                                        </div>
+                                    </td>
+                                    <td class="center">
+                                        <div class="todo-actionlist">
+                                            <a href ng-click="vm.getMaintenance(maintenance)" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                            <a href ng-click="vm.editMaintenance(maintenance)" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-11 text-center">
+                                <button type="button" class="btn btn-default " ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
