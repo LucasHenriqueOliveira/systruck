@@ -42,43 +42,80 @@
                                     <h2> <span><i class="fa fa-truck"></i></span> Caminhão</h2>
                                     <div class="location-info">
                                         <p>
-                                            <strong>Scania P310</strong> <br>
-                                            <strong>Frota:</strong> 20.314 <br>
-                                            <strong>Placa:</strong> HGL-1876 <br>
-                                            <strong>Placa semi-reboque:</strong> HGL-1875 <br>
+                                            <strong>{{vm.maintenance.carro_nome}}</strong> <br>
+                                            <strong>Frota:</strong> {{vm.maintenance.carro_frota}} <br>
+                                            <strong>Placa:</strong> {{vm.maintenance.carro_placa}} <br>
+                                            <strong>Placa semi-reboque:</strong> {{vm.maintenance.carro_placa_semi_reboque}} <br>
                                         </p>
                                     </div>
                                     <h2> <span><i class="fa fa-road"></i></span> Quilometragem (Km)</h2>
                                     <div class="location-info">
-                                        <p><strong>Atual:</strong> 380.029 <br>
-                                            <strong>Manutenção:</strong> 390.500
-                                        </p>
-                                    </div>
-                                    <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
-                                    <div class="location-info">
-                                        <p><strong>Cadastro:</strong> 03/12/2015 <br>
-                                            <strong>Manutenção:</strong> 05/12/2015
+                                        <p><strong>Atual:</strong> {{vm.maintenance.carro_km | number}} <br>
+                                            <strong>Manutenção:</strong> {{vm.maintenance.revisao_km | number}}
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="prf-contacts">
-                                    <h2> <span><i class="fa fa-road"></i></span> Peça/Item</h2>
+                                    <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
                                     <div class="location-info">
-                                        <p><strong>Óleo </strong><br>
-                                            <strong>Preço Unitário:</strong> R$1.200,00<br>
-                                            <strong>Quantidade:</strong> 1
+                                        <p><strong>Cadastro:</strong> <span ng-show="!vm.maintenance.revisao_data_ativacao"> - </span>{{vm.maintenance.revisao_data_ativacao}} <br>
+                                            <strong>Manutenção:</strong> <span ng-show="!vm.maintenance.revisao_data"> - </span>{{vm.maintenance.revisao_data}}
                                         </p>
                                     </div>
                                     <h2> <span><i class="fa fa-money"></i></span> Preço</h2>
                                     <div class="location-info">
-                                        <p><strong>Peças:</strong> R$1.200,00 <br>
-                                            <strong>Manutenção:</strong> R$3.200,00
+                                        <p><strong>Peças:</strong> <span ng-show="!vm.maintenance.total_parts"> - </span>{{vm.maintenance.total_parts | currency}} <br>
+                                            <strong>Manutenção:</strong> <span ng-show="!vm.maintenance.revisao_valor"> - </span>{{vm.maintenance.revisao_valor | currency}}
                                         </p>
                                         <p>
-                                            Status: <span class="label label-success label-mini">Realizada</span>
+                                            Status:
+                                            <span ng-show="vm.maintenance.revisao_status == 2" class="label label-success label-mini">Realizada</span>
+                                            <span ng-show="vm.maintenance.revisao_status == 1" class="label label-danger label-mini">Pendente</span>
                                         </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa fa-wrench"></i></span> Peça/Item</h2>
+                                    <div class="location-info">
+                                        <table class="table table-bordered table-striped table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th>Peça/Item</th>
+                                                <th>Tipo</th>
+                                                <th class="text-center">Quantidade</th>
+                                                <th class="text-center">Preço Unitário</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="part in vm.maintenance.parts track by $index">
+                                                <td>{{part.item_nome}}</td>
+                                                <td>{{part.estoque_descricao}}</td>
+                                                <td class="text-center">{{part.revisao_item_qtd}}</td>
+                                                <td class="text-center">{{part.revisao_item_valor | currency}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: right"><strong>Total</strong></td>
+                                                <td class="text-center"><strong>{{vm.maintenance.total_parts | currency}}</strong></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space15" ng-show="vm.maintenance.revisao_observacao"></div>
+                        <div class="row" ng-show="vm.maintenance.revisao_observacao">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-comments"></i></span> Observações</h2>
+                                    <div class="location-info">
+                                        <p>{{vm.maintenance.revisao_observacao}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -86,8 +123,8 @@
                         <br>
                         <div class="row">
                             <div class="col-md-11 text-center">
-                                <button type="button" class="btn btn-default " ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
-                                <button type="button" class="btn btn-default "><i class="fa fa-pencil"></i> Editar</button>
+                                <button type="button" class="btn btn-default" ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
+                                <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Editar</button>
                                 <button type="button" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</button>
                             </div>
                         </div>
