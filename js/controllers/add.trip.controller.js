@@ -5,9 +5,9 @@
         .module('app')
         .controller('AddTripController', AddTripController);
 
-    AddTripController.$inject = ['DataService', '$localstorage', '$location', '$rootScope'];
+    AddTripController.$inject = ['DataService', '$localstorage', '$location', '$rootScope', '$filter', '$scope'];
 
-    function AddTripController(DataService, $localstorage, $location, $rootScope) {
+    function AddTripController(DataService, $localstorage, $location, $rootScope, $filter, $scope) {
         var vm = this;
 
         vm.driverSelect = '';
@@ -17,6 +17,7 @@
         vm.trucks = {};
         vm.drivers = {};
         vm.cities = {};
+        vm.connections = [];
 
         vm.fuels = DataService.getFuel();
         vm.expenses = DataService.getExpense();
@@ -94,6 +95,7 @@
 
             vm.expenses = DataService.getExpense();
             vm.expense = {};
+
             jQuery(document).ready(function(){
                 jQuery("#myExpense").modal("hide");
 
@@ -159,6 +161,34 @@
             if(vm.expense.type == 7) {
                 vm.expense.value = parseFloat((4 / 100) * parseFloat(vm.totalMoney));
                 vm.expense.date = vm.dateArrival;
+            }
+        };
+
+        vm.submitConnection = function(city) {
+            vm.connections.push({
+                home: city.home,
+                destination: city.destination
+            });
+            $scope.formConnection.$setPristine();
+
+            jQuery(document).ready(function(){
+                jQuery("#myConnection").modal("hide");
+            });
+        };
+
+        vm.removeConnection = function(city) {
+
+            var found = $filter('filter')(vm.connections, city, true);
+
+            if (found.length) {
+                for(var i = 0; i < vm.connections.length; i++) {
+                    var obj = vm.connections[i];
+
+                    if(found.indexOf(obj) !== -1) {
+                        vm.connections.splice(i, 1);
+                        i--;
+                    }
+                }
             }
         };
 
