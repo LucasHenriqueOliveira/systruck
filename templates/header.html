@@ -18,7 +18,7 @@
                     <i class="fa fa-tasks"></i>
                     <span class="badge bg-success">{{numberLastTrip}}</span>
                 </a>
-                <ul class="dropdown-menu extended tasks-bar">
+                <ul class="dropdown-menu extended tasks-bar" ng-show="header.getLastTrip.length">
                     <li>
                         <p>Últimas Viagens</p>
                     </li>
@@ -46,7 +46,7 @@
                     <i class="fa fa-bell-o"></i>
                     <span class="badge bg-important">{{numberNextMaintenance}}</span>
                 </a>
-                <ul class="dropdown-menu extended notification">
+                <ul class="dropdown-menu extended notification" ng-show="header.getNextMaintenance.length">
                     <li>
                         <p>Próximas Manutenções</p>
                     </li>
@@ -73,7 +73,7 @@
                     <i class="fa fa-user-md"></i>
                     <span class="badge bg-warning">{{numberNextPeriodic}}</span>
                 </a>
-                <ul class="dropdown-menu extended inbox">
+                <ul class="dropdown-menu extended inbox" ng-show="header.getNextPeriodic.length">
                     <li>
                         <p class="red">Exames Periódicos</p>
                     </li>
