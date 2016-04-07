@@ -5942,3 +5942,10 @@ input:-webkit-autofill:active {
 .display_inline {
     display: inline;
 }
+
+.link_connection {
+    top: -13px;
+    position: relative;
+    margin-bottom: 0px !important;
+    color: #1FB5AD !important;
+}
