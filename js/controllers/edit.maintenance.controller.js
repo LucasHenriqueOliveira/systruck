@@ -294,7 +294,7 @@
             }
         };
 
-        vm.submitAddMaintenance = function(maintenance) {
+        vm.submitEditMaintenance = function(maintenance) {
             var price = null;
             var date = null;
 
@@ -316,7 +316,10 @@
                 revisao_km: maintenance.km,
                 revisao_price: price,
                 revisao_status: maintenance.status,
-                carro_id: maintenance.truck.carro_id
+                carro_id: maintenance.truck.carro_id,
+                qtd_parts: maintenance.parts.length,
+                id_usuario: $localstorage.getObject('id'),
+                empresa: $localstorage.getObject('company')
             };
 
             var idx = 0;
@@ -359,6 +362,12 @@
 
         jQuery(document).ready(function(){
             jQuery('.popovers').popover();
+
+            jQuery('.default-date-picker').datepicker({
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+                language: 'pt-BR'
+            });
         });
 
     }

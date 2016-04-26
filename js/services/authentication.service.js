@@ -24,7 +24,7 @@
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            $http.post('http://localhost:8080/login', { username: email, password: password })
+            $http.post('http://localhost:8081/login', { username: email, password: password })
                 .then(function(response) {
                         callback(response);
                     }, function(error) {

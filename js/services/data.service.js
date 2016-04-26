@@ -105,7 +105,7 @@
 
                  $http({
                     method: 'POST',
-                    url: 'http://localhost:8080/api/v1/dash',
+                    url: 'http://localhost:8081/api/v1/dash',
                     data: {
                         company: company,
                         roles: roles
@@ -131,7 +131,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/api/v1/header/' + company
+                    url: 'http://localhost:8081/api/v1/header/' + company
                 })
                     .then(function(response) {
 
@@ -153,7 +153,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/api/v1/trucks-drivers-cities/' + company
+                    url: 'http://localhost:8081/api/v1/trucks-drivers-cities/' + company
                 })
                     .then(function(response) {
 
@@ -173,7 +173,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/api/v1/driver-to-truck/' + truck
+                    url: 'http://localhost:8081/api/v1/driver-to-truck/' + truck
                 })
                     .then(function(response) {
 
@@ -193,7 +193,7 @@
 
                 $http({
                     method: 'POST',
-                    url: 'http://localhost:8080/api/v1/add-trip',
+                    url: 'http://localhost:8081/api/v1/add-trip',
                     data: postData
                 })
                     .then(function(response) {
@@ -216,7 +216,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/api/v1/last-trip/' + company
+                    url: 'http://localhost:8081/api/v1/last-trip/' + company
                 })
                     .then(function(response) {
 
@@ -236,7 +236,7 @@
 
                 $http({
                     method: 'POST',
-                    url: 'http://localhost:8080/api/v1/search-trip/',
+                    url: 'http://localhost:8081/api/v1/search-trip/',
                     data: postData
                 })
                     .then(function(response) {
@@ -257,7 +257,7 @@
 
                 $http({
                     method: 'POST',
-                    url: 'http://localhost:8080/api/v1/search-maintenance/',
+                    url: 'http://localhost:8081/api/v1/search-maintenance/',
                     data: postData
                 })
                     .then(function(response) {
@@ -280,7 +280,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/api/v1/company/' + company
+                    url: 'http://localhost:8081/api/v1/company/' + company
                 })
                     .then(function(response) {
 
@@ -300,7 +300,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/api/v1/cities'
+                    url: 'http://localhost:8081/api/v1/cities'
                 })
                     .then(function(response) {
 
@@ -330,7 +330,7 @@
 
                 $http({
                     method: 'PUT',
-                    url: 'http://localhost:8080/api/v1/edit-company',
+                    url: 'http://localhost:8081/api/v1/edit-company',
                     data: dataCompany
                 })
                     .then(function(response) {
@@ -351,7 +351,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/api/v1/parts'
+                    url: 'http://localhost:8081/api/v1/parts'
                 })
                     .then(function(response) {
 
@@ -373,7 +373,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/api/v1/realized-maintenance/' + company
+                    url: 'http://localhost:8081/api/v1/realized-maintenance/' + company
                 })
                     .then(function(response) {
 
@@ -395,7 +395,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/api/v1/last-maintenance/' + company
+                    url: 'http://localhost:8081/api/v1/last-maintenance/' + company
                 })
                     .then(function(response) {
 

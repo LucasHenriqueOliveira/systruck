@@ -9,7 +9,7 @@
     function PartService($http, $rootScope, $localstorage) {
         var service = {};
         var currentPart = {};
-        var baseURL = 'http://localhost:8080/api/v1/';
+        var baseURL = 'http://localhost:8081/api/v1/';
 
         service.getParts = getParts;
         service.getById = getById;

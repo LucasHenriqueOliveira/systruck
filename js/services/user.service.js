@@ -9,7 +9,7 @@
     function UserService($http, $rootScope, $localstorage) {
         var service = {};
         var currentUser = {};
-        var baseURL = 'http://localhost:8080/api/v1/';
+        var baseURL = 'http://localhost:8081/api/v1/';
 
         service.getUsers = getUsers;
         service.getById = getById;
