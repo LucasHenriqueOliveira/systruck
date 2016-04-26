@@ -49,15 +49,15 @@
                                     <h2> <span><i class="fa fa-truck"></i></span> Caminhão</h2>
                                     <div class="location-info">
                                         <p>
-                                            <strong>Scania P310</strong> <br>
-                                            <strong>Frota:</strong> 20.314 <br>
-                                            <strong>Placa:</strong> HGL-1876 <br>
-                                            <strong>Placa semi-reboque:</strong> HGL-1875 <br>
+                                            <strong>{{vm.maintenance.truck.carro_nome}}</strong> <br>
+                                            <strong>Frota:</strong> {{vm.maintenance.truck.carro_frota}} <br>
+                                            <strong>Placa:</strong> {{vm.maintenance.truck.carro_placa}} <br>
+                                            <strong>Placa semi-reboque:</strong> {{vm.maintenance.truck.carro_placa_semi_reboque}} <br>
                                         </p>
                                     </div>
                                     <h2> <span><i class="fa fa-road"></i></span> Quilometragem (Km)</h2>
                                     <div class="location-info">
-                                        <p><strong>Atual:</strong> {{vm.maintenance.qtd_km | number}} <br>
+                                        <p><strong>Atual:</strong> {{vm.maintenance.truck.carro_km | number}} <br>
                                             <strong>Manutenção:</strong> {{vm.maintenance.km | number}}
                                         </p>
                                     </div>
@@ -68,17 +68,18 @@
                                     <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
                                     <div class="location-info">
                                         <p><strong>Cadastro:</strong> {{vm.maintenance.date_add}} <br>
-                                            <strong>Manutenção:</strong> {{vm.maintenance.date}}
+                                            <strong>Manutenção:</strong><span ng-show="!vm.maintenance.date"> - </span> {{vm.maintenance.date}}
                                         </p>
                                     </div>
                                     <h2> <span><i class="fa fa-money"></i></span> Preço</h2>
                                     <div class="location-info">
                                         <p><strong>Peças:</strong> {{vm.maintenance.sumPricePart | currency}} <br>
-                                            <strong>Manutenção:</strong> {{vm.maintenance.price | currency}} <br>
-                                            <strong>Total:</strong> {{vm.maintenance.total | currency}}
+                                            <strong>Manutenção:</strong> <span ng-show="!vm.maintenance.price"> - </span>{{vm.maintenance.price | currency}}
                                         </p>
                                         <p>
-                                            Status: <span class="label label-success label-mini">Realizada</span>
+                                            Status:
+                                            <span ng-show="vm.maintenance.status == 2" class="label label-success label-mini">Realizada</span>
+                                            <span ng-show="vm.maintenance.status == 1" class="label label-danger label-mini">Pendente</span>
                                         </p>
                                     </div>
                                 </div>
@@ -93,18 +94,20 @@
                                             <thead>
                                             <tr>
                                                 <th>Peça/Item</th>
+                                                <th>Tipo</th>
                                                 <th class="text-center">Quantidade</th>
                                                 <th class="text-center">Preço Total</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr ng-repeat="part in vm.maintenance.parts track by $index">
-                                                <td>{{part.name}}</td>
+                                                <td>{{part.name_part}}</td>
+                                                <td><span ng-show="!part.desc_stock"> - </span>{{part.desc_stock}}</td>
                                                 <td class="text-center">{{part.qtd}}</td>
                                                 <td class="text-center">{{part.price | currency}}</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" style="text-align: right"><strong>Total</strong></td>
+                                                <td colspan="3" style="text-align: right"><strong>Total</strong></td>
                                                 <td class="text-center"><strong>{{vm.maintenance.sumPricePart | currency}}</strong></td>
                                             </tr>
                                             </tbody>

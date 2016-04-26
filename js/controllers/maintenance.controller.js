@@ -5,9 +5,9 @@
         .module('app')
         .controller('MaintenanceController', MaintenanceController);
 
-    MaintenanceController.$inject = ['$window', 'PartService'];
+    MaintenanceController.$inject = ['$window', 'PartService', '$location'];
 
-    function MaintenanceController($window, PartService) {
+    function MaintenanceController($window, PartService, $location) {
         var vm = this;
         vm.loading = true;
         vm.maintenance = {};
@@ -19,7 +19,7 @@
         vm.maintenance = PartService.getCurrentPart();
 
         if(!vm.maintenance) {
-            //TruckService.getById($routeParams.id).then(function (data) {
+            //PartService.getById($routeParams.id).then(function (data) {
             //    vm.truck = data.getTruck;
             //    vm.truckPart = data.getTruckPart;
             //    vm.loading = false;
@@ -27,6 +27,11 @@
         } else {
             vm.loading = false;
         }
+
+        vm.editMaintenance = function(maintenance) {
+            PartService.setCurrentPart(maintenance);
+            $location.path('/edit-maintenance/' + maintenance.revisao_id);
+        };
 
     }
 

@@ -5,166 +5,137 @@
         .module('app')
         .controller('AddMaintenanceController', AddMaintenanceController);
 
-    AddMaintenanceController.$inject = ['$location', '$localstorage', 'DataService'];
+    AddMaintenanceController.$inject = ['$location', '$localstorage', 'PartService', 'TruckService', 'DataService', '$scope', '$filter', '$rootScope'];
 
-    function AddMaintenanceController($location, $localstorage, DataService) {
+    function AddMaintenanceController($location, $localstorage, PartService, TruckService, DataService, $scope, $filter, $rootScope) {
         var vm = this;
         vm.message = '';
         vm.qtd_km = '';
         vm.part = {};
+        vm.maintenance = {};
         vm.part.message_price = '';
         vm.part.price = '';
         vm.view_status = false;
         vm.view_date = false;
-        vm.parts = DataService.getPart();
+        vm.field_price = false;
 
-        vm.trucks = [
-            {
-                id: 1,
-                km: "720877"
-            },
-            {
-                id: 2,
-                km: "1293043"
-            },
-            {
-                id: 3,
-                km: "380029"
-            },
-            {
-                id: 4,
-                km: "312904"
-            },
-            {
-                id: 5,
-                km: "834245"
-            },
-            {
-                id: 6,
-                km: "943726"
-            },
-            {
-                id: 7,
-                km: "314324"
-            },
-            {
-                id: 8,
-                km: "538945"
-            },
-            {
-                id: 9,
-                km: "349832"
-            }
-            ,
-            {
-                id: 10,
-                km: "1298438"
-            }
-        ];
+        vm.maintenance.parts = DataService.getPart();
 
-        vm.parts_maintenance = [
-            {
-                id: 1,
-                name: 'Óleo',
-                price: "1200"
-            },
-            {
-                id: 2,
-                name: 'Pneu',
-                price: "2400"
-            },
-            {
-                id: 3,
-                name: 'Suspensão',
-                price: "1350"
-            },
-            {
-                id: 4,
-                name: 'Feixe de molas',
-                price: "3000"
-            },
-            {
-                id: 5,
-                name: 'Amortecedores',
-                price: "4350"
-            },
-            {
-                id: 6,
-                name: 'Sistema de Freio',
-                price: "1570"
-            },
-            {
-                id: 7,
-                name: 'Molas Pneumáticas',
-                price: "1240"
-            },
-            {
-                id: 8,
-                name: 'Rolamento de roda',
-                price: "3200"
-            },
-            {
-                id: 9,
-                name: 'Barra de direção',
-                price: "1200"
-            },
-            {
-                id: 10,
-                name: 'Braços tensores',
-                price: "1870"
-            }
-        ];
+        TruckService.getTrucks().then(function (data) {
+            vm.trucks = data.getTrucksAvailable;
+        });
+
+        vm.getAllParts = function() {
+            PartService.getAllParts().then(function (data) {
+                vm.parts = data.getParts;
+            });
+        };
+
+        vm.getAllParts();
 
         vm.getKm = function() {
-            if(vm.truck_select){
+            if(vm.maintenance.truck.carro_km){
                 vm.message = 'Km atual é ';
                 vm.unit = 'km';
-                vm.qtd_km = vm.trucks[vm.truck_select - 1].km;
+                vm.qtd_km = vm.maintenance.truck.carro_km;
             } else {
                 vm.message = '';
                 vm.unit = '';
                 vm.qtd_km = '';
             }
+            vm.maintenance.km = '';
+            vm.maintenance.status = '';
+            vm.view_status = false;
+            vm.view_date = false;
         };
 
-        vm.getPrice = function() {
-            if(vm.part.part_select) {
-                vm.part.message_price = 'Preço: ';
-                vm.part.price = vm.parts_maintenance[vm.part.part_select - 1].price;
+        vm.checkPart = function() {
+
+            if(vm.part.part_select.parts.length) {
+                vm.part.options = vm.part.part_select.parts;
+                vm.part.qtd = 0;
+                vm.field_price = false;
             } else {
-                vm.part.message_price = '';
+                vm.field_price = true;
                 vm.part.price = '';
+                vm.part.price_unit = '';
+                vm.part.qtd = 0;
+                vm.part.options = {};
+            }
+        };
+
+        vm.checkPrice = function() {
+
+            if(vm.part.part_option_select) {
+                vm.part.message_price = 'Preço: ';
+                vm.part.price = vm.part.part_option_select.estoque_preco_unitario;
+                vm.part.qtd = 0;
+            } else {
+                vm.part.qtd = 0;
             }
         };
 
         vm.updatePrice = function() {
-            if(vm.part.part_select && vm.part.qtd) {
+            if(vm.part.part_select && vm.part.qtd && vm.part.part_option_select) {
                 vm.part.message_price = 'Preço: ';
-                vm.part.price = parseInt(vm.parts_maintenance[vm.part.part_select - 1].price) * vm.part.qtd;
+                vm.part.price = parseInt(vm.part.part_option_select.estoque_preco_unitario) * vm.part.qtd;
+                vm.part.price_unit = vm.part.part_option_select.estoque_preco_unitario;
+            } else {
+                vm.part.message_price = 'Preço: ';
+                vm.part.price = parseInt(vm.part.price_unit) * vm.part.qtd;
             }
         };
 
-        vm.submitPart = function(part) {
-            vm.parts = $localstorage.getObject('parts');
-            var part_name = vm.parts_maintenance[vm.part.part_select - 1].name;
+        vm.addPart = function() {
+            vm.part.part_select = {};
+            vm.part.options = {};
+            vm.field_price = false;
+            vm.part.message_price = '';
+            vm.part.price = '';
+            vm.part.qtd = '';
 
-            if(JSON.stringify(vm.parts) === '{}'){
-                $localstorage.setObject('parts', [{
-                    name: part_name,
-                    qtd: part.qtd,
-                    price: part.price
-                }]);
-            } else{
-                vm.parts.push({
-                    name: part_name,
-                    qtd: part.qtd,
-                    price: part.price
-                });
-                $localstorage.setObject('parts', vm.parts);
+            jQuery(document).ready(function(){
+                jQuery("#myParts").modal("show");
+            });
+        };
+
+        vm.submitPart = function(part) {
+            vm.maintenance.parts = $localstorage.getObject('parts');
+
+            if(!part.part_option_select){
+                part.part_option_select = {
+                    estoque_id: null,
+                    estoque_descricao: null
+                }
             }
 
-            vm.parts = DataService.getPart();
+            if(JSON.stringify(vm.maintenance.parts) === '{}'){
+                $localstorage.setObject('parts', [{
+                    id_part: part.part_select.id,
+                    name_part: part.part_select.name,
+                    qtd: part.qtd,
+                    price: part.price,
+                    price_unit: part.price_unit,
+                    id_stock: part.part_option_select.estoque_id,
+                    desc_stock: part.part_option_select.estoque_descricao
+                }]);
+            } else{
+                vm.maintenance.parts.push({
+                    id_part: part.part_select.id,
+                    name_part: part.part_select.name,
+                    qtd: part.qtd,
+                    price: part.price,
+                    price_unit: part.price_unit,
+                    id_stock: part.part_option_select.estoque_id,
+                    desc_stock: part.part_option_select.estoque_descricao
+                });
+                $localstorage.setObject('parts', vm.maintenance.parts);
+            }
+
+            vm.maintenance.parts = DataService.getPart();
             vm.part = {};
+            $scope.formParts.$setPristine();
+
             jQuery(document).ready(function(){
                 jQuery("#myParts").modal("hide");
 
@@ -174,10 +145,160 @@
             });
         };
 
+        vm.editPart = function(part) {
+
+            vm.part.part_select = {
+                id: part.id_part,
+                name: part.name_part
+            };
+
+            if(!part.id_stock) {
+                vm.field_price = true;
+                vm.part.price_unit = part.price_unit;
+                vm.part.options = {
+                    length: 0
+                };
+            } else {
+                vm.field_price = false;
+
+                for(var i = 0; i < vm.parts.length; i++) {
+                    if(vm.parts[i].id === part.id_part){
+                        vm.part.options = vm.parts[i].parts;
+                    }
+                }
+
+                vm.part.part_option_select = {
+                    estoque_id: part.id_stock,
+                    estoque_descricao: part.desc_stock,
+                    estoque_preco_unitario: part.price_unit
+                }
+            }
+
+            vm.part.message_price = 'Preço: ';
+            vm.part.price = part.price;
+            vm.part.qtd = part.qtd;
+
+            jQuery(document).ready(function(){
+                jQuery("#myPartsEdit").modal("show");
+            });
+        };
+
+        vm.submitEditPart = function(part) {
+
+            if(!part.part_option_select) {
+                part.part_option_select = {
+                    estoque_id: null,
+                    estoque_descricao: null
+                };
+            }
+
+            var parts = $localstorage.getObject('parts');
+            var found = $filter('filter')(parts, {id_part: part.part_select.id,
+                id_stock: part.part_option_select.estoque_id}, true);
+
+            if (found.length) {
+                for(var i = 0; i < parts.length; i++) {
+                    var obj = parts[i];
+
+                    if(found.indexOf(obj) !== -1) {
+                        parts[i]['id_part'] = part.part_select.id;
+                        parts[i]['name_part'] = part.part_select.name;
+                        parts[i]['qtd'] = part.qtd;
+                        parts[i]['price'] = part.price;
+                        parts[i]['price_unit'] = part.price_unit;
+                        parts[i]['id_stock'] = part.part_option_select.estoque_id;
+                        parts[i]['desc_stock'] = part.part_option_select.estoque_descricao;
+                    }
+                    $localstorage.setObject('parts', parts);
+                    vm.maintenance.parts = DataService.getPart();
+                    vm.part = {};
+                    $scope.formParts.$setPristine();
+
+                    jQuery(document).ready(function(){
+                        jQuery("#myPartsEdit").modal("hide");
+                    });
+                }
+            } else {
+                toastr.error('Erro ao alterar a peça/item. Exclua a peça/item e inclua novamente.', 'Alteração de peça/item', {timeOut: 3000});
+            }
+        };
+
+        vm.removePart = function(part) {
+            var parts = $localstorage.getObject('parts');
+
+            var found = $filter('filter')(parts, part, true);
+
+            if (found.length) {
+                for(var i = 0; i < parts.length; i++) {
+                    var obj = parts[i];
+
+                    if(found.indexOf(obj) !== -1) {
+                        parts.splice(i, 1);
+                        i--;
+                    }
+                }
+                $localstorage.setObject('parts', parts);
+                vm.maintenance.parts = DataService.getPart();
+
+            } else {
+                toastr.error('Erro ao excluir a peça/item', 'Exclusão de peça/item', {timeOut: 3000});
+            }
+        };
+
         vm.submitAddMaintenance = function(form) {
-            $localstorage.remove('maintenance');
-            $localstorage.setObject('maintenance', form);
-            $location.path('/add-maintenance-confirm');
+
+            var price = null;
+            var date = null;
+
+            if(form.status == 2) {
+                var price = form.price;
+                var date = form.date;
+
+                if(!price || !date) {
+                    toastr.error('Informe a data e preço da manutenção.', 'Adicionar manutenção', {timeOut: 3000});
+                    return false;
+                }
+            }
+
+            var postData = {
+                carro_id: form.truck.carro_id,
+                revisao_km: form.km,
+                empresa: $localstorage.getObject('company'),
+                revisao_status: form.status,
+                revisao_data: date,
+                revisao_preco: price,
+                revisao_observacao: form.comments,
+                id_usuario: $localstorage.getObject('id'),
+                qtd_parts: form.parts.length
+            };
+
+            var idx = 0;
+
+            Object.keys(form.parts).forEach(function(partId) {
+                postData['id_part_' + idx] = form.parts[partId].id_part;
+                postData['id_stock_' + idx] = form.parts[partId].id_stock;
+                postData['qtd_' + idx] = form.parts[partId].qtd;
+                postData['price_' + idx] = form.parts[partId].price;
+                idx++;
+            });
+
+            PartService.createMaintenance(postData).then(function (data) {
+                if(data.error) {
+                    toastr.error(data.message, 'Manutenção', {timeOut: 3000});
+                } else {
+                    toastr.success(data.message, 'Manutenção', {timeOut: 3000});
+                    $localstorage.remove('parts');
+                    $scope.form.$setPristine();
+                    $localstorage.remove('maintenance');
+                    $rootScope.$broadcast("login-done");
+
+                    var date_add = new Date();
+                    form.date_add = date_add.getDate() + '/' + (date_add.getMonth() + 1) + '/' +  date_add.getFullYear();
+                    $localstorage.setObject('maintenance', form);
+                    vm.maintenance = {};
+                    $location.path('/add-maintenance-confirm');
+                }
+            });
         };
 
         jQuery(document).ready(function(){
@@ -190,8 +311,8 @@
             });
         });
 
-        vm.checkKm = function(km, qtd_km) {
-            if(km <= qtd_km) {
+        vm.checkKm = function() {
+            if(vm.maintenance.km <= vm.maintenance.truck.carro_km) {
                 vm.view_status = true;
             } else {
                 vm.view_status = false;
@@ -201,6 +322,13 @@
         vm.checkStatus = function(status) {
             if(status == 2) {
                 vm.view_date = true;
+
+                jQuery(document).ready(function(){
+                    var bodyHeight = jQuery(this).height();
+                    jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+                    jQuery(".content .clearfix").parent().animate({ height: (bodyHeight/2) }, "slow");
+                });
+
             } else {
                 vm.view_date = false;
             }

@@ -39,25 +39,15 @@
                             })(jQuery);
                         </script>
 
-                        <form role="form" name="form" class="form-horizontal" ng-submit="vm.submitAddMaintenance(vm)">
+                        <form role="form" name="form" class="form-horizontal" ng-submit="vm.submitAddMaintenance(vm.maintenance)">
                             <div id="wizard-maintenance">
                                 <h3>Dados da Manutenção</h3>
                                 <section>
                                 <div class="form-group" ng-class="{ 'has-error': form.truckSelect.$dirty && form.truckSelect.$error.required }">
                                     <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
                                     <div class="col-lg-6 col-sm-6">
-                                        <select class="form-control" name="truckSelect" ng-model="vm.truck_select" ng-change="vm.getKm()" required>
-                                            <option></option>
-                                            <option value="1">20.279 - Scania P310</option>
-                                            <option value="2">20.280 - Scania P340</option>
-                                            <option value="3">20.314 - Scania P310</option>
-                                            <option value="4">20.654 - Scania P340</option>
-                                            <option value="5">20.323 - Iveco Stralis 420</option>
-                                            <option value="6">20.279 - Scania P310</option>
-                                            <option value="7">23.423 - Iveco Stralis 420</option>
-                                            <option value="8">20.675 - Scania P310</option>
-                                            <option value="9">20.876 - Scania P340</option>
-                                            <option value="10">20.856 - Scania P340</option>
+                                        <select class="form-control" name="truckSelect" ng-model="vm.maintenance.truck" ng-change="vm.getKm()"
+                                                ng-options="(truck.carro_placa + ' - ' + truck.carro_nome) for truck in vm.trucks" required>
                                         </select>
                                     </div>
                                 </div>
@@ -67,10 +57,10 @@
                                           data-placement="right" data-trigger="hover" class="badge bg-default popovers information">?</span>
                                     </label>
                                     <div class="col-lg-2 col-sm-2">
-                                        <input type="text" name="km" class="form-control" ng-model="vm.km" ui-number-mask="0" ng-blur="vm.checkKm(vm.km, vm.qtd_km)" required>
+                                        <input type="text" name="km" class="form-control" ng-model="vm.maintenance.km" ui-number-mask="0" ng-blur="vm.checkKm()" required>
                                     </div>
                                     <div class="col-lg-3 col-sm-3 message-padding" ng-show="vm.qtd_km">
-                                        <label class="message-km">
+                                        <label class="message-km" style="width: 100%;">
                                             {{vm.message}} <strong>{{vm.qtd_km | number}} {{vm.unit}}</strong>
                                         </label>
                                     </div>
@@ -81,7 +71,7 @@
                                           data-placement="top" data-trigger="hover" class="badge bg-default popovers information">?</span>
                                     </label>
                                     <div class="col-lg-2 col-sm-2">
-                                        <select class="form-control" ng-model="vm.status" ng-change="vm.checkStatus(vm.status)">
+                                        <select class="form-control" ng-model="vm.maintenance.status" ng-change="vm.checkStatus(vm.maintenance.status)">
                                             <option value="1">Pendente</option>
                                             <option value="2">Realizada</option>
                                         </select>
@@ -93,7 +83,7 @@
                                           data-placement="top" data-trigger="hover" class="badge bg-default popovers information">?</span>
                                     </label>
                                     <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control default-date-picker" ng-model="vm.date" ui-mask="99/99/9999" model-view-value="true">
+                                        <input type="text" class="form-control default-date-picker" ng-model="vm.maintenance.date" ui-mask="99/99/9999" model-view-value="true">
                                     </div>
                                 </div>
                                 <div class="form-group" ng-show="vm.view_status && vm.view_date">
@@ -102,7 +92,7 @@
                                           data-placement="top" data-trigger="hover" class="badge bg-default popovers information">?</span>
                                     </label>
                                     <div class="col-lg-2 col-sm-2">
-                                        <input type="text" class="form-control" ng-model="vm.price" ui-money-mask="2">
+                                        <input type="text" class="form-control" ng-model="vm.maintenance.price" ui-money-mask="2">
                                     </div>
                                 </div>
                                 </section>
@@ -114,32 +104,34 @@
                                     </div>
                                     <div class="col-lg-2 col-sm-2">
                                         <div class="btn-group pull-right">
-                                            <a href data-target="#myParts" data-toggle="modal" class="btn btn-primary">
+                                            <a href ng-click="vm.addPart()" class="btn btn-primary">
                                                 <i class="fa fa-plus"></i> Novo
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group" ng-show="vm.parts.length > 0">
+                                <div class="form-group" ng-show="vm.maintenance.parts.length > 0">
                                     <div class="col-lg-12 col-sm-12">
                                         <table class="table table-condensed">
                                             <thead>
                                             <tr>
                                                 <th>Peça/Item</th>
+                                                <th>Tipo</th>
                                                 <th class="text-center">Qtd.</th>
                                                 <th class="text-center">Preço</th>
                                                 <th class="text-center" style="width:13%">Ação</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr ng-repeat="part in vm.parts track by $index" style="background-color: #fff">
-                                                <td>{{part.name}}</td>
+                                            <tr ng-repeat="part in vm.maintenance.parts track by $index" style="background-color: #fff">
+                                                <td>{{part.name_part}}</td>
+                                                <td><span ng-show="!part.desc_stock">-</span>{{part.desc_stock}}</td>
                                                 <td class="text-center">{{part.qtd}}</td>
                                                 <td class="text-center">{{part.price | currency}}</td>
                                                 <td class="text-center">
                                                     <div class="todo-actionlist">
-                                                        <a href="#" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                                        <a href="#" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
+                                                        <a href ng-click="vm.editPart(part)" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                                        <a href ng-click="vm.removePart(part)" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -158,7 +150,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-12 col-sm-12">
-                                            <textarea class="form-control" rows="6" ng-model="vm.comments"></textarea>
+                                            <textarea class="form-control" rows="6" ng-model="vm.maintenance.comments"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -171,6 +163,7 @@
                             </div>
                         </form>
                     </div>
+                    <span id="toastrOptions"></span>
                 </section>
             </div>
         </div>
@@ -192,23 +185,90 @@
                 <form name="formParts" ng-submit="vm.submitPart(vm.part)">
                     <div class="form-group" ng-class="{ 'has-error': formParts.partSelect.$dirty && formParts.partSelect.$error.required }">
                         <label class="control-label" for="inputParts">Peça/Item</label>
-                        <select class="form-control" name="partSelect" id="inputParts" ng-model="vm.part.part_select" ng-change="vm.getPrice()" required>
-                            <option></option>
-                            <option value="1">Óleo</option>
-                            <option value="2">Pneu</option>
-                            <option value="3">Suspensão</option>
-                            <option value="4">Feixe de molas</option>
-                            <option value="5">Amortecedores</option>
-                            <option value="6">Sistema de Freio</option>
-                            <option value="7">Molas Pneumáticas</option>
-                            <option value="8">Rolamento de roda</option>
-                            <option value="9">Barra de direção</option>
-                            <option value="10">Braços tensores</option>
+                        <select class="form-control" name="partSelect" id="inputParts" ng-model="vm.part.part_select" ng-change="vm.checkPart()"
+                                ng-options="part.name for part in vm.parts track by part.id" required>
+                        </select>
+                    </div>
+                    <div class="form-group" ng-show="vm.field_price">
+                        <label class="control-label" for="inputPartPrice">Preço Unitário</label>
+                        <input type="text" name="inputPartPrice" class="form-control" id="inputPartPrice" ng-model="vm.part.price_unit" ng-blur="vm.checkPrice()" placeholder="Valor (R$)" ui-money-mask="2">
+                    </div>
+                    <div class="form-group" ng-show="vm.part.options.length">
+                        <label class="control-label" for="inputPartsOptions">Opções no estoque</label>
+                        <select class="form-control" name="partOptionSelect" id="inputPartsOptions" ng-model="vm.part.part_option_select" ng-change="vm.checkPrice()"
+                                ng-options="part.estoque_descricao for part in vm.part.options">
                         </select>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error': formParts.partQtd.$dirty && formParts.partQtd.$error.required }">
                         <label class="control-label" for="inputQtd">Quantidade</label>
                         <select class="form-control" name="partQtd" id="inputQtd" ng-model="vm.part.qtd" ng-change="vm.updatePrice()" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                        </select>
+                        <div class="message-padding" ng-show="vm.part.price">
+                            <label class="message-km">
+                                {{vm.part.message_price}} <strong>{{vm.part.price | currency}}</strong>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn btn-primary" ng-disabled="formParts.$invalid"><i class="fa fa-check"></i> Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myPartsEdit" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Alterar peça/item</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="formParts" ng-submit="vm.submitEditPart(vm.part)">
+                    <div class="form-group" ng-class="{ 'has-error': formParts.partEditSelect.$dirty && formParts.partEditSelect.$error.required }">
+                        <label class="control-label" for="inputEditParts">Peça/Item</label>
+                        <select class="form-control" name="partEditSelect" id="inputEditParts" ng-model="vm.part.part_select" ng-change="vm.checkPart()"
+                                ng-options="part.name for part in vm.parts track by part.id" required>
+                        </select>
+                    </div>
+                    <div class="form-group" ng-show="vm.field_price">
+                        <label class="control-label" for="inputEditPartPrice">Preço Unitário</label>
+                        <input type="text" name="inputPartPrice" class="form-control" id="inputEditPartPrice" ng-model="vm.part.price_unit" ng-blur="vm.checkPrice()" placeholder="Valor (R$)" ui-money-mask="2">
+                    </div>
+                    <div class="form-group" ng-show="vm.part.options.length">
+                        <label class="control-label" for="inputEditPartsOptions">Opções no estoque</label>
+                        <select class="form-control" name="partOptionSelect" id="inputEditPartsOptions" ng-model="vm.part.part_option_select" ng-change="vm.checkPrice()"
+                                ng-options="part.estoque_descricao for part in vm.part.options track by part.estoque_id">
+                        </select>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formParts.partEditQtd.$dirty && formParts.partEditQtd.$error.required }">
+                        <label class="control-label" for="inputEditQtd">Quantidade</label>
+                        <select class="form-control" name="partEditQtd" id="inputEditQtd" ng-model="vm.part.qtd" ng-change="vm.updatePrice()" required>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
