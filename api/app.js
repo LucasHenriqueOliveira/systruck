@@ -1,17 +1,19 @@
 // get all the tools we need
 var express = require('express');
 var bodyParser = require('body-parser');
+path = require('path');
 var cors = require('cors');
 var logger = require('morgan');
 
 var app = express();
 
 // set up our express application
-app.use(logger('dev'));
+app.use(logger('prod'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../')));
 
 // cors
 app.use(cors());
