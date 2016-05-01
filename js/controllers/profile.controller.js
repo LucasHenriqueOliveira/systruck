@@ -22,6 +22,10 @@
         $timeout(function() {
             vm.loading = false;
         }, 2000);
+
+        vm.changePassword = function() {
+            $location.path("/change-password");
+        };
     }
 
 })();
