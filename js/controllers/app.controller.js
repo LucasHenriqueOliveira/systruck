@@ -5,9 +5,9 @@
         .module('app')
         .controller('AppController', AppController);
 
-    AppController.$inject = ['$location', '$scope', 'AuthenticationService', '$rootScope', 'DataService', 'UserService'];
+    AppController.$inject = ['$location', '$scope', 'AuthenticationService', '$rootScope', 'DataService', 'UserService', '$localstorage'];
 
-    function AppController($location, $scope, AuthenticationService, $rootScope, DataService, UserService) {
+    function AppController($location, $scope, AuthenticationService, $rootScope, DataService, UserService, $localstorage) {
 
         if(AuthenticationService.IsLogged()) {
             $location.path('/');
@@ -30,7 +30,10 @@
             });
         };
 
-        $scope.getDataHeader();
+        var company = $localstorage.getObject('company');
+        if(JSON.stringify(company) !== '{}') {
+            $scope.getDataHeader();
+        }
 
         $scope.getUser = function(perfil_id) {
             UserService.getById(perfil_id).then(function (data) {
