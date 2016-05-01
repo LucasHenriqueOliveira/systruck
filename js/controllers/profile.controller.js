@@ -23,6 +23,10 @@
             vm.loading = false;
         }, 2000);
 
+        vm.selectProfile = function() {
+            $location.path("/select-profile");
+        };
+
         vm.changePassword = function() {
             $location.path("/change-password");
         };
