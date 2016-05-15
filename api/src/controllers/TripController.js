@@ -24,6 +24,7 @@ var addTripController = function(dbconfig){
         var truckSelect = req.body.truckSelect;
         var fuelsNumber = req.body.fuelsNumber;
         var expensesNumber = req.body.expensesNumber;
+        var connectionsNumber = req.body.connectionsNumber;
         var date = new Date();
 
         dateArrival = convertDate(dateArrival);
@@ -61,17 +62,62 @@ var addTripController = function(dbconfig){
                 var type_expense = "";
                 var value_expense = "";
                 var date_expense = "";
+                var city_destination = "";
+                var city_home = "";
+                var date_arrival = "";
+                var date_output = "";
+                var km_arrival = "";
+                var km_output = "";
+                var km_paid = "";
+                var money_company = "";
+                var money_complement = "";
+                var total_money = "";
+                var km_fuel = "";
+                var tank_fuel = "";
+
+                for(var i = 0; i < connectionsNumber; i++) {
+                    city_destination = req.body["city_destination_" + i];
+                    city_home = req.body["city_home_" + i];
+                    date_arrival = convertDate(req.body["date_arrival_" + i]);
+                    date_output = convertDate(req.body["date_output_" + i]);
+                    km_arrival = req.body["km_arrival_" + i];
+                    km_output = req.body["km_output_" + i];
+                    km_paid = req.body["km_paid_" + i];
+                    money_company = req.body["money_company_" + i];
+                    money_complement = req.body["money_complement_" + i];
+                    total_money = req.body["total_money_" + i];
+
+                    connection.query("INSERT INTO conexao (conexao_viagem_id, conexao_carro_id, " +
+                        "conexao_cidade_origem_id, conexao_cidade_destino_id, conexao_data_saida, " +
+                        "conexao_data_chegada, conexao_km_saida, conexao_km_chegada, conexao_valor_km, " +
+                        "conexao_frete, conexao_adiantamento, conexao_complemento, " +
+                        "conexao_usuario_id_ativacao, conexao_data_ativacao) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[viagem_id,
+                        truckSelect, city_home, city_destination, date_output, date_arrival, km_output, km_arrival,
+                        km_paid, total_money, money_company, money_complement, id_user, date], function(err, row) {
+                        if (err) {
+                            connection.rollback(function() {
+                                return res.json({
+                                    error: true,
+                                    message: 'Erro ao realizar a conexão'
+                                });
+                            });
+                        }
+
+                    });
+                }
 
                 for(var i = 0; i < fuelsNumber; i++) {
                     name_fuel = req.body["name_fuel_" + i];
                     price_fuel = req.body["price_fuel_" + i];
                     qtd_fuel = req.body["qtd_fuel_" + i];
                     date_fuel = convertDate(req.body["date_fuel_" + i]);
+                    km_fuel = req.body["km_fuel_" + i];
+                    tank_fuel = req.body["tank_fuel_" + i];
 
                     connection.query("INSERT INTO abastecimento (abastecimento_nome, abastecimento_valor, " +
-                        "abastecimento_litros, abastecimento_data, abastecimento_carro_id, abastecimento_viagem_id, " +
-                        "abastecimento_usuario_id_ativacao, abastecimento_data_ativacao) values(?,?,?,?,?,?,?,?)",[name_fuel,
-                        price_fuel, qtd_fuel, date_fuel, truckSelect, viagem_id, id_user, date], function(err, row) {
+                        "abastecimento_litros, abastecimento_data, abastecimento_carro_id, abastecimento_viagem_id, abastecimento_km, abastecimento_tanque_cheio, " +
+                        "abastecimento_usuario_id_ativacao, abastecimento_data_ativacao) values(?,?,?,?,?,?,?,?,?,?)",[name_fuel,
+                        price_fuel, qtd_fuel, date_fuel, truckSelect, viagem_id, km_fuel, tank_fuel, id_user, date], function(err, row) {
                         if (err) {
                             connection.rollback(function() {
                                 return res.json({

@@ -1,0 +1,697 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li> Viagens</li>
+                    <li class="active">Alteração de viagem</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Cadastro de viagem
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+
+                        <script>
+                            (function ($) {
+                                $("#wizard").steps({
+                                    headerTag: "h3",
+                                    bodyTag: "section",
+                                    transitionEffect: "slideLeft",
+                                    labels: {
+                                        next: 'Próximo <i class="fa fa-chevron-right"></i>',
+                                        previous: '<i class="fa fa-chevron-left"></i> Anterior'
+                                    }
+                                });
+                            })(jQuery);
+                        </script>
+
+                        <form role="form" class="form-horizontal" name="form" ng-submit="vm.submitAddTrip(vm)">
+                            <div id="wizard">
+                                <h3>Dados da Viagem</h3>
+                                <section>
+                                    <div class="form-group" ng-class="{ 'has-error': form.truckSelect.$dirty && form.truckSelect.$error.required }">
+                                        <label class="col-lg-3 col-sm-3 control-label">Caminhão</label>
+                                        <div class="col-lg-7 col-sm-7">
+                                            <select class="form-control" name="truckSelect" ng-model="vm.truckSelect" ng-change="vm.selectDriver()"
+                                                    ng-options="truck.name for truck in vm.trucks track by truck.id" required>
+                                            </select>
+                                            <span ng-show="form.truckSelect.$dirty && form.truckSelect.$error.required" class="help-block">Selecione o caminhão.</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 col-sm-3 control-label">Motorista</label>
+                                        <div class="col-lg-7 col-sm-7">
+                                            <select class="form-control" ng-model="vm.driverSelect"
+                                                    ng-options="driver.name for driver in vm.drivers track by driver.id" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 col-sm-3 control-label">Cidade Origem</label>
+                                        <div class="col-lg-7 col-sm-7">
+                                            <select class="form-control" ng-model="vm.cityHome"
+                                                    ng-options="city.name for city in vm.cities track by city.id" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 col-sm-3 control-label">Cidade Destino</label>
+                                        <div class="col-lg-7 col-sm-7">
+                                            <select class="form-control" ng-model="vm.cityDestination"
+                                                    ng-options="city.name for city in vm.cities track by city.id" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div ng-class="{ 'has-error': form.dateOutput.$dirty && form.dateOutput.$error.required }">
+                                            <label class="col-lg-3 col-sm-3 control-label">Data Saída</label>
+                                            <div class="col-lg-2 col-sm-2">
+                                                <input type="text" name="dateOutput" class="form-control default-date-picker" ng-model="vm.dateOutput" ui-mask="99/99/9999" model-view-value="true" required>
+                                            </div>
+                                        </div>
+                                        <div ng-class="{ 'has-error': form.dateArrival.$dirty && form.dateArrival.$error.required }">
+                                            <label class="col-lg-3 col-sm-3 control-label">Data Chegada</label>
+                                            <div class="col-lg-2 col-sm-2">
+                                                <input type="text" name="dateArrival" class="form-control default-date-picker" ng-model="vm.dateArrival" ui-mask="99/99/9999" model-view-value="true" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div ng-class="{ 'has-error': form.kmOutput.$dirty && form.kmOutput.$error.required }">
+                                            <label class="col-lg-3 col-sm-3 control-label">Saída (km)</label>
+                                            <div class="col-lg-2 col-sm-2">
+                                                <input type="text" name="kmOutput" class="form-control" ng-model="vm.kmOutput" ui-number-mask="0" required>
+                                            </div>
+                                        </div>
+                                        <div ng-class="{ 'has-error': form.kmArrival.$dirty && form.kmArrival.$error.required }">
+                                            <label class="col-lg-3 col-sm-3 control-label">Chegada (km)</label>
+                                            <div class="col-lg-2 col-sm-2">
+                                                <input type="text" name="kmArrival" class="form-control" ng-model="vm.kmArrival" ui-number-mask="0" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div ng-class="{ 'has-error': form.kmPaid.$dirty && form.kmPaid.$error.required }">
+                                            <label class="col-lg-3 col-sm-3 control-label">Paga (km)
+                                        <span data-content="Quantidade em km paga pela empresa."
+                                              data-placement="top" data-trigger="hover" class="badge bg-default popovers information">?</span>
+                                            </label>
+                                            <div class="col-lg-2 col-sm-2">
+                                                <input type="text" name="kmPaid" class="form-control" ng-model="vm.kmPaid" ui-number-mask="0" required>
+                                            </div>
+                                        </div>
+
+                                        <div ng-class="{ 'has-error': form.totalMoney.$dirty && form.totalMoney.$error.required }">
+                                            <label class="col-lg-3 col-sm-3 control-label">Frete Total (R$)</label>
+                                            <div class="col-lg-2 col-sm-2">
+                                                <input type="text" name="totalMoney" class="form-control" ng-model="vm.totalMoney" ui-money-mask="2" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 col-sm-3 control-label">Ad. Empresa (R$)</label>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <input type="text" class="form-control" ng-model="vm.moneyCompany" ui-money-mask="2">
+                                        </div>
+                                        <label class="col-lg-3 col-sm-3 control-label">Complemento (R$)</label>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <input type="text" class="form-control" ng-model="vm.moneyComplement" ui-money-mask="2">
+                                        </div>
+                                    </div>
+                                </section>
+                                <h3>Dados das Conexões</h3>
+                                <section>
+                                    <div class="form-group">
+                                        <div class="col-lg-10 col-sm-10">
+                                            <p>Informe as conexões realizadas:</p>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <div class="btn-group pull-right">
+                                                <a href data-target="#myConnection" data-toggle="modal" class="btn btn-primary">
+                                                    <i class="fa fa-plus"></i> Novo
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="vm.connections.length > 0">
+                                        <div class="col-lg-12 col-sm-12">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                <tr>
+                                                    <th>Cidade</th>
+                                                    <th class="text-center">Data</th>
+                                                    <th class="text-center">Km</th>
+                                                    <th class="text-center">Valor</th>
+                                                    <th class="text-center" style="width:13%">Ação</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="connection in vm.connections track by $index" style="background-color: #fff">
+                                                    <td>
+                                                        <ul>
+                                                            <li>Origem: {{connection.cityHome.name}}</li>
+                                                            <li>Destino: {{connection.cityDestination.name}}</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <ul>
+                                                            <li>Saída: {{connection.dateOutput}}</li>
+                                                            <li>Chegada: {{connection.dateArrival}}</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <ul>
+                                                            <li>Saída: {{connection.kmOutput | number}}</li>
+                                                            <li>Chegada: {{connection.kmArrival | number}}</li>
+                                                            <li>Paga: {{connection.kmPaid | number}}</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <ul>
+                                                            <li>Frete Total: {{connection.totalMoney | currency}}</li>
+                                                            <li>Ad. Empresa: {{connection.moneyCompany | currency}}</li>
+                                                            <li>Complemento: {{connection.moneyComplement | currency}}</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td class="text-center" style="vertical-align: middle;">
+                                                        <div class="todo-actionlist">
+                                                            <a href ng-click="vm.editConnection(connection, $index)" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                                            <a href ng-click="vm.removeConnection(connection)" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </section>
+                                <h3>Despesas Abastecimento</h3>
+                                <section>
+                                    <div class="form-group">
+                                        <div class="col-lg-10 col-sm-10">
+                                            <p>Informe as despesas referentes a abastecimento:</p>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <div class="btn-group pull-right">
+                                                <a href data-target="#myFuel" data-toggle="modal" class="btn btn-primary">
+                                                    <i class="fa fa-plus"></i> Novo
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="vm.fuels.length > 0">
+                                        <div class="col-lg-12 col-sm-12">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                <tr>
+                                                    <th>Local</th>
+                                                    <th class="text-center">Litros</th>
+                                                    <th class="text-center">Valor</th>
+                                                    <th class="text-center">Km</th>
+                                                    <th class="text-center" style="width:13%">Ação</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="fuel in vm.fuels track by $index" style="background-color: #fff">
+                                                    <td>{{fuel.name}}</td>
+                                                    <td class="text-center">{{fuel.qtd}} litros</td>
+                                                    <td class="text-center">{{fuel.price | currency}}</td>
+                                                    <td class="text-center">
+                                                        {{fuel.km | number}}
+                                                        <span ng-if="fuel.tanque == 1"><i class="fa fa-battery-full" aria-hidden="true"></i></span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="todo-actionlist">
+                                                            <a href ng-click="vm.editFuel(fuel, $index)" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                                            <a href ng-click="vm.removeFuel(fuel)" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </section>
+                                <h3>Despesas Gerais</h3>
+                                <section>
+                                    <div class="form-group">
+                                        <div class="col-lg-10 col-sm-10">
+                                            <p>Informe todas as despesas gerais:</p>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <div class="btn-group pull-right">
+                                                <a href data-target="#myExpense" data-toggle="modal" class="btn btn-primary">
+                                                    <i class="fa fa-plus"></i> Novo
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="vm.expenses.length > 0">
+                                        <div class="col-lg-12 col-sm-12">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th class="text-center">Valor</th>
+                                                    <th class="text-center">Data</th>
+                                                    <th class="text-center" style="width:13%">Ação</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="expense in vm.expenses track by $index" style="background-color: #fff">
+                                                    <td>{{expense.name}}</td>
+                                                    <td class="text-center">{{expense.value | currency}}</td>
+                                                    <td class="text-center">{{expense.date}}</td>
+                                                    <td class="text-center">
+                                                        <div class="todo-actionlist">
+                                                            <a href ng-click="vm.editExpense(expense, $index)" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                                            <a href ng-click="vm.removeExpense(expense)" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </section>
+                                <h3>Observações</h3>
+                                <section>
+                                    <div class="form-group">
+                                        <div class="col-lg-10 col-sm-10">
+                                            <p>Preencha o campo se desejar incluir alguma observação no cadastro de viagem.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-12 col-sm-12">
+                                            <textarea class="form-control" rows="6" ng-model="vm.comments"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-12 text-center">
+                                            <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid"><i class="fa fa-check"></i> Salvar</button>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </form>
+                    </div>
+                    <span id="toastrOptions"></span>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myFuel" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Adicionar abastecimento</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="formFuel" ng-submit="vm.submitFuel(vm.fuel)">
+                    <div class="form-group" ng-class="{ 'has-error': formFuel.fuelName.$dirty && formFuel.fuelName.$error.required }">
+                        <label class="control-label" for="inputLocal">Local</label>
+                        <input type="text" name="fuelName" class="form-control" id="inputLocal" ng-model="vm.fuel.name" placeholder="Local de abastecimento" required>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6" ng-class="{ 'has-error': formFuel.fuelQtd.$dirty && formFuel.fuelQtd.$error.required }">
+                            <label class="control-label" for="inputLitros">Litros</label>
+                            <input type="text" name="fuelQtd" class="form-control" id="inputLitros" ng-model="vm.fuel.qtd" placeholder="Quantidade de litros" required>
+                        </div>
+                        <div class="col-xs-6" ng-class="{ 'has-error': formFuel.fuelPrice.$dirty && formFuel.fuelPrice.$error.required }">
+                            <label class="control-label" for="inputValor">Valor</label>
+                            <input type="text" name="fuelPrice" class="form-control" id="inputValor" ng-model="vm.fuel.price" placeholder="Valor (R$)" ui-money-mask="2" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-6" ng-class="{ 'has-error': formFuel.fuelKm.$dirty && formFuel.fuelKm.$error.required }">
+                            <label class="control-label" for="inputKm">Km</label>
+                            <input type="text" name="fuelKm" class="form-control" id="inputKm" ng-model="vm.fuel.km" placeholder="Kilometragem (Km)" ui-number-mask="0" required>
+                        </div>
+                        <div class="col-xs-6" ng-class="{ 'has-error': formFuel.fuelDate.$dirty && formFuel.fuelDate.$error.required }">
+                            <label class="control-label" for="inputData">Data</label>
+                            <input type="text" name="fuelDate" class="form-control default-date-picker" id="inputData" ng-model="vm.fuel.date" ui-mask="99/99/9999" model-view-value="true" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">
+                            <input type="checkbox" ng-model="vm.fuel.tanque" ng-true-value="1" ng-false-value="0"> Tanque cheio
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn btn-primary" ng-disabled="formFuel.$invalid"><i class="fa fa-check"></i> Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myFuelEdit" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Editar abastecimento</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="formFuelEdit" ng-submit="vm.submitEditFuel(vm.fuel_edit)">
+                    <input type="hidden" ng-value="vm.fuel_edit.index" ng-model="vm.fuel_edit.index">
+                    <div class="form-group" ng-class="{ 'has-error': formFuelEdit.fuelEditName.$dirty && formFuelEdit.fuelEditName.$error.required }">
+                        <label class="control-label" for="inputEditLocal">Local</label>
+                        <input type="text" name="fuelEditName" class="form-control" id="inputEditLocal" ng-model="vm.fuel_edit.name" placeholder="Local de abastecimento" required>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6" ng-class="{ 'has-error': formFuelEdit.fuelEditQtd.$dirty && formFuelEdit.fuelEditQtd.$error.required }">
+                            <label class="control-label" for="inputEditLitros">Litros</label>
+                            <input type="text" name="fuelEditQtd" class="form-control" id="inputEditLitros" ng-model="vm.fuel_edit.qtd" placeholder="Quantidade de litros" required>
+                        </div>
+                        <div class="col-xs-6" ng-class="{ 'has-error': formFuelEdit.fuelEditPrice.$dirty && formFuelEdit.fuelEditPrice.$error.required }">
+                            <label class="control-label" for="inputEditValor">Valor</label>
+                            <input type="text" name="fuelEditPrice" class="form-control" id="inputEditValor" ng-model="vm.fuel_edit.price" placeholder="Valor (R$)" ui-money-mask="2" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-6" ng-class="{ 'has-error': formFuelEdit.fuelEditKm.$dirty && formFuelEdit.fuelEditKm.$error.required }">
+                            <label class="control-label" for="inputEditKm">Km</label>
+                            <input type="text" name="fuelEditKm" class="form-control" id="inputEditKm" ng-model="vm.fuel_edit.km" placeholder="Kilometragem (Km)" ui-number-mask="0" required>
+                        </div>
+                        <div class="col-xs-6" ng-class="{ 'has-error': formFuelEdit.fuelEditDate.$dirty && formFuelEdit.fuelEditDate.$error.required }">
+                            <label class="control-label" for="inputEditData">Data</label>
+                            <input type="text" name="fuelEditDate" class="form-control default-date-picker" id="inputEditData" ng-model="vm.fuel_edit.date" ui-mask="99/99/9999" model-view-value="true" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">
+                            <input type="checkbox" ng-model="vm.fuel_edit.tanque" ng-true-value="1" ng-false-value="0"> Tanque cheio
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn btn-primary" ng-disabled="formFuelEdit.$invalid"><i class="fa fa-check"></i> Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myExpense" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Adicionar despesa</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="formExpense" ng-submit="vm.submitExpense(vm.expense)">
+                    <div class="form-group" ng-class="{ 'has-error': formExpense.expenseType.$dirty && formExpense.expenseType.$error.required }">
+                        <label class="control-label" for="expenseType">Tipo</label>
+                        <select class="form-control" name="expenseType" id="expenseType" ng-model="vm.expense.type" ng-change="vm.checkExpense()" required>
+                            <option></option>
+                            <option value="1">Borracharia</option>
+                            <option value="2">Lavagem/Limpeza</option>
+                            <option value="3">Serviço elétrico</option>
+                            <option value="4">Serviço mecânico</option>
+                            <option value="5">Serviço de solda</option>
+                            <option value="6">Serviço de mola</option>
+                            <option value="7">Despesa adicional sem comprovação de nota (chapa, caixinha de conferente e outros) - 4%</option>
+                            <option value="8">Despesas com Pedágio</option>
+                            <option value="9">Despesas com Posto Fiscal</option>
+                            <option value="10">Outros</option>
+                        </select>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formExpense.expenseValue.$dirty && formExpense.expenseValue.$error.required }">
+                        <label class="control-label" for="inputValorDespesa">Valor</label>
+                        <input type="text" name="expenseValue" class="form-control" id="inputValorDespesa" ng-model="vm.expense.value" placeholder="Valor (R$)" ui-money-mask="2" required>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formExpense.expenseDate.$dirty && formExpense.expenseDate.$error.required }">
+                        <label class="control-label" for="inputDataDespesa">Data</label>
+                        <input type="text" name="expenseDate" class="form-control default-date-picker" id="inputDataDespesa" ng-model="vm.expense.date" ui-mask="99/99/9999" model-view-value="true" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn btn-primary" ng-disabled="formExpense.$invalid"><i class="fa fa-check"></i> Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myExpenseEdit" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Editar despesa</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="formEditExpense" ng-submit="vm.submitEditExpense(vm.expense_edit)">
+                    <input type="hidden" ng-value="vm.expense_edit.index" ng-model="vm.expense_edit.index">
+                    <div class="form-group" ng-class="{ 'has-error': formEditExpense.expenseEditType.$dirty && formEditExpense.expenseEditType.$error.required }">
+                        <label class="control-label" for="expenseEditType">Tipo</label>
+                        <select class="form-control" name="expenseEditType" id="expenseEditType" ng-model="vm.expense_edit.type" required>
+                            <option></option>
+                            <option value="1">Borracharia</option>
+                            <option value="2">Lavagem/Limpeza</option>
+                            <option value="3">Serviço elétrico</option>
+                            <option value="4">Serviço mecânico</option>
+                            <option value="5">Serviço de solda</option>
+                            <option value="6">Serviço de mola</option>
+                            <option value="7">Despesa adicional sem comprovação de nota (chapa, caixinha de conferente e outros) - 4%</option>
+                            <option value="8">Despesas com Pedágio</option>
+                            <option value="9">Despesas com Posto Fiscal</option>
+                            <option value="10">Outros</option>
+                        </select>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formEditExpense.expenseEditValue.$dirty && formEditExpense.expenseEditValue.$error.required }">
+                        <label class="control-label" for="expenseEditValue">Valor</label>
+                        <input type="text" name="expenseEditValue" class="form-control" id="expenseEditValue" ng-model="vm.expense_edit.value" placeholder="Valor (R$)" ui-money-mask="2" required>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formEditExpense.expenseEditDate.$dirty && formEditExpense.expenseEditDate.$error.required }">
+                        <label class="control-label" for="expenseEditDate">Data</label>
+                        <input type="text" name="expenseEditDate" class="form-control default-date-picker" id="expenseEditDate" ng-model="vm.expense_edit.date" ui-mask="99/99/9999" model-view-value="true" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn btn-primary" ng-disabled="formEditExpense.$invalid"><i class="fa fa-check"></i> Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myConnection" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Adicionar conexão</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="formConnection" ng-submit="vm.submitConnection(vm.connection)">
+                    <div class="form-group" ng-class="{ 'has-error': formConnection.cityHome.$dirty && formConnection.cityHome.$error.required }">
+                        <label class="control-label" for="cityHome">Cidade Origem</label>
+                        <select name="cityHome" id="cityHome" class="form-control" ng-model="vm.connection.city.home"
+                                ng-options="city.name for city in vm.cities track by city.id" required>
+                        </select>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formConnection.cityDestination.$dirty && formConnection.cityDestination.$error.required }">
+                        <label class="control-label" for="cityDestination">Cidade Destino</label>
+                        <select name="cityDestination" id="cityDestination" class="form-control" ng-model="vm.connection.city.destination"
+                                ng-options="city.name for city in vm.cities track by city.id" required>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label class="control-label">Data Saída</label>
+                            <input type="text" name="dateOutput" class="form-control default-date-picker" ng-model="vm.connection.dateOutput" ui-mask="99/99/9999" model-view-value="true" required>
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="control-label">Data Chegada</label>
+                            <input type="text" name="dateArrival" class="form-control default-date-picker" ng-model="vm.connection.dateArrival" ui-mask="99/99/9999" model-view-value="true" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label class="control-label">Saída (km)</label>
+                            <input type="text" name="kmOutput" class="form-control" ng-model="vm.connection.kmOutput" ui-number-mask="0">
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="control-label">Chegada (km)</label>
+                            <input type="text" name="kmArrival" class="form-control" ng-model="vm.connection.kmArrival" ui-number-mask="0">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label class="control-label">Paga (km)</label>
+                            <input type="text" name="kmPaid" class="form-control" ng-model="vm.connection.kmPaid" ui-number-mask="0">
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="control-label">Frete Total (R$)</label>
+                            <input type="text" name="totalMoney" class="form-control" ng-model="vm.connection.totalMoney" ui-money-mask="2">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label class="control-label">Ad. Empresa (R$)</label>
+                            <input type="text" class="form-control" ng-model="vm.connection.moneyCompany" ui-money-mask="2">
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="control-label">Complemento (R$)</label>
+                            <input type="text" class="form-control" ng-model="vm.connection.moneyComplement" ui-money-mask="2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn btn-primary" ng-disabled="formConnection.$invalid"><i class="fa fa-check"></i> Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myConnectionEdit" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Editar conexão</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="formConnectionEdit" ng-submit="vm.submitEditConnection(vm.connection_edit)">
+                    <input type="hidden" ng-value="vm.connection_edit.index" ng-model="vm.connection_edit.index">
+                    <div class="form-group" ng-class="{ 'has-error': formConnectionEdit.cityHomeEdit.$dirty && formConnectionEdit.cityHomeEdit.$error.required }">
+                        <label class="control-label" for="cityHomeEdit">Cidade Origem</label>
+                        <select name="cityHomeEdit" id="cityHomeEdit" class="form-control" ng-model="vm.connection_edit.city.home"
+                                ng-options="city.name for city in vm.cities track by city.id" required>
+                        </select>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': formConnectionEdit.cityDestinationEdit.$dirty && formConnectionEdit.cityDestinationEdit.$error.required }">
+                        <label class="control-label" for="cityDestinationEdit">Cidade Destino</label>
+                        <select name="cityDestinationEdit" id="cityDestinationEdit" class="form-control" ng-model="vm.connection_edit.city.destination"
+                                ng-options="city.name for city in vm.cities track by city.id" required>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label class="control-label">Data Saída</label>
+                            <input type="text" name="dateOutput" class="form-control default-date-picker" ng-model="vm.connection_edit.dateOutput" ui-mask="99/99/9999" model-view-value="true" required>
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="control-label">Data Chegada</label>
+                            <input type="text" name="dateArrival" class="form-control default-date-picker" ng-model="vm.connection_edit.dateArrival" ui-mask="99/99/9999" model-view-value="true" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label class="control-label">Saída (km)</label>
+                            <input type="text" name="kmOutput" class="form-control" ng-model="vm.connection_edit.kmOutput" ui-number-mask="0">
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="control-label">Chegada (km)</label>
+                            <input type="text" name="kmArrival" class="form-control" ng-model="vm.connection_edit.kmArrival" ui-number-mask="0">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label class="control-label">Paga (km)</label>
+                            <input type="text" name="kmPaid" class="form-control" ng-model="vm.connection_edit.kmPaid" ui-number-mask="0">
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="control-label">Frete Total (R$)</label>
+                            <input type="text" name="totalMoney" class="form-control" ng-model="vm.connection_edit.totalMoney" ui-money-mask="2">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-xs-6">
+                            <label class="control-label">Ad. Empresa (R$)</label>
+                            <input type="text" class="form-control" ng-model="vm.connection_edit.moneyCompany" ui-money-mask="2">
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <label class="control-label">Complemento (R$)</label>
+                            <input type="text" class="form-control" ng-model="vm.connection_edit.moneyComplement" ui-money-mask="2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button data-dismiss="modal" class="btn btn-default" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn btn-primary" ng-disabled="formConnectionEdit.$invalid"><i class="fa fa-check"></i> Editar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
