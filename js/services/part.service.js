@@ -5,11 +5,11 @@
         .module('app')
         .factory('PartService', PartService);
 
-    PartService.$inject = ['$http', '$rootScope', '$localstorage'];
-    function PartService($http, $rootScope, $localstorage) {
+    PartService.$inject = ['$http', '$rootScope', '$localstorage', 'CONFIG'];
+    function PartService($http, $rootScope, $localstorage, CONFIG) {
         var service = {};
         var currentPart = {};
-        var baseURL = 'http://systruck.com.br/api/v1/';
+        var baseURL = CONFIG.url;
 
         service.getParts = getParts;
         service.getById = getById;

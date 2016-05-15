@@ -183,6 +183,15 @@
                 }
             })
 
+            .when('/edit-trip/:id', {
+                controller: 'EditTripController',
+                templateUrl: 'templates/edit-trip.html',
+                controllerAs: 'vm',
+                access: {
+                    requiredLogin: true
+                }
+            })
+
             .when('/search-trip', {
                 controller: 'SearchTripController',
                 templateUrl: 'templates/search-trip.html',

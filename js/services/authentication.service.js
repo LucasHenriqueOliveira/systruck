@@ -5,8 +5,8 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$rootScope', '$timeout', 'UserService', '$localstorage'];
-    function AuthenticationService($http, $rootScope, $timeout, UserService, $localstorage) {
+    AuthenticationService.$inject = ['$http', '$rootScope', '$localstorage', 'CONFIG'];
+    function AuthenticationService($http, $rootScope, $localstorage, CONFIG) {
         var service = {};
 
         service.Login = Login;
@@ -24,11 +24,10 @@
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            $http.post('http://systruck.com.br/login', { username: email, password: password })
+            $http.post(CONFIG.login, { username: email, password: password })
                 .then(function(response) {
                         callback(response);
                     }, function(error) {
-                        //alert("Login failure" + JSON.stringify(error));
                         console.log(error);
                     });
         }

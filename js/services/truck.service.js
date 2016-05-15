@@ -5,11 +5,11 @@
         .module('app')
         .factory('TruckService', TruckService);
 
-    TruckService.$inject = ['$http', '$rootScope', '$localstorage'];
-    function TruckService($http, $rootScope, $localstorage) {
+    TruckService.$inject = ['$http', '$rootScope', '$localstorage', 'CONFIG'];
+    function TruckService($http, $rootScope, $localstorage, CONFIG) {
         var service = {};
         var currentTruck = {};
-        var baseURL = 'http://systruck.com.br/api/v1/';
+        var baseURL = CONFIG.url;
 
         service.getTrucks = getTrucks;
         service.getById = getById;

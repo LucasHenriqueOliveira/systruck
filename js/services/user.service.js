@@ -5,11 +5,11 @@
         .module('app')
         .factory('UserService', UserService);
 
-    UserService.$inject = ['$http', '$rootScope', '$localstorage'];
-    function UserService($http, $rootScope, $localstorage) {
+    UserService.$inject = ['$http', '$localstorage', 'CONFIG'];
+    function UserService($http, $localstorage, CONFIG) {
         var service = {};
         var currentUser = {};
-        var baseURL = 'http://systruck.com.br/api/v1/';
+        var baseURL = CONFIG.url;
 
         service.getUsers = getUsers;
         service.getById = getById;

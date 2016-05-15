@@ -73,7 +73,7 @@
 
 .wizard > .steps > ul > li
 {
-    width: 25%;
+    width: 20%;
 }
 
 .wizard > .steps > ul > li,
@@ -92,6 +92,8 @@
 .wizard > .steps a:hover,
 .wizard > .steps a:active
 {
+    color: #fff;
+    background: rgba(41,181,173,0.4);
     display: block;
     width: auto;
     margin: 0 0.5em 0.5em;
@@ -101,6 +103,7 @@
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    font-size: 0.9em;
 }
 
 .wizard > .steps .disabled a,
@@ -110,6 +113,7 @@
     background: #f1f2f7;
     color: #aaa;
     cursor: default;
+    font-size: 0.9em;
 }
 
 .wizard > .actions > ul > li.disabled {

@@ -5,9 +5,9 @@
         .module('app')
         .factory('DataService', DataService);
 
-    DataService.$inject = ['$localstorage', '$timeout', '$http', '$q'];
+    DataService.$inject = ['$localstorage', '$timeout', '$http', '$q', 'CONFIG'];
 
-    function DataService($localstorage, $timeout, $http, $q){
+    function DataService($localstorage, $timeout, $http, $q, CONFIG){
         return {
             getFuel: function() {
                 var arrFuels = [];
@@ -20,7 +20,9 @@
                             name : fuel.name,
                             qtd : fuel.qtd,
                             price : fuel.price,
-                            date: fuel.date
+                            date: fuel.date,
+                            km: fuel.km,
+                            tanque: fuel.tanque
                         });
                     });
                 }
@@ -89,11 +91,27 @@
             getTrip: function() {
 
                 var trip = $localstorage.getObject('trip');
-
-                if(JSON.stringify(trip) !== '{}'){
-
-                }
                 return trip;
+            },
+
+            getTripServer: function(id) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: CONFIG.url + 'trip/' + id
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
             },
 
             getDataDashboard: function() {
@@ -105,7 +123,7 @@
 
                  $http({
                     method: 'POST',
-                    url: 'http://systruck.com.br/api/v1/dash',
+                    url: CONFIG.url + 'dash',
                     data: {
                         company: company,
                         roles: roles
@@ -131,7 +149,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://systruck.com.br/api/v1/header/' + company
+                    url: CONFIG.url + 'header/' + company
                 })
                     .then(function(response) {
 
@@ -153,7 +171,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://systruck.com.br/api/v1/trucks-drivers-cities/' + company
+                    url: CONFIG.url + 'trucks-drivers-cities/' + company
                 })
                     .then(function(response) {
 
@@ -173,7 +191,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://systruck.com.br/api/v1/driver-to-truck/' + truck
+                    url: CONFIG.url + 'driver-to-truck/' + truck
                 })
                     .then(function(response) {
 
@@ -193,7 +211,7 @@
 
                 $http({
                     method: 'POST',
-                    url: 'http://systruck.com.br/api/v1/add-trip',
+                    url: CONFIG.url + 'add-trip',
                     data: postData
                 })
                     .then(function(response) {
@@ -216,7 +234,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://systruck.com.br/api/v1/last-trip/' + company
+                    url: CONFIG.url + 'last-trip/' + company
                 })
                     .then(function(response) {
 
@@ -236,7 +254,7 @@
 
                 $http({
                     method: 'POST',
-                    url: 'http://systruck.com.br/api/v1/search-trip/',
+                    url: CONFIG.url + 'search-trip/',
                     data: postData
                 })
                     .then(function(response) {
@@ -257,7 +275,7 @@
 
                 $http({
                     method: 'POST',
-                    url: 'http://systruck.com.br/api/v1/search-maintenance/',
+                    url: CONFIG.url + 'search-maintenance/',
                     data: postData
                 })
                     .then(function(response) {
@@ -280,7 +298,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://systruck.com.br/api/v1/company/' + company
+                    url: CONFIG.url + 'company/' + company
                 })
                     .then(function(response) {
 
@@ -300,7 +318,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://systruck.com.br/api/v1/cities'
+                    url: CONFIG.url + 'cities'
                 })
                     .then(function(response) {
 
@@ -317,10 +335,6 @@
             getCompanyLocal: function() {
 
                 var company = $localstorage.getObject('companyData');
-
-                if(JSON.stringify(company) !== '{}'){
-
-                }
                 return company;
             },
 
@@ -330,7 +344,7 @@
 
                 $http({
                     method: 'PUT',
-                    url: 'http://systruck.com.br/api/v1/edit-company',
+                    url: CONFIG.url + 'edit-company',
                     data: dataCompany
                 })
                     .then(function(response) {
@@ -351,7 +365,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://systruck.com.br/api/v1/parts'
+                    url: CONFIG.url + 'parts'
                 })
                     .then(function(response) {
 
@@ -373,7 +387,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://systruck.com.br/api/v1/realized-maintenance/' + company
+                    url: CONFIG.url + 'realized-maintenance/' + company
                 })
                     .then(function(response) {
 
@@ -395,7 +409,7 @@
 
                 $http({
                     method: 'GET',
-                    url: 'http://systruck.com.br/api/v1/last-maintenance/' + company
+                    url: CONFIG.url + 'last-maintenance/' + company
                 })
                     .then(function(response) {
 
@@ -412,11 +426,31 @@
             getMaintenance: function() {
 
                 var maintenance = $localstorage.getObject('maintenance');
-
-                if(JSON.stringify(maintenance) !== '{}'){
-
-                }
                 return maintenance;
+            },
+
+            getConnections: function() {
+                var arrConnections = [];
+                var connections = $localstorage.getObject('connections');
+
+                if(JSON.stringify(connections) !== '{}'){
+                    connections.forEach(function (connection) {
+
+                        arrConnections.push({
+                            cityHome: connection.cityHome,
+                            cityDestination: connection.cityDestination,
+                            dateArrival: connection.dateArrival,
+                            dateOutput: connection.dateOutput,
+                            kmArrival: connection.kmArrival,
+                            kmOutput: connection.kmOutput,
+                            kmPaid: connection.kmPaid,
+                            moneyCompany: connection.moneyCompany,
+                            moneyComplement: connection.moneyComplement,
+                            totalMoney: connection.totalMoney
+                        });
+                    });
+                }
+                return arrConnections;
             },
 
             getChartProfitTotal: function() {

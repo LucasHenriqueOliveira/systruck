@@ -89,6 +89,58 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" ng-show="vm.trip.connections">
+                                <div class="col-md-11">
+                                    <div class="prf-contacts">
+                                        <h2> <span><i class="fa fa-exchange"></i></span> Conexão</h2>
+                                        <div class="location-info">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                <tr>
+                                                    <th>Cidade</th>
+                                                    <th class="text-center">Data</th>
+                                                    <th class="text-center">Km</th>
+                                                    <th class="text-center">Valor</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="connection in vm.trip.connections track by $index">
+                                                    <td>
+                                                        <ul>
+                                                            <li>Origem: {{connection.cityHome.name}}</li>
+                                                            <li>Destino: {{connection.cityDestination.name}}</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <ul>
+                                                            <li>Saída: {{connection.dateOutput}}</li>
+                                                            <li>Chegada: {{connection.dateArrival}}</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <ul>
+                                                            <li>Saída: {{connection.kmOutput | number}}</li>
+                                                            <li>Chegada: {{connection.kmArrival | number}}</li>
+                                                            <li>Paga: {{connection.kmPaid | number}}</li>
+                                                            <li>Rodados: {{connection.kmArrival - connection.kmOutput | number}}</li>
+                                                            <li>Diferença km: {{(connection.kmArrival - connection.kmOutput) - (connection.kmPaid * 2) | number}}</li>
+                                                        </ul>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <ul>
+                                                            <li>Frete Total: {{connection.totalMoney | currency}}</li>
+                                                            <li>Ad. Empresa: {{connection.moneyCompany | currency}}</li>
+                                                            <li>Complemento: {{connection.moneyComplement | currency}}</li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space15" ng-show="vm.trip.connections"></div>
                             <div class="row">
                                 <div class="col-md-11">
                                     <div class="prf-contacts">
@@ -100,7 +152,8 @@
                                                     <th>Local</th>
                                                     <th class="text-center">Litros</th>
                                                     <th class="text-center">Valor</th>
-                                                    <th class="text-center">Data</th>
+                                                    <th class="text-center">km</th>
+                                                    <th class="text-center">Média</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -108,12 +161,17 @@
                                                     <td>{{fuel.name}}</td>
                                                     <td class="text-center">{{fuel.qtd}} litros</td>
                                                     <td class="text-center">{{fuel.price | currency}}</td>
-                                                    <td class="text-center">{{fuel.date}}</td>
+                                                    <td class="text-center">{{fuel.km | number}}</td>
+                                                    <td class="text-center">
+                                                        <span ng-if="fuel.media">{{fuel.media}} km/l</span>
+                                                        <span ng-if="!fuel.media"> - </span>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Total</strong></td>
                                                     <td class="text-center"><strong>{{vm.trip.sumLts}} litros</strong></td>
                                                     <td class="text-center"><strong>{{vm.trip.sumPriceFuel | currency}}</strong></td>
+                                                    <td class="text-center"> - </td>
                                                     <td class="text-center"> - </td>
                                                 </tr>
                                                 </tbody>

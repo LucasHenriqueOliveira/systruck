@@ -181,8 +181,28 @@ var addTripController = function(dbconfig){
         });
     };
 
+    var get = function(req, res) {
+
+        var id = req.params.id;
+
+        connection.query("CALL getTrip(?)",[id], function(err, rows) {
+            if (err) {
+                return res.json({
+                    error: true,
+                    message: err
+                });
+            }
+
+            res.json({
+                getCompany: rows[0][0]
+            });
+
+        });
+    };
+
     return {
-        post: post
+        post: post,
+        get: get
     }
 };
 

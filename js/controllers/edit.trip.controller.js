@@ -1,3 +1,17 @@
-/**
- * Created by lucas on 15/05/16.
- */
+(function () {
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('EditTripController', EditTripController);
+
+    EditTripController.$inject = ['$location', '$localstorage', 'DataService', '$timeout', '$window', '$stateParams'];
+
+    function EditTripController($location, $localstorage, DataService, $timeout, $window, $stateParams) {
+        var vm = this;
+
+        vm.trip = DataService.getTripServer($stateParams);
+
+    }
+
+})();

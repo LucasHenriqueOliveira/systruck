@@ -9,7 +9,7 @@ var truckController = require('../controllers/truckController')(dbconfig);
 var partController = require('../controllers/partController')(dbconfig);
 var dashController = require('../controllers/dashController')(dbconfig);
 var headerController = require('../controllers/headerController')(dbconfig);
-var addTripController = require('../controllers/addTripController')(dbconfig);
+var TripController = require('../controllers/TripController')(dbconfig);
 var searchTripController = require('../controllers/searchTripController')(dbconfig);
 var TrucksDriversCitiesController = require('../controllers/TrucksDriversCitiesController')(dbconfig);
 var lastTripController = require('../controllers/lastTripController')(dbconfig);
@@ -67,9 +67,10 @@ router.put('/api/v1/remove-maintenance/:id', maintenanceController.removeMainten
 router.put('/api/v1/maintenance/:id', maintenanceController.put);
 
 // trip
+router.get('/api/v1/trip/:id', TripController.get);
 router.post('/api/v1/dash', dashController.post);
 router.get('/api/v1/header/:id', headerController.get);
-router.post('/api/v1/add-trip', addTripController.post);
+router.post('/api/v1/add-trip', TripController.post);
 router.post('/api/v1/search-trip', searchTripController.post);
 router.get('/api/v1/trucks-drivers-cities/:id', TrucksDriversCitiesController.get);
 router.get('/api/v1/last-trip/:id', lastTripController.get);
