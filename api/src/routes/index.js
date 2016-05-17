@@ -68,6 +68,7 @@ router.put('/api/v1/maintenance/:id', maintenanceController.put);
 
 // trip
 router.get('/api/v1/trip/:id', TripController.get);
+router.put('/api/v1/trip/:id', TripController.put);
 router.post('/api/v1/dash', dashController.post);
 router.get('/api/v1/header/:id', headerController.get);
 router.post('/api/v1/add-trip', TripController.post);
@@ -75,6 +76,9 @@ router.post('/api/v1/search-trip', searchTripController.post);
 router.get('/api/v1/trucks-drivers-cities/:id', TrucksDriversCitiesController.get);
 router.get('/api/v1/last-trip/:id', lastTripController.get);
 router.get('/api/v1/driver-to-truck/:id', driverToTruckController.get);
+router.put('/api/v1/remove-trip-fuel/:id', TripController.putRemoveFuel);
+router.put('/api/v1/remove-trip-expense/:id', TripController.putRemoveExpense);
+router.put('/api/v1/remove-trip-connection/:id', TripController.putRemoveConnection);
 
 // cities
 router.get('/api/v1/cities', citiesController.get);

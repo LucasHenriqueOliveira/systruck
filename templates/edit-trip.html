@@ -28,7 +28,7 @@
 
                         <script>
                             (function ($) {
-                                $("#wizard").steps({
+                                $("#wizard_edit").steps({
                                     headerTag: "h3",
                                     bodyTag: "section",
                                     transitionEffect: "slideLeft",
@@ -41,8 +41,8 @@
                             })(jQuery);
                         </script>
 
-                        <form role="form" class="form-horizontal" name="form" ng-submit="vm.submitAddTrip(vm)">
-                            <div id="wizard">
+                        <form role="form" class="form-horizontal" name="form" ng-submit="vm.submitEditTrip(vm)">
+                            <div id="wizard_edit">
                                 <h3>Dados da Viagem</h3>
                                 <section>
                                     <div class="form-group" ng-class="{ 'has-error': form.truckSelect.$dirty && form.truckSelect.$error.required }">
@@ -390,6 +390,7 @@
 
                 <form name="formFuelEdit" ng-submit="vm.submitEditFuel(vm.fuel_edit)">
                     <input type="hidden" ng-value="vm.fuel_edit.index" ng-model="vm.fuel_edit.index">
+                    <input type="hidden" ng-value="vm.fuel_edit.id" ng-model="vm.fuel_edit.id">
                     <div class="form-group" ng-class="{ 'has-error': formFuelEdit.fuelEditName.$dirty && formFuelEdit.fuelEditName.$error.required }">
                         <label class="control-label" for="inputEditLocal">Local</label>
                         <input type="text" name="fuelEditName" class="form-control" id="inputEditLocal" ng-model="vm.fuel_edit.name" placeholder="Local de abastecimento" required>
@@ -500,6 +501,7 @@
 
                 <form name="formEditExpense" ng-submit="vm.submitEditExpense(vm.expense_edit)">
                     <input type="hidden" ng-value="vm.expense_edit.index" ng-model="vm.expense_edit.index">
+                    <input type="hidden" ng-value="vm.expense_edit.id" ng-model="vm.expense_edit.id">
                     <div class="form-group" ng-class="{ 'has-error': formEditExpense.expenseEditType.$dirty && formEditExpense.expenseEditType.$error.required }">
                         <label class="control-label" for="expenseEditType">Tipo</label>
                         <select class="form-control" name="expenseEditType" id="expenseEditType" ng-model="vm.expense_edit.type" required>
@@ -630,6 +632,7 @@
 
                 <form name="formConnectionEdit" ng-submit="vm.submitEditConnection(vm.connection_edit)">
                     <input type="hidden" ng-value="vm.connection_edit.index" ng-model="vm.connection_edit.index">
+                    <input type="hidden" ng-value="vm.connection_edit.id" ng-model="vm.connection_edit.id">
                     <div class="form-group" ng-class="{ 'has-error': formConnectionEdit.cityHomeEdit.$dirty && formConnectionEdit.cityHomeEdit.$error.required }">
                         <label class="control-label" for="cityHomeEdit">Cidade Origem</label>
                         <select name="cityHomeEdit" id="cityHomeEdit" class="form-control" ng-model="vm.connection_edit.city.home"

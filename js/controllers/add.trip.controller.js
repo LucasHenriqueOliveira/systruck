@@ -23,6 +23,10 @@
         vm.connection_edit.city = {};
         vm.connections = [];
 
+        $localstorage.remove('fuels');
+        $localstorage.remove('expenses');
+        $localstorage.remove('connections');
+
         vm.fuels = DataService.getFuel();
         vm.expenses = DataService.getExpense();
         vm.connections = DataService.getConnections();

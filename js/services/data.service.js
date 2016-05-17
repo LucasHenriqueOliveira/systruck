@@ -17,6 +17,7 @@
                     fuels.forEach(function (fuel) {
 
                         arrFuels.push({
+                            id: fuel.id,
                             name : fuel.name,
                             qtd : fuel.qtd,
                             price : fuel.price,
@@ -37,6 +38,7 @@
                     expenses.forEach(function (expense) {
 
                         arrExpenses.push({
+                            id: expense.id,
                             name : expense.name,
                             type : expense.type,
                             value : expense.value,
@@ -88,6 +90,31 @@
                 return arrParts;
             },
 
+            getConnections: function() {
+                var arrConnections = [];
+                var connections = $localstorage.getObject('connections');
+
+                if(JSON.stringify(connections) !== '{}'){
+                    connections.forEach(function (connection) {
+
+                        arrConnections.push({
+                            id: connection.id,
+                            cityHome: connection.cityHome,
+                            cityDestination: connection.cityDestination,
+                            dateArrival: connection.dateArrival,
+                            dateOutput: connection.dateOutput,
+                            kmArrival: connection.kmArrival,
+                            kmOutput: connection.kmOutput,
+                            kmPaid: connection.kmPaid,
+                            moneyCompany: connection.moneyCompany,
+                            moneyComplement: connection.moneyComplement,
+                            totalMoney: connection.totalMoney
+                        });
+                    });
+                }
+                return arrConnections;
+            },
+
             getTrip: function() {
 
                 var trip = $localstorage.getObject('trip');
@@ -101,6 +128,69 @@
                 $http({
                     method: 'GET',
                     url: CONFIG.url + 'trip/' + id
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            removeTripFuel: function(id, data) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'PUT',
+                    url: CONFIG.url + 'remove-trip-fuel/' + id,
+                    data: data
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            removeTripExpense: function(id, data) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'PUT',
+                    url: CONFIG.url + 'remove-trip-expense/' + id,
+                    data: data
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            removeTripConnection: function(id, data) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'PUT',
+                    url: CONFIG.url + 'remove-trip-connection/' + id,
+                    data: data
                 })
                     .then(function(response) {
 
@@ -212,6 +302,27 @@
                 $http({
                     method: 'POST',
                     url: CONFIG.url + 'add-trip',
+                    data: postData
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+            submitEditTrip: function(postData, id) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'PUT',
+                    url: CONFIG.url + 'trip/' + id,
                     data: postData
                 })
                     .then(function(response) {
@@ -427,30 +538,6 @@
 
                 var maintenance = $localstorage.getObject('maintenance');
                 return maintenance;
-            },
-
-            getConnections: function() {
-                var arrConnections = [];
-                var connections = $localstorage.getObject('connections');
-
-                if(JSON.stringify(connections) !== '{}'){
-                    connections.forEach(function (connection) {
-
-                        arrConnections.push({
-                            cityHome: connection.cityHome,
-                            cityDestination: connection.cityDestination,
-                            dateArrival: connection.dateArrival,
-                            dateOutput: connection.dateOutput,
-                            kmArrival: connection.kmArrival,
-                            kmOutput: connection.kmOutput,
-                            kmPaid: connection.kmPaid,
-                            moneyCompany: connection.moneyCompany,
-                            moneyComplement: connection.moneyComplement,
-                            totalMoney: connection.totalMoney
-                        });
-                    });
-                }
-                return arrConnections;
             },
 
             getChartProfitTotal: function() {

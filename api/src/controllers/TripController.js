@@ -193,16 +193,158 @@ var addTripController = function(dbconfig){
                 });
             }
 
+            var getTrip = {};
+            var getConnection = {};
+            var getFuel = {};
+            var getExpense = {};
+
+            if(rows[0].length) {
+                getTrip = rows[0][0];
+            }
+
+            if(rows[1].length) {
+                getConnection = rows[1];
+            }
+
+            if(rows[2].length) {
+                getFuel = rows[2];
+            }
+
+            if(rows[3].length) {
+                getExpense = rows[3];
+            }
+
             res.json({
-                getCompany: rows[0][0]
+                getTrip: getTrip,
+                getConnection: getConnection,
+                getFuel: getFuel,
+                getExpense: getExpense
             });
 
         });
     };
 
+    var put = function(req, res) {
+
+        var id = req.params.id;
+        var id_user = req.body.id;
+        var company = req.body.company;
+        var cityDestinationId = req.body.cityDestinationId;
+        var cityHomeId = req.body.cityHomeId;
+        var comments = req.body.comments;
+        var dateArrival = req.body.dateArrival;
+        var dateOutput = req.body.dateOutput;
+        var driverSelect = req.body.driverSelect;
+        var kmArrival = req.body.kmArrival;
+        var kmOutput = req.body.kmOutput;
+        var kmPaid = req.body.kmPaid;
+        var moneyCompany = req.body.moneyCompany;
+        var moneyComplement = req.body.moneyComplement;
+        var totalMoney = req.body.totalMoney;
+        var truckSelect = req.body.truckSelect;
+        var fuelsNumber = req.body.fuelsNumber;
+        var expensesNumber = req.body.expensesNumber;
+        var connectionsNumber = req.body.connectionsNumber;
+        var date = new Date();
+
+        dateArrival = convertDate(dateArrival);
+        dateOutput = convertDate(dateOutput);
+
+        connection.beginTransaction(function(err) {
+            if (err) {
+                return res.json({
+                    error: true,
+                    message: 'Erro ao iniciar a transação'
+                });
+            }
+
+            connection.query("UPDATE viagem SET viagem_cidade_origem_id = ?, viagem_cidade_destino_id = ?, viagem_data_saida = ?, viagem_data_chegada = ?, " +
+                "viagem_km_saida = ?, viagem_km_chegada = ?, viagem_carro_id = ?, viagem_empresa_id = ?, viagem_usuario_id = ?, viagem_valor_km = ?" +
+                "viagem_frete = ?, viagem_adiantamento = ?, viagem_complemento = ?, viagem_observacao = ?, viagem_usuario_id_ativacao = ?" +
+                "viagem_data_ativacao = NOW() WHERE viagem_id = ?", [cityHomeId, cityDestinationId, dateOutput, dateArrival, kmOutput, kmArrival, truckSelect, company,
+                driverSelect, kmPaid, totalMoney, moneyCompany, moneyComplement, comments, id_user, id], function (err, car) {
+                if (err) {
+                    connection.rollback(function () {
+                        return res.json({
+                            error: true,
+                            message: 'Erro ao editar a viagem'
+                        });
+                    });
+                }
+            });
+
+            connection.commit(function(err) {
+                if (err) {
+                    connection.rollback(function() {
+                        return res.json({
+                            error: true,
+                            message: 'Erro ao realizar a transação'
+                        });
+                    });
+                }
+                connection.end();
+                res.json({
+                    error: false,
+                    viagem_id: viagem_id
+                });
+            });
+        });
+
+
+    };
+
+    var putRemoveFuel = function(req, res) {
+
+        var id = req.params.id;
+        var id_user = req.body.id;
+
+        connection.query("UPDATE abastecimento SET abastecimento_ativo = 0, abastecimento_usuario_id_desativacao = ?, " +
+            "abastecimento_data_desativacao = NOW() WHERE abastecimento_id = ?",[id_user, id], function(err, rows) {
+            if (err)
+                return res.send({"error": true, "message": "Erro ao desativar o abastecimento."});
+
+            res.json({"error": false, "message": "Abastecimento desativado com sucesso."});
+        });
+
+    };
+
+    var putRemoveExpense = function(req, res) {
+
+        var id = req.params.id;
+        var id_user = req.body.id;
+
+        connection.query("UPDATE despesa SET despesa_ativo = 0, despesa_usuario_id_desativacao = ?, " +
+            "despesa_data_desativacao = NOW() WHERE despesa_id = ?",[id_user, id], function(err, rows) {
+            if (err)
+                return res.send({"error": true, "message": "Erro ao desativar a despesa."});
+
+            res.json({"error": false, "message": "Despesa desativado com sucesso."});
+        });
+
+    };
+
+    var putRemoveConnection = function(req, res) {
+
+        var id = req.params.id;
+        var id_user = req.body.id;
+
+        connection.query("UPDATE conexao SET conexao_ativo = 0, conexao_usuario_id_desativacao = ?, " +
+            "conexao_data_desativacao = NOW() WHERE conexao_id = ?",[id_user, id], function(err, rows) {
+            if (err)
+                return res.send({"error": true, "message": "Erro ao desativar a conexão."});
+
+            res.json({"error": false, "message": "Conexão desativado com sucesso."});
+        });
+
+    };
+
     return {
         post: post,
-        get: get
+        get: get,
+        put: put,
+        putRemoveFuel: putRemoveFuel,
+        putRemoveExpense: putRemoveExpense,
+        putRemoveConnection: putRemoveConnection
     }
 };
 
