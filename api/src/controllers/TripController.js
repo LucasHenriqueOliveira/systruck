@@ -227,7 +227,7 @@ var addTripController = function(dbconfig){
     var put = function(req, res) {
 
         var id = req.params.id;
-        var id_user = req.body.id;
+        var id_user = req.body.id_user;
         var company = req.body.company;
         var cityDestinationId = req.body.cityDestinationId;
         var cityHomeId = req.body.cityHomeId;
@@ -245,7 +245,6 @@ var addTripController = function(dbconfig){
         var fuelsNumber = req.body.fuelsNumber;
         var expensesNumber = req.body.expensesNumber;
         var connectionsNumber = req.body.connectionsNumber;
-        var date = new Date();
 
         dateArrival = convertDate(dateArrival);
         dateOutput = convertDate(dateOutput);
@@ -272,6 +271,135 @@ var addTripController = function(dbconfig){
                     });
                 }
             });
+
+            for(var i = 0; i < connectionsNumber; i++) {
+
+                var id_connection = req.body['id_connection_' + i];
+                var city_destination = req.body['city_destination_' + i];
+                var city_home = req.body['city_home_' + i];
+                var date_arrival = convertDate(req.body['date_arrival_' + i]);
+                var date_output = convertDate(req.body['date_output_' + i]);
+                var km_arrival = req.body['km_arrival_' + i];
+                var km_output = req.body['km_output_' + i];
+                var km_paid = req.body['km_paid_' + i];
+                var money_company = req.body['money_company_' + i];
+                var money_complement = req.body['money_complement_' + i];
+                var total_money = req.body['total_money_' + i];
+
+                if(id_connection) {
+
+                    connection.query("UPDATE conexao SET conexao_cidade_origem_id = ?, conexao_cidade_destino_id = ?, conexao_data_saida = ?, " +
+                        "conexao_data_chegada = ?, conexao_km_saida = ?, conexao_km_chegada = ?, conexao_valor_km = ?, conexao_frete = ?, conexao_adiantamento = ?, " +
+                        "conexao_complemento = ?, conexao_viagem_id = ?, conexao_carro_id = ? WHERE conexao_id = ?", [id, city_home, city_destination,
+                        date_output, date_arrival, km_output, km_arrival, km_paid, total_money, money_company, money_complement, id, truckSelect, id_connection], function (err, row) {
+                        if (err) {
+                            connection.rollback(function () {
+                                return res.json({
+                                    error: true,
+                                    message: 'Erro ao editar a conexão'
+                                });
+                            });
+                        }
+                    });
+                } else {
+                    connection.query("INSERT INTO revisao (conexao_cidade_origem_id, conexao_cidade_destino_id, conexao_data_saida, conexao_data_chegada," +
+                        "conexao_km_saida, conexao_km_chegada, conexao_valor_km, conexao_frete, conexao_adiantamento, conexao_complemento, conexao_viagem_id" +
+                        "conexao_carro_id, conexao_ativo, conexao_usuario_id_ativacao, conexao_data_ativacao) " +
+                        "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,1,?,NOW())", [city_home, city_destination, date_output, date_arrival, km_output, km_arrival,
+                        km_paid, total_money, money_company, money_complement, id, truckSelect, id_user], function (err, row) {
+                        if (err) {
+                            connection.rollback(function () {
+                                return res.json({
+                                    error: true,
+                                    message: 'Erro ao inserir a conexão'
+                                });
+                            });
+                        }
+                    });
+                }
+            }
+
+            for(var i = 0; i < fuelsNumber; i++) {
+
+                var id_fuel = req.body['id_fuel_' + i];
+                var date_fuel = convertDate(req.body['date_fuel_' + i]);
+                var name_fuel = req.body['name_fuel_' + i];
+                var price_fuel = req.body['price_fuel_' + i];
+                var qtd_fuel = req.body['qtd_fuel_' + i];
+                var km = req.body['km_' + i];
+                var tank = req.body['tank_' + i];
+
+                if(id_fuel) {
+
+                    connection.query("UPDATE abastecimento SET abastecimento_nome = ?, abastecimento_data = ?, abastecimento_valor = ?, " +
+                        "abastecimento_litros = ?, abastecimento_km = ?, abastecimento_tanque_cheio = ?, abastecimento_viagem_id = ?, " +
+                        "abastecimento_carro_id = ? WHERE abastecimento_id = ?", [name_fuel, date_fuel, price_fuel, qtd_fuel, km, tank,
+                        id, truckSelect, id_fuel], function (err, row) {
+                        if (err) {
+                            connection.rollback(function () {
+                                return res.json({
+                                    error: true,
+                                    message: 'Erro ao editar o abastecimento'
+                                });
+                            });
+                        }
+                    });
+                } else {
+                    connection.query("INSERT INTO abastecimento (abastecimento_nome, abastecimento_data, abastecimento_valor, abastecimento_litros, " +
+                        "abastecimento_km, abastecimento_tanque_cheio, abastecimento_viagem_id, abastecimento_carro_id, abastecimento_ativo, " +
+                        "abastecimento_usuario_id_ativacao, abastecimento_data_ativacao) " +
+                        "VALUES(?,?,?,?,?,?,?,?,1,?,NOW())", [name_fuel, date_fuel, price_fuel, qtd_fuel, km, tank,
+                        id, truckSelect, id_user], function (err, row) {
+                        if (err) {
+                            connection.rollback(function () {
+                                return res.json({
+                                    error: true,
+                                    message: 'Erro ao inserir o abastecimento'
+                                });
+                            });
+                        }
+                    });
+                }
+            }
+
+            for(var i = 0; i < expensesNumber; i++) {
+
+                var id_expense = req.body['id_expense_' + i];
+                var date_expense = convertDate(req.body['date_expense_' + i]);
+                var name_expense = req.body['name_expense_' + i];
+                var type_expense = req.body['type_expense_' + i];
+                var value_expense = req.body['value_expense_' + i];
+
+                if(id_expense) {
+
+                    connection.query("UPDATE despesa SET despesa_nome = ?, despesa_tipo = ?, despesa_valor = ?, despesa_data = ?, " +
+                        "despesa_carro_id = ?, despesa_viagem_id = ? WHERE despesa_id = ?", [name_expense, type_expense, value_expense, date_expense,
+                        truckSelect, id, id_expense], function (err, row) {
+                        if (err) {
+                            connection.rollback(function () {
+                                return res.json({
+                                    error: true,
+                                    message: 'Erro ao editar a despesa'
+                                });
+                            });
+                        }
+                    });
+                } else {
+                    connection.query("INSERT INTO despesa (despesa_nome, despesa_tipo, despesa_valor, despesa_data, " +
+                        "despesa_carro_id, despesa_viagem_id, despesa_ativo, despesa_usuario_id_ativacao, despesa_data_ativacao) " +
+                        "VALUES(?,?,?,?,?,?,1,?,NOW())", [name_expense, type_expense, value_expense, date_expense, truckSelect, id,
+                        id_user], function (err, row) {
+                        if (err) {
+                            connection.rollback(function () {
+                                return res.json({
+                                    error: true,
+                                    message: 'Erro ao inserir a despesa'
+                                });
+                            });
+                        }
+                    });
+                }
+            }
 
             connection.commit(function(err) {
                 if (err) {
