@@ -16,6 +16,11 @@
         vm.fuel_edit = {};
         vm.expense_edit = {};
         vm.connection_edit.city = {};
+        vm.loading = true;
+
+        $timeout(function() {
+            vm.loading = false;
+        }, 2000);
 
         DataService.getTrucksDriversCities().then(function (data) {
             vm.trucks = data.getTrucks;
@@ -28,7 +33,11 @@
 
             vm.truckSelect = {
                 id: vm.trip.viagem_carro_id,
-                name: vm.trip.carro_placa + ' - ' + vm.trip.carro_nome
+                name: vm.trip.carro_placa + ' - ' + vm.trip.carro_nome,
+                carro_nome: vm.trip.carro_nome,
+                placa: vm.trip.carro_placa,
+                frota: vm.trip.carro_frota,
+                placa_semi_reboque: vm.trip.carro_placa_semi_reboque
             };
 
             vm.driverSelect = {
@@ -554,8 +563,8 @@
                 postData['name_fuel_' + i] = form.fuels[i].name;
                 postData['price_fuel_' + i] = form.fuels[i].price;
                 postData['qtd_fuel_' + i] = form.fuels[i].qtd;
-                postData['km_' + i] = form.fuels[i].qtd;
-                postData['tank_' + i] = form.fuels[i].qtd;
+                postData['km_' + i] = form.fuels[i].km;
+                postData['tank_' + i] = form.fuels[i].tanque;
             }
 
             for(i = 0; i < form.expenses.length; i++) {
@@ -577,7 +586,7 @@
                     $location.path('/add-trip-confirm');
 
                 } else {
-                    toastr.error(response.message, 'Cadastro de viagem', {timeOut: 3000});
+                    toastr.error(response.message, 'Alteração de viagem', {timeOut: 3000});
                 }
             });
         };

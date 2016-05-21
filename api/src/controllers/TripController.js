@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 
-var addTripController = function(dbconfig){
+var TripController = function(dbconfig){
 
     var connection = mysql.createConnection(dbconfig.connection);
     connection.query('USE ' + dbconfig.database);
@@ -171,7 +171,7 @@ var addTripController = function(dbconfig){
                             });
                         });
                     }
-                    connection.end();
+
                     res.json({
                         error: false,
                         viagem_id: viagem_id
@@ -258,15 +258,26 @@ var addTripController = function(dbconfig){
             }
 
             connection.query("UPDATE viagem SET viagem_cidade_origem_id = ?, viagem_cidade_destino_id = ?, viagem_data_saida = ?, viagem_data_chegada = ?, " +
-                "viagem_km_saida = ?, viagem_km_chegada = ?, viagem_carro_id = ?, viagem_empresa_id = ?, viagem_usuario_id = ?, viagem_valor_km = ?" +
-                "viagem_frete = ?, viagem_adiantamento = ?, viagem_complemento = ?, viagem_observacao = ?, viagem_usuario_id_ativacao = ?" +
-                "viagem_data_ativacao = NOW() WHERE viagem_id = ?", [cityHomeId, cityDestinationId, dateOutput, dateArrival, kmOutput, kmArrival, truckSelect, company,
-                driverSelect, kmPaid, totalMoney, moneyCompany, moneyComplement, comments, id_user, id], function (err, car) {
+                "viagem_km_saida = ?, viagem_km_chegada = ?, viagem_carro_id = ?, viagem_empresa_id = ?, viagem_usuario_id = ?, viagem_valor_km = ?," +
+                "viagem_frete = ?, viagem_adiantamento = ?, viagem_complemento = ?, viagem_observacao = ? " +
+                "WHERE viagem_id = ?", [cityHomeId, cityDestinationId, dateOutput, dateArrival, kmOutput, kmArrival, truckSelect, company,
+                driverSelect, kmPaid, totalMoney, moneyCompany, moneyComplement, comments, id], function (err, row) {
                 if (err) {
                     connection.rollback(function () {
                         return res.json({
                             error: true,
                             message: 'Erro ao editar a viagem'
+                        });
+                    });
+                }
+            });
+
+            connection.query("UPDATE carro SET carro_km = ? WHERE carro_id = ?",[kmArrival, truckSelect], function(err, row) {
+                if (err) {
+                    connection.rollback(function() {
+                        return res.json({
+                            error: true,
+                            message: 'Erro ao atualizar a km'
                         });
                     });
                 }
@@ -290,7 +301,7 @@ var addTripController = function(dbconfig){
 
                     connection.query("UPDATE conexao SET conexao_cidade_origem_id = ?, conexao_cidade_destino_id = ?, conexao_data_saida = ?, " +
                         "conexao_data_chegada = ?, conexao_km_saida = ?, conexao_km_chegada = ?, conexao_valor_km = ?, conexao_frete = ?, conexao_adiantamento = ?, " +
-                        "conexao_complemento = ?, conexao_viagem_id = ?, conexao_carro_id = ? WHERE conexao_id = ?", [id, city_home, city_destination,
+                        "conexao_complemento = ?, conexao_viagem_id = ?, conexao_carro_id = ? WHERE conexao_id = ?", [city_home, city_destination,
                         date_output, date_arrival, km_output, km_arrival, km_paid, total_money, money_company, money_complement, id, truckSelect, id_connection], function (err, row) {
                         if (err) {
                             connection.rollback(function () {
@@ -303,7 +314,7 @@ var addTripController = function(dbconfig){
                     });
                 } else {
                     connection.query("INSERT INTO revisao (conexao_cidade_origem_id, conexao_cidade_destino_id, conexao_data_saida, conexao_data_chegada," +
-                        "conexao_km_saida, conexao_km_chegada, conexao_valor_km, conexao_frete, conexao_adiantamento, conexao_complemento, conexao_viagem_id" +
+                        "conexao_km_saida, conexao_km_chegada, conexao_valor_km, conexao_frete, conexao_adiantamento, conexao_complemento, conexao_viagem_id," +
                         "conexao_carro_id, conexao_ativo, conexao_usuario_id_ativacao, conexao_data_ativacao) " +
                         "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,1,?,NOW())", [city_home, city_destination, date_output, date_arrival, km_output, km_arrival,
                         km_paid, total_money, money_company, money_complement, id, truckSelect, id_user], function (err, row) {
@@ -328,6 +339,10 @@ var addTripController = function(dbconfig){
                 var qtd_fuel = req.body['qtd_fuel_' + i];
                 var km = req.body['km_' + i];
                 var tank = req.body['tank_' + i];
+
+                if(!tank) {
+                    tank = 0;
+                }
 
                 if(id_fuel) {
 
@@ -410,10 +425,10 @@ var addTripController = function(dbconfig){
                         });
                     });
                 }
-                connection.end();
+
                 res.json({
                     error: false,
-                    viagem_id: viagem_id
+                    viagem_id: id
                 });
             });
         });
@@ -476,7 +491,7 @@ var addTripController = function(dbconfig){
     }
 };
 
-module.exports = addTripController;
+module.exports = TripController;
 
 function convertDate(date) {
     var datePart = date.split('/');

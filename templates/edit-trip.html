@@ -1,6 +1,17 @@
 <!--main content start-->
 <div id="main-content">
-    <div class="wrapper">
+    <div class="wrapper" ng-show="vm.loading">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" ng-show="!vm.loading">
         <!-- page start-->
         <div class="row">
             <div class="col-md-12">

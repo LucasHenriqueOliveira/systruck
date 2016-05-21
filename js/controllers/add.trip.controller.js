@@ -416,8 +416,8 @@
                 postData['name_fuel_' + i] = form.fuels[i].name;
                 postData['price_fuel_' + i] = form.fuels[i].price;
                 postData['qtd_fuel_' + i] = form.fuels[i].qtd;
-                postData['km_' + i] = form.fuels[i].qtd;
-                postData['tank_' + i] = form.fuels[i].qtd;
+                postData['km_' + i] = form.fuels[i].km;
+                postData['tank_' + i] = form.fuels[i].tanque;
             }
 
             for(i = 0; i < form.expenses.length; i++) {

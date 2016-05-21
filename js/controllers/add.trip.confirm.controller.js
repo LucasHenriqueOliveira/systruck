@@ -65,6 +65,10 @@
             myWindow.print();
         };
 
+        vm.editTrip = function(id){
+            $location.path('/edit-trip/' + id);
+        };
+
     }
 
 })();

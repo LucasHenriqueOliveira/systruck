@@ -23,7 +23,7 @@
                             price : fuel.price,
                             date: fuel.date,
                             km: fuel.km,
-                            tanque: fuel.tanque
+                            tan: fuel.tanque
                         });
                     });
                 }
