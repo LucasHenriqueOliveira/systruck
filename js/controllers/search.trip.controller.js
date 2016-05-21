@@ -5,9 +5,9 @@
         .module('app')
         .controller('SearchTripController', SearchTripController);
 
-    SearchTripController.$inject = ['$location', 'DataService', '$localstorage'];
+    SearchTripController.$inject = ['$location', 'DataService', '$localstorage', '$timeout'];
 
-    function SearchTripController($location, DataService, $localstorage) {
+    function SearchTripController($location, DataService, $localstorage, $timeout) {
         var vm = this;
         vm.numberTrip = '';
         vm.from = '';
@@ -41,14 +41,16 @@
                 company: $localstorage.getObject('company')
             };
 
-            DataService.getSearchTrip(postData).then(function(response) {
-                if(response.error === false) {
-                    vm.results = response.trip;
-                } else {
-                    vm.message = response.message;
-                }
-                vm.loading = false;
-            });
+            $timeout(function() {
+                DataService.getSearchTrip(postData).then(function(response) {
+                    if(response.error === false) {
+                        vm.results = response.trip;
+                    } else {
+                        vm.message = response.message;
+                    }
+                    vm.loading = false;
+                });
+            }, 2000);
         };
 
         vm.back = function(){
