@@ -540,6 +540,26 @@
                 return maintenance;
             },
 
+            getMaintenanceById: function(id) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: CONFIG.url + 'maintenance/' + id
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
             getChartProfitTotal: function() {
 
                 var data_chart = [{

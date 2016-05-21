@@ -5,6 +5,64 @@ var maintenanceController = function(dbconfig){
     var connection = mysql.createConnection(dbconfig.connection);
     connection.query('USE ' + dbconfig.database);
 
+    // get maintenance
+    var get = function(req, res){
+
+        var id = req.params.id;
+
+        connection.query("CALL getMaintenanceById(?)", [id], function(err, rows) {
+            if (err)
+                return res.json({
+                    error: true,
+                    message: 'Erro ao consultar a manutenção'
+                });
+
+            var getMaintenance = rows[0];
+
+            if(getMaintenance.length){
+                var resultRevisao = '';
+
+                connection.query("SELECT ri.revisao_item_revisao_id, ri.revisao_item_id, ri.revisao_item_qtd, ri.revisao_item_valor, i.item_nome, i.item_id, e.estoque_descricao, e.estoque_id " +
+                    "FROM revisao_item ri INNER JOIN item i ON ri.revisao_item_item_id = i.item_id " +
+                    "LEFT JOIN estoque e ON e.estoque_id = ri.revisao_item_estoque_id " +
+                    "WHERE ri.revisao_item_revisao_id = ?",[id], function(err, rows, fields) {
+                    if (err) {
+                        return res.json({
+                            error: true,
+                            message: 'Erro ao consultar os itens da manutenção'
+                        });
+                    } else {
+                        resultRevisao = rows;
+                    }
+
+                    for(var i = 0; i < getMaintenance.length; i++) {
+                        getMaintenance[i].parts = [];
+                        var total = 0;
+
+                        for(var j = 0; j < resultRevisao.length; j++) {
+
+                            if(getMaintenance[i].revisao_id === resultRevisao[j].revisao_item_revisao_id) {
+                                total = total + resultRevisao[j].revisao_item_valor;
+                                getMaintenance[i].parts.push(resultRevisao[j]);
+                            }
+                        }
+                        getMaintenance[i].total_parts = total;
+                    }
+
+                    res.json({
+                        getMaintenance: getMaintenance[0]
+                    });
+                });
+
+            } else{
+                res.json({
+                    getMaintenance: getMaintenance[0]
+                });
+            }
+        });
+
+    };
+
     // get the last maintenance
     var getLastMaintenance = function(req, res){
 
@@ -621,6 +679,7 @@ var maintenanceController = function(dbconfig){
     };
 
     return {
+        get: get,
         getLastMaintenance: getLastMaintenance,
         getRealizedMaintenance: getRealizedMaintenance,
         post: post,

@@ -59,6 +59,7 @@ router.put('/api/v1/remove-part/:id', partController.putRemove);
 router.put('/api/v1/active-part/:id', partController.putActive);
 
 // maintenance
+router.get('/api/v1/maintenance/:id', maintenanceController.get);
 router.get('/api/v1/last-maintenance/:id', maintenanceController.getLastMaintenance);
 router.get('/api/v1/realized-maintenance/:id', maintenanceController.getRealizedMaintenance);
 router.post('/api/v1/maintenance', maintenanceController.post);
