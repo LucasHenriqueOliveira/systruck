@@ -31,6 +31,7 @@
             var res = form.option.split("_");
             $localstorage.set('company', res[0]);
             $localstorage.set('roles', res[1]);
+            $localstorage.set('profile', res[2]);
 
             $rootScope.$broadcast("login-done");
 
@@ -38,6 +39,7 @@
         };
 
         vm.back = function(){
+            AuthenticationService.ClearCredentials();
             $window.history.back();
         };
     }

@@ -43,14 +43,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="profile-desk">
-                                <h1>{{vm.username}}</h1>
-                                <span class="text-muted">{{vm.userfunction}}</span>
+                                <h1>{{vm.user.usuario_nome}}</h1>
+                                <span class="text-muted">{{vm.user.tipo_perfil_nome}}</span>
                                 <br>
                                 <ul>
-                                    <li>Email: {{vm.useremail}}</li>
-                                    <li ng-show="vm.driver">CNH: 3123423523</li>
-                                    <li ng-show="vm.driver">Exame Periódico: 03/06/2016</li>
-                                    <li>Data do cadastro: 11/12/2015</li>
+                                    <li>Email: {{vm.user.usuario_email}}</li>
+                                    <li ng-show="vm.driver">CNH: {{vm.user.usuario_cnh}}</li>
+                                    <li ng-show="vm.driver">Exame Periódico: {{vm.user.data_exame}}</li>
+                                    <li>Data do cadastro: {{vm.user.perfil_data_ativacao}}</li>
                                 </ul>
                                 <br>
                                 <button type="button" class="btn btn-primary" ng-click="vm.selectProfile()"><i class="fa fa-refresh"></i> Trocar usuário</button>
@@ -62,9 +62,11 @@
                                 <h2> <span><i class="fa fa-phone"></i></span></h2>
                             </div>
                             <div class="profile-statistics text-center" style="margin-top: 30px;">
-                                <h1>(31) 99435-4562</h1>
+                                <h1 ng-if="vm.user.usuario_telefone1">{{vm.user.usuario_telefone1}}</h1>
+                                <h1 ng-if="!vm.user.usuario_telefone1"> - </h1>
                                 <p>Telefone</p>
-                                <h1>(31) 2563-4562</h1>
+                                <h1 ng-if="vm.user.usuario_telefone2">{{vm.user.usuario_telefone2}}</h1>
+                                <h1 ng-if="!vm.user.usuario_telefone2"> - </h1>
                                 <p>Telefone</p>
                             </div>
                         </div>

@@ -6,7 +6,7 @@
                 <tbody>
                 <tr ng-repeat="profile in vm.profiles track by $index" style="background-color: #fff">
                     <td class="center">
-                        <input type="radio" ng-model="vm.option" name="optionProfile" value="{{profile.empresa_id}}_{{profile.tipo_perfil_id}}" required>
+                        <input type="radio" ng-model="vm.option" name="optionProfile" value="{{profile.empresa_id}}_{{profile.tipo_perfil_id}}_{{profile.perfil_id}}" required>
                     </td>
                     <td class="center">{{profile.empresa_nome}}</td>
                     <td class="center">{{profile.tipo_perfil_nome}}</td>
@@ -21,7 +21,7 @@
             <button class="btn btn-lg btn-login btn-block" ng-disabled="form.$invalid" type="submit">Entrar</button>
         </div>
         <div class="text-center" ng-show="vm.message">
-            <button type="button" class="btn btn-lg btn-login btn-block " ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
+            <button type="button" class="btn btn-lg btn-login btn-block " ng-click="vm.back()"><i class="fa fa-undo"></i> Cancelar</button>
         </div>
     </div>
 </form>

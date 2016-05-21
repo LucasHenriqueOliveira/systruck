@@ -5,23 +5,21 @@
         .module('app')
         .controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['$location', '$timeout', 'AuthenticationService'];
+    ProfileController.$inject = ['$location', '$timeout', 'UserService', '$localstorage'];
 
-    function ProfileController($location, $timeout, AuthenticationService) {
+    function ProfileController($location, $timeout, UserService, $localstorage) {
         var vm = this;
         vm.loading = true;
-
-        vm.useremail = AuthenticationService.GetEmail();
-        vm.username = AuthenticationService.GetName();
-        if(AuthenticationService.GetRoles() == 1){
-            vm.userfunction = 'Gerente';
-        } else {
-            vm.userfunction = 'Administrativo';
-        }
+        vm.user = {};
+        var id = $localstorage.get('profile');
 
         $timeout(function() {
             vm.loading = false;
         }, 2000);
+
+        UserService.getById(id).then(function (data) {
+            vm.user = data.getUser;
+        });
 
         vm.selectProfile = function() {
             $location.path("/select-profile");

@@ -56,6 +56,7 @@
             $localstorage.remove('companyData');
             $localstorage.remove('trip');
             $localstorage.remove('login_default');
+            $localstorage.remove('profile');
         }
 
         function IsLogged() {
