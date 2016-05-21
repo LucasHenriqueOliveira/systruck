@@ -37,14 +37,6 @@ var dashController = function(dbconfig){
             if (rows[3][0].total_manutencao)
                 qtd_manutencao = (rows[3][0].total_manutencao).toFixed(2);
 
-            if(rows[6].length) {
-                rank_truck = rows[6];
-            }
-
-            if(rows[7].length) {
-                rank_driver = rows[7];
-            }
-
             if (roles == 1){
                 if (rows[5][0].resultado)
                     resultado = Number(rows[5][0].resultado);
@@ -53,6 +45,14 @@ var dashController = function(dbconfig){
                     despesa_geral = Number(rows[4][0].despesa_geral);
 
                 result = (resultado - despesa_geral - qtd_abastecimento - qtd_manutencao).toFixed(2);
+
+                if(rows[6]) {
+                    rank_truck = rows[6];
+                }
+
+                if(rows[7].length) {
+                    rank_driver = rows[7];
+                }
 
                 res.json({
                     qtd_viagens: qtd_viagens,
@@ -63,6 +63,13 @@ var dashController = function(dbconfig){
                     rank_driver: rank_driver
                 });
             } else {
+                if(rows[4]) {
+                    rank_truck = rows[4];
+                }
+
+                if(rows[5].length) {
+                    rank_driver = rows[5];
+                }
 
                 qtd_carros = rows[1][0].qtd_carros | qtd_carros;
 
