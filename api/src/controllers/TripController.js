@@ -1,4 +1,7 @@
 var mysql = require('mysql');
+var fs = require('fs');
+var pdf = require('html-pdf');
+var handlebars = require('handlebars');
 
 var TripController = function(dbconfig){
 
@@ -481,10 +484,185 @@ var TripController = function(dbconfig){
 
     };
 
+    var getPdf = function(req, res) {
+
+        var id = req.params.id;
+        var company = req.body.company;
+
+        connection.query("CALL getTripPdf(?, ?)",[id, company], function(err, rows) {
+            if (err) {
+                return res.json({
+                    error: true,
+                    message: err
+                });
+            }
+
+            var trip = {};
+            var connections = {};
+            var fuels = {};
+            var expenses = {};
+
+            if(rows[0].length) {
+                trip = rows[0][0];
+            }
+
+            if(rows[1].length) {
+                connections = rows[1];
+            }
+
+            if(rows[2].length) {
+                fuels = rows[2];
+            }
+
+            if(rows[3].length) {
+                expenses = rows[3];
+            }
+
+            if(rows[4].length) {
+                company = rows[4][0];
+            }
+
+            var content = {
+                trip: trip,
+                connections: connections,
+                fuels: fuels,
+                expenses: expenses
+            };
+
+            content.trip.rodados = content.trip.viagem_km_chegada - content.trip.viagem_km_saida;
+            content.trip.dif_km = content.trip.rodados - (2 * content.trip.viagem_valor_km);
+            content.trip.comments = content.trip.viagem_observacao;
+
+            var options = {
+                format: 'A4',
+                "border": {
+                    "top": "10px",
+                    "right": "15px",
+                    "bottom": "15px",
+                    "left": "40px"
+                },
+                "footer": {
+                    "height": "10mm",
+                    "contents": '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>'
+                }
+            };
+
+            var fuels = [];
+            var expenses = [];
+            var connections = [];
+
+            for(var i = 0; i < content.connections.length; i++) {
+
+                connections.push({
+                    id: content.connections[i].conexao_id,
+                    cityHome: {
+                        id: content.connections[i].conexao_cidade_origem_id,
+                        name: content.connections[i].cidade_origem
+                    },
+                    cityDestination: {
+                        id: content.connections[i].conexao_cidade_destino_id,
+                        name: content.connections[i].cidade_destino
+                    },
+                    dateArrival: content.connections[i].conexao_data_chegada,
+                    dateOutput: content.connections[i].conexao_data_saida,
+                    kmArrival: content.connections[i].conexao_km_chegada,
+                    kmOutput: content.connections[i].conexao_km_saida,
+                    kmPaid: content.connections[i].conexao_valor_km,
+                    moneyCompany: content.connections[i].conexao_adiantamento,
+                    moneyComplement: content.connections[i].conexao_complemento,
+                    totalMoney: content.connections[i].conexao_frete
+                });
+            }
+            content.connections = connections;
+
+            for(var i = 0; i < content.fuels.length; i++) {
+
+                fuels.push({
+                    id: content.fuels[i].abastecimento_id,
+                    name: content.fuels[i].abastecimento_nome,
+                    qtd: content.fuels[i].abastecimento_litros,
+                    price: content.fuels[i].abastecimento_valor,
+                    date: content.fuels[i].abastecimento_data,
+                    km: content.fuels[i].abastecimento_km,
+                    tanque: content.fuels[i].abastecimento_tanque_cheio
+                });
+            }
+            content.fuels = fuels;
+
+            for(var i = 0; i < content.expenses.length; i++) {
+
+                expenses.push({
+                    id: content.expenses[i].despesa_id,
+                    name: content.expenses[i].despesa_nome,
+                    type: content.expenses[i].despesa_tipo,
+                    value: content.expenses[i].despesa_valor,
+                    date: content.expenses[i].despesa_data
+                });
+            }
+            content.expenses = expenses;
+
+            var sumLts = 0;
+            var sumPriceFuel = 0;
+            var sumKm = 0;
+            var sumLtsKm = 0;
+            var lastFuelTankFull = content.trip.viagem_km_saida;
+            content.fuels.forEach(function(fuel, index) {
+                sumLts = sumLts + parseFloat(fuel.qtd);
+                sumLtsKm = sumLtsKm + parseFloat(fuel.qtd);
+                sumPriceFuel = sumPriceFuel + parseFloat(fuel.price);
+                sumKm = sumKm + fuel.km;
+                if(fuel.tanque == 1) {
+                    content.fuels[index].media = (sumKm - lastFuelTankFull/sumLtsKm).toFixed(2);
+                    lastFuelTankFull = fuel.km;
+                    sumKm = 0;
+                    sumLtsKm = 0;
+                }
+            });
+
+            var sumPriceExpenses = 0;
+            content.expenses.forEach(function(expense) {
+                sumPriceExpenses = sumPriceExpenses + parseFloat(expense.value);
+            });
+
+            content.trip.sumLts = sumLts;
+            content.trip.sumPriceFuel = sumPriceFuel;
+            content.trip.sumPriceExpenses = sumPriceExpenses;
+            content.trip.average = (content.trip.rodados/sumLts).toFixed(2);
+            content.trip.advance = parseInt(content.trip.viagem_adiantamento) + parseInt(content.trip.viagem_complemento);
+            content.trip.result = (content.trip.sumPriceExpenses + content.trip.sumPriceFuel) - content.trip.advance;
+
+            content.trip.viagem_km_saida = '' + (content.trip.viagem_km_saida).format(0, 3, '.');
+            content.trip.viagem_km_chegada = '' + (content.trip.viagem_km_chegada).format(0, 3, '.');
+            content.trip.viagem_valor_km = '' + (content.trip.viagem_valor_km).format(0, 3, '.');
+            content.trip.rodados = '' + (content.trip.rodados).format(0, 3, '.');
+            content.trip.dif_km = '' + (content.trip.dif_km).format(0, 3, '.');
+
+            content.trip.viagem_frete = 'R$' + (content.trip.viagem_frete).format(2, 3, '.', ',');
+            content.trip.viagem_adiantamento = 'R$' + (content.trip.viagem_adiantamento).format(2, 3, '.', ',');
+            content.trip.viagem_complemento = 'R$' + (content.trip.viagem_complemento).format(2, 3, '.', ',');
+            content.trip.advance = 'R$' + (content.trip.advance).format(2, 3, '.', ',');
+            content.trip.result = 'R$' + (content.trip.result).format(2, 3, '.', ',');
+
+            fs.readFile('./template/index.html', 'utf-8', function(error, source){
+
+                var template = handlebars.compile(source);
+                var html = template(content);
+
+                pdf.create(html, options).toFile('./tmp/relatorio.pdf', function(err, res) {
+                    if (err) return console.log(err);
+                    console.log(res);
+                });
+            });
+
+        });
+
+    };
+
     return {
         post: post,
         get: get,
         put: put,
+        getPdf: getPdf,
         putRemoveFuel: putRemoveFuel,
         putRemoveExpense: putRemoveExpense,
         putRemoveConnection: putRemoveConnection
@@ -497,3 +675,10 @@ function convertDate(date) {
     var datePart = date.split('/');
     return datePart[2] + "-" + datePart[1] + "-" + datePart[0];
 }
+
+Number.prototype.format = function(n, x, s, c) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+        num = this.toFixed(Math.max(0, ~~n));
+
+    return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+};

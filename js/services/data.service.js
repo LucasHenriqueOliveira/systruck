@@ -560,6 +560,28 @@
                 return deferred.promise;
             },
 
+            getTripPdf: function(id) {
+
+                var company = $localstorage.getObject('company');
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'POST',
+                    url: CONFIG.url + 'trip-pdf/' + id,
+                    data: {company: company}
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
             getChartProfitTotal: function() {
 
                 var data_chart = [{

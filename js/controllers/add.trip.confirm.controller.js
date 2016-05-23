@@ -59,9 +59,8 @@
         $localstorage.remove('connections');
 
         vm.printIt = function(){
-            var table = document.getElementById('print').innerHTML;
             var myWindow = $window.open('', '', 'width=800, height=600');
-            myWindow.document.write(table);
+            myWindow.document.write('a');
             myWindow.print();
         };
 

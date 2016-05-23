@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!--Core CSS -->
+    <link href="http://www.systruck.com.br/bs3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://www.systruck.com.br/css/bootstrap-reset.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://www.systruck.com.br/css/style.css" rel="stylesheet">
+    <link href="http://www.systruck.com.br/css/style-responsive.css" rel="stylesheet" />
+
+</head>
+<body style="font-size: 8px">
+    <div id="pageHeader-first">Header on first page</div>
+
+    <table style="border:0; width: 100%;">
+        <tr>
+            <td>
+                <h2 style="font-size: 9px; margin-top: 0px;">Viagem</h2>
+                <p><strong>Nº viagem:</strong> {{trip.viagem_id}} <br>
+                    <strong>Saída:</strong> {{trip.viagem_data_saida}} <br>
+                    <strong>Chegada:</strong> {{trip.viagem_data_chegada}}<br>
+                    <strong>Origem:</strong> {{trip.cidade_origem}}<br>
+                    <strong>Destino:</strong> {{trip.cidade_destino}}
+                </p>
+            </td>
+            <td>
+                <h2 style="font-size: 9px; margin-top: 0px;">Veículo</h2>
+                <p>
+                    <strong>Caminhão:</strong> {{trip.carro_nome}} <br>
+                    <strong>Frota:</strong> {{trip.carro_frota}} <br>
+                    <strong>Placa:</strong> {{trip.carro_placa}} <br>
+                    <strong>Placa semi-reboque:</strong> {{trip.carro_placa_semi_reboque}} <br>
+                    <strong>Motorista:</strong> {{trip.usuario_nome}}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2 style="font-size: 9px; margin-top: 0px;">Quilometragem (Km)</h2>
+                <p><strong>Saída:</strong> {{trip.viagem_km_saida}} <br>
+                    <strong>Chegada:</strong> {{trip.viagem_km_chegada}}<br>
+                    <strong>Paga:</strong> {{trip.viagem_valor_km}} <br>
+                    <strong>Rodados:</strong> {{trip.rodados}} <br>
+                    <strong>Diferença Km rodados:</strong> {{trip.dif_km}} <br>
+                    <strong>Consumo médio: </strong> {{#if trip.average}}{{trip.average}} km/l {{/if}}
+                </p>
+            </td>
+            <td>
+                <h2 style="font-size: 9px; margin-top: 0px;">Recebimentos</h2>
+                <p><strong>Frete Total:</strong> {{trip.viagem_frete}} <br>
+                    <strong>Ad. Empresa:</strong> {{trip.viagem_adiantamento}} <br>
+                    <strong>Complemento:</strong> {{trip.viagem_complemento}}<br>
+                    <strong>Adiantamento:</strong> {{trip.advance}}<br>
+                    <strong>Resultado:</strong> {{trip.result}}
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    {{#if connections}}
+    <h2 style="font-size: 9px; margin-top: 0px;">Conexão</h2>
+    <table class="table table-condensed">
+        <thead>
+        <tr style="font-size: 8px">
+            <th>Cidade</th>
+            <th class="text-center">Data</th>
+            <th class="text-center">Km</th>
+            <th class="text-center">Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each connections}}
+        <tr style="font-size: 8px">
+            <td>
+                <ul style="padding-left: 0px;">
+                    <li>Origem: {{cityHome.name}}</li>
+                    <li>Destino: {{cityDestination.name}}</li>
+                </ul>
+            </td>
+            <td class="text-center">
+                <ul>
+                    <li>Saída: {{dateOutput}}</li>
+                    <li>Chegada: {{dateArrival}}</li>
+                </ul>
+            </td>
+            <td class="text-center">
+                <ul>
+                    <li>Saída: {{kmOutput}}</li>
+                    <li>Chegada: {{kmArrival}}</li>
+                    <li>Paga: {{kmPaid}}</li>
+                </ul>
+            </td>
+            <td class="text-center">
+                <ul>
+                    <li>Frete Total: {{totalMoney}}</li>
+                    <li>Ad. Empresa: {{moneyCompany}}</li>
+                    <li>Complemento: {{moneyComplement}}</li>
+                </ul>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    {{/if}}
+
+    {{#if fuels}}
+    <h2 style="font-size: 9px; margin-top: 0px;">Despesas Abastecimento</h2>
+    <table class="table table-bordered table-striped table-condensed">
+        <thead>
+        <tr style="font-size: 8px">
+            <th>Local</th>
+            <th class="text-center">Litros</th>
+            <th class="text-center">Valor</th>
+            <th class="text-center">km</th>
+            <th class="text-center">Média</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each fuels}}
+        <tr style="font-size: 8px">
+            <td>{{name}}</td>
+            <td class="text-center">{{qtd}} litros</td>
+            <td class="text-center">{{price}}</td>
+            <td class="text-center">{{km}}</td>
+            <td class="text-center">
+                {{#if media}}
+                <span>{{media}} km/l</span>
+                {{else}}
+                -
+                {{/if}}
+            </td>
+        </tr>
+        {{/each}}
+        <tr style="font-size: 8px">
+            <td><strong>Total</strong></td>
+            <td class="text-center"><strong>{{trip.sumLts}} litros</strong></td>
+            <td class="text-center"><strong>{{trip.sumPriceFuel}}</strong></td>
+            <td class="text-center"> - </td>
+            <td class="text-center"> - </td>
+        </tr>
+        </tbody>
+    </table>
+    {{/if}}
+
+    {{#if expenses}}
+    <h2 style="font-size: 9px; margin-top: 0px;">Despesas gerais</h2>
+    <table class="table table-bordered table-striped table-condensed">
+        <thead>
+        <tr style="font-size: 8px">
+            <th>Descrição</th>
+            <th class="text-center">Valor</th>
+            <th class="text-center">Data</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each expenses}}
+        <tr style="font-size: 8px">
+            <td>{{name}}</td>
+            <td class="text-center">{{value}}</td>
+            <td class="text-center">{{date}}</td>
+        </tr>
+        {{/each}}
+        <tr style="font-size: 8px">
+            <td><strong>Total</strong></td>
+            <td class="text-center"><strong>{{sumPriceExpenses}}</strong></td>
+            <td class="text-center"> - </td>
+        </tr>
+        </tbody>
+    </table>
+    {{/if}}
+
+    {{#if trip.comments}}
+    <h2 style="font-size: 9px">Observações</h2>
+    <p style="font-size: 8px">{{trip.comments}}</p>
+    {{/if}}
+
+</body>
+</html>

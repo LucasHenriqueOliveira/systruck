@@ -70,6 +70,7 @@ router.put('/api/v1/maintenance/:id', maintenanceController.put);
 // trip
 router.get('/api/v1/trip/:id', TripController.get);
 router.put('/api/v1/trip/:id', TripController.put);
+router.post('/api/v1/trip-pdf/:id', TripController.getPdf);
 router.post('/api/v1/dash', dashController.post);
 router.get('/api/v1/header/:id', headerController.get);
 router.post('/api/v1/add-trip', TripController.post);

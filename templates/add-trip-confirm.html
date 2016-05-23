@@ -42,193 +42,191 @@
                             </button>
                             <strong>Pronto!</strong> O cadastro da viagem foi realizado com sucesso.
                         </div>
-                        <div id="print">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="prf-contacts">
-                                        <h2> <span><i class="fa fa-map-marker"></i></span> Viagem</h2>
-                                        <div class="location-info">
-                                            <p><strong>Nº viagem:</strong> {{vm.trip.id | number}} <br>
-                                                <strong>Saída:</strong> {{vm.trip.dateOutput}} <br>
-                                                <strong>Chegada:</strong> {{vm.trip.dateArrival}}<br>
-                                                <strong>Origem:</strong> {{vm.trip.cityHome.name}}<br>
-                                                <strong>Destino:</strong> {{vm.trip.cityDestination.name}}
-                                            </p>
-                                        </div>
-                                        <h2> <span><i class="fa fa-truck"></i></span> Veículo</h2>
-                                        <div class="location-info">
-                                            <p>
-                                                <strong>Caminhão:</strong> {{vm.trip.truckSelect.carro_nome}} <br>
-                                                <strong>Frota:</strong> {{vm.trip.truckSelect.frota}} <br>
-                                                <strong>Placa:</strong> {{vm.trip.truckSelect.placa}} <br>
-                                                <strong>Placa semi-reboque:</strong> {{vm.trip.truckSelect.placa_semi_reboque}} <br>
-                                                <strong>Motorista:</strong> {{vm.trip.driverSelect.name}}</p>
-                                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-map-marker"></i></span> Viagem</h2>
+                                    <div class="location-info">
+                                        <p><strong>Nº viagem:</strong> {{vm.trip.id | number}} <br>
+                                            <strong>Saída:</strong> {{vm.trip.dateOutput}} <br>
+                                            <strong>Chegada:</strong> {{vm.trip.dateArrival}}<br>
+                                            <strong>Origem:</strong> {{vm.trip.cityHome.name}}<br>
+                                            <strong>Destino:</strong> {{vm.trip.cityDestination.name}}
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="prf-contacts">
-                                        <h2> <span><i class="fa fa-road"></i></span> Quilometragem (Km)</h2>
-                                        <div class="location-info">
-                                            <p><strong>Saída:</strong> {{vm.trip.kmOutput | number}} <br>
-                                                <strong>Chegada:</strong> {{vm.trip.kmArrival | number}}<br>
-                                                <strong>Paga:</strong> {{vm.trip.kmPaid | number}} <br>
-                                                <strong>Rodados:</strong> {{vm.trip.traveled | number}} <br>
-                                                <strong>Diferença Km rodados:</strong> {{vm.trip.diffTraveled | number}} <br>
-                                                <strong>Consumo médio: </strong> {{vm.trip.average}} km/l
-                                            </p>
-                                        </div>
-                                        <h2> <span><i class="fa fa-money"></i></span> Recebimentos</h2>
-                                        <div class="location-info">
-                                            <p><strong>Frete Total:</strong> {{vm.trip.totalMoney | currency}} <br>
-                                                <strong>Ad. Empresa:</strong> {{vm.trip.moneyCompany | currency}} <br>
-                                                <strong>Complemento:</strong> {{vm.trip.moneyComplement | currency}}<br>
-                                                <strong>Adiantamento:</strong> {{vm.trip.advance | currency}}<br>
-                                                <strong>Resultado:</strong> {{vm.trip.result | currency}}</p>
-                                        </div>
+                                    <h2> <span><i class="fa fa-truck"></i></span> Veículo</h2>
+                                    <div class="location-info">
+                                        <p>
+                                            <strong>Caminhão:</strong> {{vm.trip.truckSelect.carro_nome}} <br>
+                                            <strong>Frota:</strong> {{vm.trip.truckSelect.frota}} <br>
+                                            <strong>Placa:</strong> {{vm.trip.truckSelect.placa}} <br>
+                                            <strong>Placa semi-reboque:</strong> {{vm.trip.truckSelect.placa_semi_reboque}} <br>
+                                            <strong>Motorista:</strong> {{vm.trip.driverSelect.name}}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" ng-show="vm.trip.connections">
-                                <div class="col-md-11">
-                                    <div class="prf-contacts">
-                                        <h2> <span><i class="fa fa-exchange"></i></span> Conexão</h2>
-                                        <div class="location-info">
-                                            <table class="table table-condensed">
-                                                <thead>
-                                                <tr>
-                                                    <th>Cidade</th>
-                                                    <th class="text-center">Data</th>
-                                                    <th class="text-center">Km</th>
-                                                    <th class="text-center">Valor</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr ng-repeat="connection in vm.trip.connections track by $index">
-                                                    <td>
-                                                        <ul>
-                                                            <li>Origem: {{connection.cityHome.name}}</li>
-                                                            <li>Destino: {{connection.cityDestination.name}}</li>
-                                                        </ul>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <ul>
-                                                            <li>Saída: {{connection.dateOutput}}</li>
-                                                            <li>Chegada: {{connection.dateArrival}}</li>
-                                                        </ul>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <ul>
-                                                            <li>Saída: {{connection.kmOutput | number}}</li>
-                                                            <li>Chegada: {{connection.kmArrival | number}}</li>
-                                                            <li>Paga: {{connection.kmPaid | number}}</li>
-                                                            <li>Rodados: {{connection.kmArrival - connection.kmOutput | number}}</li>
-                                                            <li>Diferença km: {{(connection.kmArrival - connection.kmOutput) - (connection.kmPaid * 2) | number}}</li>
-                                                        </ul>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <ul>
-                                                            <li>Frete Total: {{connection.totalMoney | currency}}</li>
-                                                            <li>Ad. Empresa: {{connection.moneyCompany | currency}}</li>
-                                                            <li>Complemento: {{connection.moneyComplement | currency}}</li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-road"></i></span> Quilometragem (Km)</h2>
+                                    <div class="location-info">
+                                        <p><strong>Saída:</strong> {{vm.trip.kmOutput | number}} <br>
+                                            <strong>Chegada:</strong> {{vm.trip.kmArrival | number}}<br>
+                                            <strong>Paga:</strong> {{vm.trip.kmPaid | number}} <br>
+                                            <strong>Rodados:</strong> {{vm.trip.traveled | number}} <br>
+                                            <strong>Diferença Km rodados:</strong> {{vm.trip.diffTraveled | number}} <br>
+                                            <strong>Consumo médio: </strong> {{vm.trip.average}} km/l
+                                        </p>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="space15" ng-show="vm.trip.connections"></div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <div class="prf-contacts">
-                                        <h2> <span><i class="fa fa-battery-half"></i></span> Despesas Abastecimento</h2>
-                                        <div class="location-info">
-                                            <table class="table table-bordered table-striped table-condensed">
-                                                <thead>
-                                                <tr>
-                                                    <th>Local</th>
-                                                    <th class="text-center">Litros</th>
-                                                    <th class="text-center">Valor</th>
-                                                    <th class="text-center">km</th>
-                                                    <th class="text-center">Média</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr ng-repeat="fuel in vm.trip.fuels track by $index">
-                                                    <td>{{fuel.name}}</td>
-                                                    <td class="text-center">{{fuel.qtd}} litros</td>
-                                                    <td class="text-center">{{fuel.price | currency}}</td>
-                                                    <td class="text-center">{{fuel.km | number}}</td>
-                                                    <td class="text-center">
-                                                        <span ng-if="fuel.media">{{fuel.media}} km/l</span>
-                                                        <span ng-if="!fuel.media"> - </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Total</strong></td>
-                                                    <td class="text-center"><strong>{{vm.trip.sumLts}} litros</strong></td>
-                                                    <td class="text-center"><strong>{{vm.trip.sumPriceFuel | currency}}</strong></td>
-                                                    <td class="text-center"> - </td>
-                                                    <td class="text-center"> - </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br >
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <div class="prf-contacts">
-                                        <h2> <span><i class="fa fa-credit-card"></i></span> Despesas gerais</h2>
-                                        <div class="location-info">
-                                            <table class="table table-bordered table-striped table-condensed">
-                                                <thead>
-                                                <tr>
-                                                    <th>Descrição</th>
-                                                    <th class="text-center">Valor</th>
-                                                    <th class="text-center">Data</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr ng-repeat="expense in vm.trip.expenses track by $index">
-                                                    <td>{{expense.name}}</td>
-                                                    <td class="text-center">{{expense.value | currency}}</td>
-                                                    <td class="text-center">{{expense.date}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Total</strong></td>
-                                                    <td class="text-center"><strong>{{vm.trip.sumPriceExpenses | currency}}</strong></td>
-                                                    <td class="text-center"> - </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space15" ng-show="vm.trip.comments"></div>
-                            <div class="row" ng-show="vm.trip.comments">
-                                <div class="col-md-11">
-                                    <div class="prf-contacts">
-                                        <h2> <span><i class="fa fa-comments"></i></span> Observações</h2>
-                                        <div class="location-info">
-                                            <p>{{vm.trip.comments}}</p>
-                                        </div>
+                                    <h2> <span><i class="fa fa-money"></i></span> Recebimentos</h2>
+                                    <div class="location-info">
+                                        <p><strong>Frete Total:</strong> {{vm.trip.totalMoney | currency}} <br>
+                                            <strong>Ad. Empresa:</strong> {{vm.trip.moneyCompany | currency}} <br>
+                                            <strong>Complemento:</strong> {{vm.trip.moneyComplement | currency}}<br>
+                                            <strong>Adiantamento:</strong> {{vm.trip.advance | currency}}<br>
+                                            <strong>Resultado:</strong> {{vm.trip.result | currency}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-11 text-center">
-                                <button type="button" class="btn btn-default" ng-click="vm.editTrip(vm.trip.id)"><i class="fa fa-pencil"></i> Editar</button>
-                                <button type="button" class="btn btn-primary" ng-click="vm.printIt()"><i class="fa fa-print"></i> Imprimir</button>
+                        <div class="row" ng-show="vm.trip.connections">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-exchange"></i></span> Conexão</h2>
+                                    <div class="location-info">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th>Cidade</th>
+                                                <th class="text-center">Data</th>
+                                                <th class="text-center">Km</th>
+                                                <th class="text-center">Valor</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="connection in vm.trip.connections track by $index">
+                                                <td>
+                                                    <ul>
+                                                        <li>Origem: {{connection.cityHome.name}}</li>
+                                                        <li>Destino: {{connection.cityDestination.name}}</li>
+                                                    </ul>
+                                                </td>
+                                                <td class="text-center">
+                                                    <ul>
+                                                        <li>Saída: {{connection.dateOutput}}</li>
+                                                        <li>Chegada: {{connection.dateArrival}}</li>
+                                                    </ul>
+                                                </td>
+                                                <td class="text-center">
+                                                    <ul>
+                                                        <li>Saída: {{connection.kmOutput | number}}</li>
+                                                        <li>Chegada: {{connection.kmArrival | number}}</li>
+                                                        <li>Paga: {{connection.kmPaid | number}}</li>
+                                                        <li>Rodados: {{connection.kmArrival - connection.kmOutput | number}}</li>
+                                                        <li>Diferença km: {{(connection.kmArrival - connection.kmOutput) - (connection.kmPaid * 2) | number}}</li>
+                                                    </ul>
+                                                </td>
+                                                <td class="text-center">
+                                                    <ul>
+                                                        <li>Frete Total: {{connection.totalMoney | currency}}</li>
+                                                        <li>Ad. Empresa: {{connection.moneyCompany | currency}}</li>
+                                                        <li>Complemento: {{connection.moneyComplement | currency}}</li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="space15" ng-show="vm.trip.connections"></div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-battery-half"></i></span> Despesas Abastecimento</h2>
+                                    <div class="location-info">
+                                        <table class="table table-bordered table-striped table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th>Local</th>
+                                                <th class="text-center">Litros</th>
+                                                <th class="text-center">Valor</th>
+                                                <th class="text-center">km</th>
+                                                <th class="text-center">Média</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="fuel in vm.trip.fuels track by $index">
+                                                <td>{{fuel.name}}</td>
+                                                <td class="text-center">{{fuel.qtd}} litros</td>
+                                                <td class="text-center">{{fuel.price | currency}}</td>
+                                                <td class="text-center">{{fuel.km | number}}</td>
+                                                <td class="text-center">
+                                                    <span ng-if="fuel.media">{{fuel.media}} km/l</span>
+                                                    <span ng-if="!fuel.media"> - </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Total</strong></td>
+                                                <td class="text-center"><strong>{{vm.trip.sumLts}} litros</strong></td>
+                                                <td class="text-center"><strong>{{vm.trip.sumPriceFuel | currency}}</strong></td>
+                                                <td class="text-center"> - </td>
+                                                <td class="text-center"> - </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br >
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-credit-card"></i></span> Despesas gerais</h2>
+                                    <div class="location-info">
+                                        <table class="table table-bordered table-striped table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th>Descrição</th>
+                                                <th class="text-center">Valor</th>
+                                                <th class="text-center">Data</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="expense in vm.trip.expenses track by $index">
+                                                <td>{{expense.name}}</td>
+                                                <td class="text-center">{{expense.value | currency}}</td>
+                                                <td class="text-center">{{expense.date}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Total</strong></td>
+                                                <td class="text-center"><strong>{{vm.trip.sumPriceExpenses | currency}}</strong></td>
+                                                <td class="text-center"> - </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space15" ng-show="vm.trip.comments"></div>
+                        <div class="row" ng-show="vm.trip.comments">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-comments"></i></span> Observações</h2>
+                                    <div class="location-info">
+                                        <p>{{vm.trip.comments}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-11 text-center">
+                            <button type="button" class="btn btn-default" ng-click="vm.editTrip(vm.trip.id)"><i class="fa fa-pencil"></i> Editar</button>
+                            <button type="button" class="btn btn-primary" ng-click="vm.printIt()"><i class="fa fa-print"></i> Imprimir</button>
                         </div>
                     </div>
                 </section>
