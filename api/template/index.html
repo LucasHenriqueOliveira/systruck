@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
 
     <!--Core CSS -->
     <link href="http://www.systruck.com.br/bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -8,13 +9,26 @@
 
     <!-- Custom styles for this template -->
     <link href="http://www.systruck.com.br/css/style.css" rel="stylesheet">
-    <link href="http://www.systruck.com.br/css/style-responsive.css" rel="stylesheet" />
 
 </head>
-<body style="font-size: 8px">
-    <div id="pageHeader-first">Header on first page</div>
+<body style="font-size: 8px;margin-top: 0">
+    <div style="margin-top: 0">
+        <table style="border:0; width: 100%">
+            <tr style="font-size: 16px">
+                <td>{{company.empresa_nome}}</td>
+                <td style="font-size:9px; text-align: right;">
+                    <ul style="list-style-type: none; line-height:15px;">
+                        <li>{{company.empresa_logradouro}}, {{company.empresa_numero}} - {{company.empresa_bairro}}</li>
+                        <li>{{company.cidade_nome}} - {{company.empresa_cep}}</li>
+                        <li>Tel: {{company.empresa_telefone_1}}</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <hr style="margin-top: 0;margin-bottom: 10px;">
+    </div>
 
-    <table style="border:0; width: 100%;">
+    <table style="border:0; width: 100%;margin-top: 0">
         <tr>
             <td>
                 <h2 style="font-size: 9px; margin-top: 0px;">Viagem</h2>
@@ -60,39 +74,41 @@
     </table>
 
     {{#if connections}}
-    <h2 style="font-size: 9px; margin-top: 0px;">Conexão</h2>
-    <table class="table table-condensed">
+    <h2 style="font-size: 9px; margin-top: 5px; margin-bottom: 5px;">Conexão</h2>
+    <table class="table table-condensed" style="margin-bottom: 5px;">
         <thead>
         <tr style="font-size: 8px">
-            <th>Cidade</th>
-            <th class="text-center">Data</th>
-            <th class="text-center">Km</th>
-            <th class="text-center">Valor</th>
+            <th style="padding: 5px;">Cidade</th>
+            <th style="padding: 5px;" class="text-center">Data</th>
+            <th style="padding: 5px;" class="text-center">Km</th>
+            <th style="padding: 5px;" class="text-center">Valor</th>
         </tr>
         </thead>
         <tbody>
         {{#each connections}}
         <tr style="font-size: 8px">
-            <td>
+            <td style="padding: 5px;">
                 <ul style="padding-left: 0px;">
                     <li>Origem: {{cityHome.name}}</li>
                     <li>Destino: {{cityDestination.name}}</li>
                 </ul>
             </td>
-            <td class="text-center">
+            <td class="text-center" style="padding: 5px;">
                 <ul>
                     <li>Saída: {{dateOutput}}</li>
                     <li>Chegada: {{dateArrival}}</li>
                 </ul>
             </td>
-            <td class="text-center">
+            <td class="text-center" style="padding: 5px;">
                 <ul>
                     <li>Saída: {{kmOutput}}</li>
                     <li>Chegada: {{kmArrival}}</li>
                     <li>Paga: {{kmPaid}}</li>
+                    <li>Rodados: {{kmTraveled}}</li>
+                    <li>Diferença km: {{kmDifference}}</li>
                 </ul>
             </td>
-            <td class="text-center">
+            <td class="text-center" style="padding: 5px;">
                 <ul>
                     <li>Frete Total: {{totalMoney}}</li>
                     <li>Ad. Empresa: {{moneyCompany}}</li>
@@ -110,21 +126,21 @@
     <table class="table table-bordered table-striped table-condensed">
         <thead>
         <tr style="font-size: 8px">
-            <th>Local</th>
-            <th class="text-center">Litros</th>
-            <th class="text-center">Valor</th>
-            <th class="text-center">km</th>
-            <th class="text-center">Média</th>
+            <th style="padding: 5px;">Local</th>
+            <th style="padding: 5px;" class="text-center">Litros</th>
+            <th style="padding: 5px;" class="text-center">Valor</th>
+            <th style="padding: 5px;" class="text-center">km</th>
+            <th style="padding: 5px;" class="text-center">Média</th>
         </tr>
         </thead>
         <tbody>
         {{#each fuels}}
         <tr style="font-size: 8px">
-            <td>{{name}}</td>
-            <td class="text-center">{{qtd}} litros</td>
-            <td class="text-center">{{price}}</td>
-            <td class="text-center">{{km}}</td>
-            <td class="text-center">
+            <td style="padding: 5px;">{{name}}</td>
+            <td class="text-center" style="padding: 5px;">{{qtd}} litros</td>
+            <td class="text-center" style="padding: 5px;">{{price}}</td>
+            <td class="text-center" style="padding: 5px;">{{km}}</td>
+            <td class="text-center" style="padding: 5px;">
                 {{#if media}}
                 <span>{{media}} km/l</span>
                 {{else}}
@@ -134,11 +150,11 @@
         </tr>
         {{/each}}
         <tr style="font-size: 8px">
-            <td><strong>Total</strong></td>
-            <td class="text-center"><strong>{{trip.sumLts}} litros</strong></td>
-            <td class="text-center"><strong>{{trip.sumPriceFuel}}</strong></td>
-            <td class="text-center"> - </td>
-            <td class="text-center"> - </td>
+            <td style="padding: 5px;"><strong>Total</strong></td>
+            <td class="text-center" style="padding: 5px;"><strong>{{trip.sumLts}} litros</strong></td>
+            <td class="text-center" style="padding: 5px;"><strong>{{trip.sumPriceFuel}}</strong></td>
+            <td class="text-center" style="padding: 5px;"> - </td>
+            <td class="text-center" style="padding: 5px;"> - </td>
         </tr>
         </tbody>
     </table>
@@ -149,23 +165,23 @@
     <table class="table table-bordered table-striped table-condensed">
         <thead>
         <tr style="font-size: 8px">
-            <th>Descrição</th>
-            <th class="text-center">Valor</th>
-            <th class="text-center">Data</th>
+            <th style="padding: 5px;">Descrição</th>
+            <th style="padding: 5px;" class="text-center">Valor</th>
+            <th style="padding: 5px;" class="text-center">Data</th>
         </tr>
         </thead>
         <tbody>
         {{#each expenses}}
         <tr style="font-size: 8px">
-            <td>{{name}}</td>
-            <td class="text-center">{{value}}</td>
-            <td class="text-center">{{date}}</td>
+            <td style="padding: 5px;">{{name}}</td>
+            <td style="padding: 5px;" class="text-center">{{value}}</td>
+            <td style="padding: 5px;" class="text-center">{{date}}</td>
         </tr>
         {{/each}}
         <tr style="font-size: 8px">
-            <td><strong>Total</strong></td>
-            <td class="text-center"><strong>{{sumPriceExpenses}}</strong></td>
-            <td class="text-center"> - </td>
+            <td style="padding: 5px;"><strong>Total</strong></td>
+            <td style="padding: 5px;" class="text-center"><strong>{{trip.sumPriceExpenses}}</strong></td>
+            <td style="padding: 5px;" class="text-center"> - </td>
         </tr>
         </tbody>
     </table>
@@ -175,6 +191,18 @@
     <h2 style="font-size: 9px">Observações</h2>
     <p style="font-size: 8px">{{trip.comments}}</p>
     {{/if}}
+
+    <table style="width: 100%; margin-top: 30px">
+        <tr>
+            <td>
+                ________________________________________________________________ <br />
+                {{trip.usuario_nome}}
+            </td>
+            <td style="text-align: right">
+                Emitido em {{trip.date}} às {{trip.hour}}.
+            </td>
+        </tr>
+    </table>
 
 </body>
 </html>
