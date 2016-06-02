@@ -526,7 +526,8 @@ var TripController = function(dbconfig){
                 trip: trip,
                 connections: connections,
                 fuels: fuels,
-                expenses: expenses
+                expenses: expenses,
+                company: company
             };
 
             content.trip.rodados = content.trip.viagem_km_chegada - content.trip.viagem_km_saida;
@@ -543,7 +544,7 @@ var TripController = function(dbconfig){
                 },
                 "footer": {
                     "height": "10mm",
-                    "contents": '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>'
+                    "contents": '<span style="font-size: 9px">{{page}}</span><span style="font-size: 9px">/</span><span  style="font-size: 9px">{{pages}}</span>'
                 }
             };
 
@@ -552,6 +553,9 @@ var TripController = function(dbconfig){
             var connections = [];
 
             for(var i = 0; i < content.connections.length; i++) {
+
+                var kmTraveled = content.connections[i].conexao_km_chegada - content.connections[i].conexao_km_saida;
+                var kmDifference = kmTraveled - (2 * content.connections[i].conexao_valor_km);
 
                 connections.push({
                     id: content.connections[i].conexao_id,
@@ -565,12 +569,14 @@ var TripController = function(dbconfig){
                     },
                     dateArrival: content.connections[i].conexao_data_chegada,
                     dateOutput: content.connections[i].conexao_data_saida,
-                    kmArrival: content.connections[i].conexao_km_chegada,
-                    kmOutput: content.connections[i].conexao_km_saida,
-                    kmPaid: content.connections[i].conexao_valor_km,
-                    moneyCompany: content.connections[i].conexao_adiantamento,
-                    moneyComplement: content.connections[i].conexao_complemento,
-                    totalMoney: content.connections[i].conexao_frete
+                    kmArrival: '' + (content.connections[i].conexao_km_chegada).format(0, 3, '.'),
+                    kmOutput: '' + (content.connections[i].conexao_km_saida).format(0, 3, '.'),
+                    kmPaid: '' + (content.connections[i].conexao_valor_km).format(0, 3, '.'),
+                    kmTraveled: '' + (kmTraveled).format(0, 3, '.'),
+                    kmDifference: '' + (kmDifference).format(0, 3, '.'),
+                    moneyCompany: 'R$' + (content.connections[i].conexao_adiantamento).format(2, 3, '.', ','),
+                    moneyComplement: 'R$' + (content.connections[i].conexao_complemento).format(2, 3, '.', ','),
+                    totalMoney: 'R$' + (content.connections[i].conexao_frete).format(2, 3, '.', ',')
                 });
             }
             content.connections = connections;
@@ -581,9 +587,11 @@ var TripController = function(dbconfig){
                     id: content.fuels[i].abastecimento_id,
                     name: content.fuels[i].abastecimento_nome,
                     qtd: content.fuels[i].abastecimento_litros,
-                    price: content.fuels[i].abastecimento_valor,
+                    price: 'R$' + (content.fuels[i].abastecimento_valor).format(2, 3, '.', ','),
+                    sum: content.fuels[i].abastecimento_valor,
                     date: content.fuels[i].abastecimento_data,
-                    km: content.fuels[i].abastecimento_km,
+                    km: '' + (content.fuels[i].abastecimento_km).format(0, 3, '.'),
+                    km_sum: content.fuels[i].abastecimento_km,
                     tanque: content.fuels[i].abastecimento_tanque_cheio
                 });
             }
@@ -595,7 +603,8 @@ var TripController = function(dbconfig){
                     id: content.expenses[i].despesa_id,
                     name: content.expenses[i].despesa_nome,
                     type: content.expenses[i].despesa_tipo,
-                    value: content.expenses[i].despesa_valor,
+                    value: 'R$' + (content.expenses[i].despesa_valor).format(2, 3, '.', ','),
+                    sum: content.expenses[i].despesa_valor,
                     date: content.expenses[i].despesa_data
                 });
             }
@@ -609,11 +618,11 @@ var TripController = function(dbconfig){
             content.fuels.forEach(function(fuel, index) {
                 sumLts = sumLts + parseFloat(fuel.qtd);
                 sumLtsKm = sumLtsKm + parseFloat(fuel.qtd);
-                sumPriceFuel = sumPriceFuel + parseFloat(fuel.price);
-                sumKm = sumKm + fuel.km;
+                sumPriceFuel = sumPriceFuel + parseFloat(fuel.sum);
+                sumKm = sumKm + fuel.km_sum;
                 if(fuel.tanque == 1) {
                     content.fuels[index].media = (sumKm - lastFuelTankFull/sumLtsKm).toFixed(2);
-                    lastFuelTankFull = fuel.km;
+                    lastFuelTankFull = fuel.km_sum;
                     sumKm = 0;
                     sumLtsKm = 0;
                 }
@@ -621,7 +630,7 @@ var TripController = function(dbconfig){
 
             var sumPriceExpenses = 0;
             content.expenses.forEach(function(expense) {
-                sumPriceExpenses = sumPriceExpenses + parseFloat(expense.value);
+                sumPriceExpenses = sumPriceExpenses + parseFloat(expense.sum);
             });
 
             content.trip.sumLts = sumLts;
@@ -630,6 +639,8 @@ var TripController = function(dbconfig){
             content.trip.average = (content.trip.rodados/sumLts).toFixed(2);
             content.trip.advance = parseInt(content.trip.viagem_adiantamento) + parseInt(content.trip.viagem_complemento);
             content.trip.result = (content.trip.sumPriceExpenses + content.trip.sumPriceFuel) - content.trip.advance;
+            content.trip.sumPriceFuel = 'R$' + (sumPriceFuel).format(2, 3, '.', ',');
+            content.trip.sumPriceExpenses = 'R$' + (sumPriceExpenses).format(2, 3, '.', ',');
 
             content.trip.viagem_km_saida = '' + (content.trip.viagem_km_saida).format(0, 3, '.');
             content.trip.viagem_km_chegada = '' + (content.trip.viagem_km_chegada).format(0, 3, '.');
@@ -643,17 +654,36 @@ var TripController = function(dbconfig){
             content.trip.advance = 'R$' + (content.trip.advance).format(2, 3, '.', ',');
             content.trip.result = 'R$' + (content.trip.result).format(2, 3, '.', ',');
 
+
+            var monthNames = [
+                "Janeiro", "Fevereiro", "Março",
+                "Abril", "Maio", "Junho", "Julho",
+                "Agosto", "Setembro", "Outubro",
+                "Novembro", "Dezembro"
+            ];
+
+            var date = new Date();
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var year = date.getFullYear();
+
+            content.trip.date = day + ' de ' + monthNames[monthIndex] + ' de ' + year;
+            content.trip.hour = date.getHours() + ':' + date.getMinutes();
+
             fs.readFile('./template/index.html', 'utf-8', function(error, source){
 
                 var template = handlebars.compile(source);
                 var html = template(content);
 
-                pdf.create(html, options).toFile('./tmp/relatorio.pdf', function(err, res) {
-                    if (err) return console.log(err);
-                    console.log(res);
+                pdf.create(html, options).toFile('./tmp/' + id + '.pdf', function(err, res) {
+                    if (err) {
+                        console.log(err);
+                    }
                 });
             });
 
+            var url = req.protocol + '://' + req.get('host') + '/api/tmp/' + id + '.pdf';
+            res.json({"error": false, "url": url});
         });
 
     };

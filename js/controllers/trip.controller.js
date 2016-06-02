@@ -14,6 +14,7 @@
         vm.fuels = [];
         vm.expenses = [];
         vm.loading = true;
+        vm.button = 'Imprimir';
 
         $timeout(function() {
             vm.loading = false;
@@ -146,8 +147,17 @@
         $localstorage.remove('connections');
 
         vm.printIt = function(){
-            DataService.getTripPdf($routeParams.id).then(function (data) {
-                $window.open(data.url);
+            vm.button = 'Imprimindo...';
+            DataService.getTripPdf($routeParams.id).then(function (response) {
+                if(response.error === false) {
+                    $timeout(function () {
+                        $window.open(response.url);
+                        vm.button = 'Imprimir';
+                    }, 3000);
+                } else {
+                    toastr.error(response.message, 'Impressão do Controle de viagem', {timeOut: 3000});
+                }
+
             });
         };
 

@@ -10,6 +10,7 @@
     function AddTripConfirmController($location, $localstorage, DataService, $timeout, $window) {
         var vm = this;
         vm.loading = true;
+        vm.button = 'Imprimir';
 
         $timeout(function() {
             vm.loading = false;
@@ -59,9 +60,18 @@
         $localstorage.remove('connections');
 
         vm.printIt = function(){
-            var myWindow = $window.open('', '', 'width=800, height=600');
-            myWindow.document.write('a');
-            myWindow.print();
+            vm.button = 'Imprimindo...';
+            DataService.getTripPdf(vm.trip.id).then(function (response) {
+                if(response.error === false) {
+                    $timeout(function () {
+                        $window.open(response.url);
+                        vm.button = 'Imprimir';
+                    }, 3000);
+                } else {
+                    toastr.error(response.message, 'Impressão do Controle de viagem', {timeOut: 3000});
+                }
+
+            });
         };
 
         vm.editTrip = function(id){
