@@ -24,7 +24,7 @@
                             </span>
                     </header>
                     <div class="panel-body">
-                        <div class="adv-table editable-table" ng-show="vm.partsAvailable.length">
+                        <div class="adv-table editable-table">
                             <div class="clearfix">
                                 <div class="btn-group">
                                     <a href data-target="#myModal" data-toggle="modal" id="editable-sample_new" class="btn btn-primary">
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="space15"></div>
-                            <table class="display table table-hover table-bordered table-striped table-condensed">
+                            <table ng-show="vm.partsAvailable.length" class="display table table-hover table-bordered table-striped table-condensed">
                                 <thead>
                                 <tr>
                                     <th class="text-center">Peça/Item</th>
@@ -65,9 +65,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <div ng-show="!vm.partsAvailable.length">
-                            <p>Não existem peças/itens ativos no estoque.</p>
                         </div>
                     </div>
                 </section>
