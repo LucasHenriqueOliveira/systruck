@@ -34,6 +34,16 @@
             vm.trip.moneyComplement = vm.trip.viagem_complemento;
             vm.trip.comments = vm.trip.viagem_observacao;
 
+            if(typeof vm.trip.connections == 'undefined'){
+                vm.trip.connections = {};
+            }
+            if(typeof vm.trip.fuels == 'undefined'){
+                vm.trip.fuels = {};
+            }
+            if(typeof vm.trip.expenses == 'undefined'){
+                vm.trip.expenses = {};
+            }
+
             vm.trip.truckSelect = {
                 id: vm.trip.viagem_carro_id,
                 name: vm.trip.carro_placa + ' - ' + vm.trip.carro_nome,

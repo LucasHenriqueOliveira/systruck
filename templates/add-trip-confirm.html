@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" ng-show="vm.trip.connections">
+                        <div class="row" ng-show="vm.trip.connections.length">
                             <div class="col-md-11">
                                 <div class="prf-contacts">
                                     <h2> <span><i class="fa fa-exchange"></i></span> Conexão</h2>
@@ -139,8 +139,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="space15" ng-show="vm.trip.connections"></div>
-                        <div class="row">
+                        <div class="space15" ng-show="vm.trip.connections.length"></div>
+                        <div class="row" ng-show="vm.trip.fuels.length">
                             <div class="col-md-11">
                                 <div class="prf-contacts">
                                     <h2> <span><i class="fa fa-battery-half"></i></span> Despesas Abastecimento</h2>
@@ -180,7 +180,7 @@
                             </div>
                         </div>
                         <br >
-                        <div class="row">
+                        <div class="row" ng-show="vm.trip.expenses.length">
                             <div class="col-md-11">
                                 <div class="prf-contacts">
                                     <h2> <span><i class="fa fa-credit-card"></i></span> Despesas gerais</h2>

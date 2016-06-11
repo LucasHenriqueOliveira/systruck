@@ -48,6 +48,16 @@
             sumPriceExpenses = sumPriceExpenses + parseFloat(expense.value);
         });
 
+        if(typeof vm.trip.connections == 'undefined'){
+            vm.trip.connections = {};
+        }
+        if(typeof vm.trip.fuels == 'undefined'){
+            vm.trip.fuels = {};
+        }
+        if(typeof vm.trip.expenses == 'undefined'){
+            vm.trip.expenses = {};
+        }
+
         vm.trip.sumLts = sumLts;
         vm.trip.sumPriceFuel = sumPriceFuel;
         vm.trip.sumPriceExpenses = sumPriceExpenses;
