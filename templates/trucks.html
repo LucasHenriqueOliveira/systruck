@@ -23,8 +23,8 @@
                                 <a href="javascript:;" class="fa fa-times"></a>
                             </span>
                     </header>
-                    <div class="panel-body" ng-show="vm.trucksAvailable.length">
-                        <div class="adv-table editable-table ">
+                    <div class="panel-body">
+                        <div class="adv-table editable-table">
                             <div class="clearfix">
                                 <div class="btn-group">
                                     <a href="#/add-truck" class="btn btn-primary">
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="space15"></div>
-                            <table class="display table table-hover table-bordered table-striped table-condensed">
+                            <table ng-show="vm.trucksAvailable.length" class="display table table-hover table-bordered table-striped table-condensed">
                                 <thead>
                                 <tr>
                                     <th class="text-center">Frota</th>
@@ -68,9 +68,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <div ng-show="!vm.trucksAvailable.length">
-                            <p>Não existem caminhões ativos.</p>
                         </div>
                     </div>
                 </section>
