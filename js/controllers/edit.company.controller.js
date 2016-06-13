@@ -11,6 +11,8 @@
         var vm = this;
         vm.cities = {};
         vm.company = DataService.getCompanyLocal();
+        vm.company.empresa_telefone_1 = (vm.company.empresa_telefone_1).replace(/\D+/g, '');
+        vm.company.empresa_telefone_2 = (vm.company.empresa_telefone_2).replace(/\D+/g, '');
         vm.cidade_id = {
             id: vm.company.empresa_cidade_id,
             name: vm.company.cidade_nome
