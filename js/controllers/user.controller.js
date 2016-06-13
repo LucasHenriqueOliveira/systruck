@@ -21,6 +21,11 @@
             alert('Erro ao consultar usuário.');
             $location.path('/users');
         }
+
+        vm.editUser = function() {
+            UserService.setCurrentUser(vm.user);
+            $location.path('/edit-user');
+        };
     }
 
 })();
