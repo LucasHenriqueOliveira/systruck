@@ -52,7 +52,7 @@ var companyController = function(dbconfig){
              provider: 'google',
             };
             var geocoder = NodeGeocoder(options);
-              geocoder.geocode({ address: logradouro + ' ' + cidade_nome, zipcode: cep})
+              geocoder.geocode({ address: logradouro + ' ' + cidade_nome, zipcode: cep.replace(/\D+/g, '')})
                 .then(function(res) {
     
                     deferred.resolve({

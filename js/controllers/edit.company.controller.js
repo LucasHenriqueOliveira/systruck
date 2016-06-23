@@ -35,7 +35,7 @@
                 bairro: data.company.empresa_bairro,
                 cidade_id: data.cidade_id.id,
                 cidade_nome: data.cidade_id.name,
-                cep: data.company.empresa_cep.replace(/\D+/g, ''),
+                cep: data.company.empresa_cep,
                 telefone1: data.company.empresa_telefone_1,
                 telefone2: data.company.empresa_telefone_2
             };
