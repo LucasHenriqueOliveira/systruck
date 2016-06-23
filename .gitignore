@@ -3,3 +3,6 @@
 .idea/
 bd/
 api/node_modules/
+api/src/config/
+api/node_modules/*
+api/src/config/*
